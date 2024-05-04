@@ -1,4 +1,4 @@
-const postSize = (msg) => {
+export default function postSize(msg) {
   const domens = [
     ".org",
     ".com",
