@@ -50,7 +50,15 @@ export default function postSize(msg) {
     result += value.length;
   });
 
+  arrMsg.forEach((value) => {
+    if (value.endsWith(',') || value.endsWith('.')) {
+      result += 1;
+    }
+  });
+
   result += arrMsg.length - 1;
 
   return result;
 };
+
+console.log(postSize('http://hello.ru www.cloud https//kdkjfjhv.info'))

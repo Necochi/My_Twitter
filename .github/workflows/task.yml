@@ -13,8 +13,8 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: npm install -force
-        run: npm i -force
+      - name: npm install
+        run: npm install
 
       - name: lint
         run: npx eslint .
