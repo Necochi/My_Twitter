@@ -1,43 +1,45 @@
 export default function postSize(msg) {
   const domens = [
-    ".org",
-    ".com",
-    ".ru",
-    ".net",
-    ".xyz",
-    ".info",
-    ".de",
-    ".cn",
-    ".uk",
-    ".fr",
+    '.org',
+    '.com',
+    '.ru',
+    '.net',
+    '.xyz',
+    '.info',
+    '.de',
+    '.cn',
+    '.uk',
+    '.fr',
   ];
-  const protocols = ["http://", "https://", "www."];
+  const protocols = ['http://', 'https://', 'www.'];
   let result = 0;
   const arr = [];
-  let arrMsg = [];
+  const arrMsg = [];
   let count = 0;
 
-  msg.split(" ").forEach((value) => {
+  msg.split(' ').forEach((value) => {
     arrMsg.push(value);
   });
 
-  msg.split(" ").forEach((value, index) => {
+  msg.split(' ').forEach((value, index) => {
     count = 0;
     protocols.forEach((val, ind) => {
       if (value.startsWith(val)) {
         domens.forEach((v, i) => {
-          if ( !value.includes(v) && !arr.includes(value) && i === domens.length - 1 && count === 0) {
+          if (!value.includes(v) && !arr.includes(value)
+          && i === domens.length - 1 && count === 0) {
             arr.push(value);
-            arrMsg[index] = "";
+            arrMsg[index] = '';
           } else if (value.includes(v)) {
             count += 1;
           }
         });
       } else if (!value.startsWith(val) && ind === protocols.length - 1) {
         domens.forEach((v, i) => {
-          if (!value.includes(v) && !arr.includes(value) && i === domens.length - 1 && count === 0) {
+          if (!value.includes(v) && !arr.includes(value)
+          && i === domens.length - 1 && count === 0) {
             arr.push(value);
-            arrMsg[index] = "";
+            arrMsg[index] = '';
           } else if (value.includes(v)) {
             count += 1;
           }
@@ -59,6 +61,4 @@ export default function postSize(msg) {
   result += arrMsg.length - 1;
 
   return result;
-};
-
-console.log(postSize('http://hello.ru www.cloud https//kdkjfjhv.info'))
+}
