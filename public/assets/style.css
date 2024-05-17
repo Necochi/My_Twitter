@@ -5,26 +5,24 @@
     margin: 0;
     padding: 0;
 
+
 }
 
 body {
-    width: 412px;
+    height: auto;
+    width: auto;
     margin: auto;
 }
 
 .register_up {
     display: flex;
-    height: auto;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
     text-align: center;
-    background-color: aqua;
 }
 
 .register_up .img1 {
     width: 100%;
-    height: auto;
 }
 
 .register_up .icon {
@@ -33,9 +31,10 @@ body {
 }
 
 .register_up p {
+    margin: 0 16px 0 16px;
     font-size: 32px;
     font-weight: 700;
-    width: 330px;
+    width: auto;
     text-shadow: 0px 3px 5px #00000070 ;
     
 }
@@ -43,26 +42,22 @@ body {
 .buttons {
     display: flex;
     flex-direction: column;
-    width: 300px;
-    margin: 24px 0px;
+    width: 100%;
+    margin: 24px 15px;
 }
 
 .buttons button {
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    background-color:#0057FF;
     color: white;
-    box-shadow: 0px 5px 5px #00000070;
-    width: 100%;
-    margin: 0 auto;
+    width: 87%;
+    margin: auto;
     border: 1px solid #0057FF;
 
-    transition: 0.15s;
 }
 
-.buttons button:hover {
+.buttons .sign_in {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -70,15 +65,12 @@ body {
     background-color: #fff;
     color: #0057FF;
     box-shadow: none;
-    width: 98%;
+    margin-top: 8px;
 }
 
 .buttons .register {
     margin-bottom: 8px;
-}
-
-.buttons .sign_in {
-    margin-top: 8px;
+    font-weight: 600;
 }
 
 button {
@@ -88,19 +80,152 @@ button {
     font-size: 18px;
 }
 
-@media (min-width: 360px) and (max-width: 412px) {
-    body {
-        width: auto;
-        background-color: red;
-    }
+/* ---------------- */
 
-    .register_up {
-        display: flex;
-        height: auto;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-    }
+.statistic {
+    height: 457px;
+    display: flex;
+    background-color: #0057FF;
+}
+
+.statistic .block {
+    align-self: center;
+    text-align: center;
+    margin: auto;
+    color: #fff;
+}
+
+.statistic .block p {
+    width: 150px;
+    margin: auto;
+}
+
+.statistic .block .big_p {
+    font-weight: 300;
+    font-size: 48px;
 
 }
+
+.statistic .block .msg {
+    margin: 32px 0 32px 0;
+}
+
+
+/* ----------------- */
+
+
+.last_msgs {
+    color: #1D1E22;
+}
+
+.last_msgs .heading {
+    font-weight: 900;
+    font-size: 24px;
+    margin: 40px 0 0 16px;
+    color: #000000;
+}
+
+.last_msgs .added_img {
+    margin-top: 10px;
+    width: 95%;
+}
+
+.last_msgs .msg {
+    display: flex;
+    margin: 24px 16px 0 16px;
+}
+
+.last_msgs .info {
+    width: 100%;
+}
+
+.last_msgs .icon img {
+    border-radius: 50%;
+    margin-right: 16px;
+    width: 52px;
+}
+
+.last_msgs .name_time {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+    font-size: 10px;
+    color: #ABACB1;
+}
+
+.last_msgs .name_div p{
+    color: #ABACB1;
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.last_msgs .name_div .name{
+    color: #1D1E22;
+    font-weight: 900;
+    font-size: 14px;
+}
+
+.last_msgs .time p{
+    width: 52px;
+    font-weight: 400;
+    font-size: 10px;
+    text-align: right;
+}
+
+.last_msgs .text p{
+  font-size: 16px;
+  font-weight: 400;
+  margin-right: 16px;
+}
+
+.last_msgs .send_like_dwld {
+    color: #ABACB1;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.last_msgs .send {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.last_msgs .send p {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.last_msgs .like {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.last_msgs .like p {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.last_msgs .dwld {
+    margin-right: 71px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.last_msgs .dwld p {
+    margin-left: 10px;
+    font-size: 14px;
+}
+
+.line {
+    background-color: #E9E9E9;
+    height: 1px;
+    width: 100%;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* ---------------------- */
+
