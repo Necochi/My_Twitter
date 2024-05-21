@@ -1,5 +1,6 @@
-export default function convertTime(minutes) {
-  let time;
+export default function convertTime(postDate, currentDate) {
+  const time = Number(postDate) - Number(currentDate);
+  let minutes = Number(String(time).slice(1, String(time).length - 3)) / 60;
   let result;
   let stringTime;
   let stringTimeTwoLast;
@@ -7,132 +8,131 @@ export default function convertTime(minutes) {
   let numberStringTwoLast;
 
   function makingVar() {
-    stringTime = String(time);
+    stringTime = String(minutes);
     stringTimeTwoLast = stringTime.slice(stringTime.length - 2, stringTime.length);
     numberSTimeEnd = Number(stringTime[stringTime.length - 1]);
     numberStringTwoLast = Number(stringTimeTwoLast);
   }
 
   if (minutes >= 525600) {
-    time = Math.round(minutes / (60 * 24 * 365));
+    minutes = Math.round(minutes / (60 * 24 * 365));
     makingVar();
     if (stringTime.length === 1) {
-      if (time === 1) {
-        result = `${time} год назад`;
-      } else if (time >= 2 && time < 5) {
-        result = `${time} года назад`;
-      } else if (time >= 5) {
-        result = `${time} лет назад`;
+      if (minutes === 1) {
+        result = `${minutes} год назад`;
+      } else if (minutes >= 2 && minutes < 5) {
+        result = `${minutes} года назад`;
+      } else if (minutes >= 5) {
+        result = `${minutes} лет назад`;
       }
     } else if (stringTime.length >= 2) {
       if (numberStringTwoLast < 21) {
-        if (time === 1) {
-          result = `${time} год назад`;
-        } else if (time >= 2 && time < 5) {
-          result = `${time} года назад`;
-        } else if (time >= 5) {
-          result = `${time} лет назад`;
+        if (minutes === 1) {
+          result = `${minutes} год назад`;
+        } else if (minutes >= 2 && minutes < 5) {
+          result = `${minutes} года назад`;
+        } else if (minutes >= 5) {
+          result = `${minutes} лет назад`;
         }
       } else if (numberStringTwoLast > 20) {
         if (numberSTimeEnd === 1) {
-          result = `${time} год назад`;
+          result = `${minutes} год назад`;
         } else if (numberSTimeEnd > 1
         && numberSTimeEnd < 5) {
-          result = `${time} года назад`;
+          result = `${minutes} года назад`;
         } else if (numberSTimeEnd >= 5) {
-          result = `${time} лет назад`;
+          result = `${minutes} лет назад`;
         }
       }
     }
   } else if (minutes >= 1440 && minutes < 525600) {
-    time = Math.round(minutes / (60 * 24));
+    minutes = Math.round(minutes / (60 * 24));
     makingVar();
     if (stringTime.length === 1) {
-      if (time === 1) {
-        result = `${time} день назад`;
-      } else if (time >= 2 && time < 5) {
-        result = `${time} дня назад`;
-      } else if (time >= 5) {
-        result = `${time} дней назад`;
+      if (minutes === 1) {
+        result = `${minutes} день назад`;
+      } else if (minutes >= 2 && minutes < 5) {
+        result = `${minutes} дня назад`;
+      } else if (minutes >= 5) {
+        result = `${minutes} дней назад`;
       }
     } else if (stringTime.length >= 2) {
       if (numberStringTwoLast < 21) {
-        if (time === 1) {
-          result = `${time} день назад`;
-        } else if (time >= 2 && time < 5) {
-          result = `${time} дня назад`;
-        } else if (time >= 5) {
-          result = `${time} дней назад`;
+        if (minutes === 1) {
+          result = `${minutes} день назад`;
+        } else if (minutes >= 2 && minutes < 5) {
+          result = `${minutes} дня назад`;
+        } else if (minutes >= 5) {
+          result = `${minutes} дней назад`;
         }
       } else if (numberStringTwoLast > 20) {
         if (numberSTimeEnd === 1) {
-          result = `${time} день назад`;
+          result = `${minutes} день назад`;
         } else if (numberSTimeEnd > 1
         && numberSTimeEnd < 5) {
-          result = `${time} дня назад`;
+          result = `${minutes} дня назад`;
         } else if (numberSTimeEnd >= 5) {
-          result = `${time} дней назад`;
+          result = `${minutes} дней назад`;
         }
       }
     }
   } else if (minutes >= 61 && minutes < 1440) {
-    time = Math.round(minutes / 60);
+    minutes = Math.round(minutes / 60);
     makingVar();
     if (stringTime.length === 1) {
-      if (time === 1) {
-        result = `${time} час назад`;
-      } else if (time > 1 && time < 5) {
-        result = `${time} часа назад`;
-      } else if (time >= 5) {
-        result = `${time} часов назад`;
+      if (minutes === 1) {
+        result = `${minutes} час назад`;
+      } else if (minutes > 1 && minutes < 5) {
+        result = `${minutes} часа назад`;
+      } else if (minutes >= 5) {
+        result = `${minutes} часов назад`;
       }
     } else if (stringTime.length >= 2) {
       if (numberStringTwoLast < 21) {
-        if (time === 1) {
-          result = `${time} час назад`;
-        } else if (time >= 2 && time < 5) {
-          result = `${time} часа назад`;
-        } else if (time >= 5) {
-          result = `${time} часов назад`;
+        if (minutes === 1) {
+          result = `${minutes} час назад`;
+        } else if (minutes >= 2 && minutes < 5) {
+          result = `${minutes} часа назад`;
+        } else if (minutes >= 5) {
+          result = `${minutes} часов назад`;
         }
       } else if (numberStringTwoLast > 20) {
         if (numberSTimeEnd === 1) {
-          result = `${time} час назад`;
+          result = `${minutes} час назад`;
         } else if (numberSTimeEnd > 1
         && numberSTimeEnd < 5) {
-          result = `${time} часа назад`;
+          result = `${minutes} часа назад`;
         }
       }
     }
   } else if (minutes < 61) {
-    time = minutes;
     makingVar();
     if (stringTime.length === 1) {
-      if (time === 1) {
-        result = `${time} минуту назад`;
-      } else if (time >= 2 && time < 5) {
-        result = `${time} минуты назад`;
-      } else if (time >= 5) {
-        result = `${time} минут назад`;
+      if (minutes === 1) {
+        result = `${minutes} минуту назад`;
+      } else if (minutes >= 2 && minutes < 5) {
+        result = `${minutes} минуты назад`;
+      } else if (minutes >= 5) {
+        result = `${minutes} минут назад`;
       }
     } else if (stringTime.length >= 2) {
       if (numberStringTwoLast < 21) {
-        if (time === 1) {
-          result = `${time} минуту назад`;
-        } else if (time >= 2 && time < 5) {
-          result = `${time} минуты назад`;
-        } else if (time >= 5) {
-          result = `${time} минут назад`;
+        if (minutes === 1) {
+          result = `${minutes} минуту назад`;
+        } else if (minutes >= 2 && minutes < 5) {
+          result = `${minutes} минуты назад`;
+        } else if (minutes >= 5) {
+          result = `${minutes} минут назад`;
         }
       } else if (numberStringTwoLast > 20) {
         if (numberSTimeEnd === 1) {
-          result = `${time} минуту назад`;
+          result = `${minutes} минуту назад`;
         } else if (numberSTimeEnd > 1
         && numberSTimeEnd < 5) {
-          result = `${time} минуты назад`;
+          result = `${minutes} минуты назад`;
         } else if (numberSTimeEnd === 0
           || numberSTimeEnd >= 5) {
-          result = `${time} минут назад`;
+          result = `${minutes} минут назад`;
         }
       }
     }
