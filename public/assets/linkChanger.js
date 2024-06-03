@@ -18,16 +18,14 @@ export default function linkChanger(txt) {
 
   function isLink(mainTxt, indexMainTxt) {
     const slicedPart = mainTxt.slice(prtcl.length, mainTxt.length);
-    if (((prtcl !== '' && dmn !== '') || (prtcl !== '' && dmn === ''))
-    && result[indexMainTxt] === undefined) {
+    if ((prtcl !== '' && (dmn !== '' || dmn === '')) && !(result[indexMainTxt])) {
       result.push(`<a href='${mainTxt}'>${slicedPart}</a>`);
       prtcl = '';
       dmn = '';
-    } else if ((prtcl === '' && dmn !== '') && result[indexMainTxt] === undefined) {
+    } else if ((prtcl === '' && dmn !== '') && !(result[indexMainTxt])) {
       result.push(`<a href='${mainTxt}'>${mainTxt}</a>`);
       dmn = '';
-    } else if (((prtcl === '' && dmn === '')
-    || (prtcl !== '' && dmn === '')) && result[indexMainTxt] === undefined) {
+    } else if (((prtcl === '' || prtcl !== '') && dmn === '') && !(result[indexMainTxt])) {
       result.push(mainTxt);
       prtcl = '';
     } else {
