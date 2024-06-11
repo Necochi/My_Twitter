@@ -329,7 +329,7 @@ button {
 
 }
 
-.hidden_reg form .emali_plchold {
+.hidden_reg form .emali_plchold_reg {
     position: absolute;
     top: 132px;
     left: 7%;
@@ -338,7 +338,7 @@ button {
     color: #B1B1B1;
 }
 
-.hidden_reg form .pass_plchold {
+.hidden_reg form .pass_plchold_reg {
     position: absolute;
     top: 210px;
     left: 7%;
@@ -382,7 +382,7 @@ button {
 
 .hidden_sign legend {
     text-align: left;
-    margin: 32px 0 30px 0;
+    margin: 20px 0 30px 0;
     margin-left: 5%;
     font-family: 'Roboto';
     color: #1D1E22;
@@ -411,7 +411,7 @@ button {
     font-family: 'Roboto';
     font-weight: 400;
     color: #E40060;
-    top: 245px;
+    top: 252px;
     left: 7%;
     margin-left: 20px;
 
@@ -419,7 +419,7 @@ button {
 
 .hidden_sign form .email_plchold_sign {
     position: absolute;
-    top: 120px;
+    top: 128px;
     left: 7%;
     margin-left: 20px;
     font-size: 9px;
@@ -428,7 +428,7 @@ button {
 
 .hidden_sign form .pass_plchold_sign {
     position: absolute;
-    top: 195px;
+    top: 205px;
     left: 7%;
     margin-left: 20px;
     font-size: 9px;
