@@ -12,9 +12,11 @@ body {
     height: auto;
     width: auto;
     margin: auto;
+
 }
 
 .register_up {
+    background-color: #FFFFFF;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -226,4 +228,222 @@ button {
 }
 
 /* ---------------------- */
+.hidden {
+    display: none;
+}
 
+.down {
+    translate: 0px 400px;
+    transition: 0.5s ease;
+}
+
+.stop_scrolling {
+    overflow-y: hidden;
+  }
+
+.black_block {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background-color: #000000;
+    opacity: 60%;
+}
+
+.hidden_reg {
+    height: 100%;
+    width: 100%;
+    position: sticky;
+    bottom: 0px;
+    padding: 16px;
+    border-radius: 5% 5% 0 0;
+    background-color: #FFFFFF;
+    color: #555555;
+    transition: 3s ease;
+}
+
+.swipe_line_sign {
+    padding: 10px;
+}
+
+.swipe_line_reg {
+    padding: 10px;
+}
+
+
+.swipe_line {
+    margin: auto;
+    width: 50px;
+    height: 4px;
+    border-radius: 60px;
+    background-color: #ABACB1;
+}
+
+.hidden_reg legend {
+    text-align: left;
+    margin: 26px 0 30px 0;
+    margin-left: 5%;
+    font-family: 'Roboto';
+    color: #1D1E22;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.hidden_reg form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.hidden_reg input {
+    width: 90%;
+    height: 52px;
+    border: #DFDFDF 1px solid;
+    border-radius: 10px;
+    padding-left: 16px;
+    margin-bottom: 24px;
+}
+
+.hidden_reg ::placeholder {
+    color: #B1B1B1;
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.hidden_sign ::placeholder {
+    color: #B1B1B1;
+    font-family: 'Roboto';
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.hidden_reg form .email_p {
+    position: absolute;
+    font-size: 9px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: #E40060;
+    top: 182px;
+    left: 7%;
+    margin-left: 20px;
+
+}
+
+.hidden_reg form .emali_plchold {
+    position: absolute;
+    top: 132px;
+    left: 7%;
+    margin-left: 20px;
+    font-size: 9px;
+    color: #B1B1B1;
+}
+
+.hidden_reg form .pass_plchold {
+    position: absolute;
+    top: 210px;
+    left: 7%;
+    margin-left: 20px;
+    font-size: 9px;
+    color: #B1B1B1;
+}
+
+.hidden_reg form .passCheck_plchold {
+    position: absolute;
+    top: 285px;
+    left: 7%;
+    margin-left: 20px;
+    font-size: 9px;
+    color: #B1B1B1;
+}
+
+.hidden_reg form #email_label input {
+    border: #FF97C3 1px solid;
+    background-color: #FFDEEC;
+}
+
+
+.hidden_reg button {
+    margin: auto;
+    width: 90%;
+    border: #0057FF 1px solid;
+    color: #FFFFFF;
+}
+
+/* --------------------- */
+
+.hidden_sign {
+    padding: 16px;
+    border-radius: 5% 5% 0 0;
+    position: sticky;
+    bottom: 0px;
+    background-color: #FFFFFF;
+    color: #555555;
+}
+
+.hidden_sign legend {
+    text-align: left;
+    margin: 32px 0 30px 0;
+    margin-left: 5%;
+    font-family: 'Roboto';
+    color: #1D1E22;
+    font-weight: 800;
+    font-size: 24px;
+}
+
+.hidden_sign form {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.hidden_sign input {
+    width: 90%;
+    height: 52px;
+    border: #DFDFDF 1px solid;
+    border-radius: 10px;
+    padding-left: 16px;
+    margin-bottom: 24px;
+}
+
+.hidden_sign form .pass_p_sign {
+    position: absolute;
+    font-size: 9px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: #E40060;
+    top: 245px;
+    left: 7%;
+    margin-left: 20px;
+
+}
+
+.hidden_sign form .email_plchold_sign {
+    position: absolute;
+    top: 120px;
+    left: 7%;
+    margin-left: 20px;
+    font-size: 9px;
+    color: #B1B1B1;
+}
+
+.hidden_sign form .pass_plchold_sign {
+    position: absolute;
+    top: 195px;
+    left: 7%;
+    margin-left: 20px;
+    font-size: 9px;
+    color: #B1B1B1;
+}
+
+.hidden_sign form #passCheck_signIn_label input {
+    border: #FF97C3 1px solid;
+    background-color: #FFDEEC;
+}
+
+
+.hidden_sign button {
+    margin: auto;
+    width: 90%;
+    border: #0057FF 1px solid;
+    color: #FFFFFF;
+}

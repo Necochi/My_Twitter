@@ -1,3 +1,3 @@
-import postSize from './post_size.js';
+import modalWindow from './modalWindow.js';
 
-alert(postSize('Всем привет!'));
+modalWindow();

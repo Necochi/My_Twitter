@@ -18,6 +18,7 @@
     "globals": "^15.2.0",
     "semistandard": "^17.0.0"
   },
+  "eslintIgnore": ["swipeFunc.js"],
   "directories": {
     "test": "tests"
   }
