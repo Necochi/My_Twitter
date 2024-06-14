@@ -4,8 +4,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-
-
 }
 
 body {
@@ -227,7 +225,12 @@ button {
     margin-bottom: 10px;
 }
 
-/* ---------------------- */
+/* -----------for module window----------- */
+
+input {
+    border: #DFDFDF 1px solid;
+}
+
 .hidden {
     display: none;
 }
@@ -248,6 +251,13 @@ button {
     background-color: #000000;
     opacity: 60%;
 }
+
+.wrong_border {
+    border: #FF97C3 1px solid;
+    background-color: #FFDEEC;
+}
+
+/* ------- register ---------- */
 
 .hidden_reg {
     height: 100%;
@@ -297,7 +307,6 @@ button {
 .hidden_reg input {
     width: 90%;
     height: 52px;
-    border: #DFDFDF 1px solid;
     border-radius: 10px;
     padding-left: 16px;
     margin-bottom: 24px;
@@ -324,6 +333,30 @@ button {
     font-weight: 400;
     color: #E40060;
     top: 182px;
+    left: 7%;
+    margin-left: 20px;
+
+}
+
+.hidden_reg form .pass_p_reg {
+    position: absolute;
+    font-size: 9px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: #E40060;
+    top: 257px;
+    left: 7%;
+    margin-left: 20px;
+
+}
+
+.hidden_reg form .passCheck_p_reg {
+    position: absolute;
+    font-size: 9px;
+    font-family: 'Roboto';
+    font-weight: 400;
+    color: #E40060;
+    top: 332px;
     left: 7%;
     margin-left: 20px;
 
@@ -356,12 +389,6 @@ button {
     color: #B1B1B1;
 }
 
-.hidden_reg form #email_label input {
-    border: #FF97C3 1px solid;
-    background-color: #FFDEEC;
-}
-
-
 .hidden_reg button {
     margin: auto;
     width: 90%;
@@ -369,7 +396,7 @@ button {
     color: #FFFFFF;
 }
 
-/* --------------------- */
+/* ---------- sign module window ----------- */
 
 .hidden_sign {
     padding: 16px;
@@ -399,7 +426,6 @@ button {
 .hidden_sign input {
     width: 90%;
     height: 52px;
-    border: #DFDFDF 1px solid;
     border-radius: 10px;
     padding-left: 16px;
     margin-bottom: 24px;
@@ -434,12 +460,6 @@ button {
     font-size: 9px;
     color: #B1B1B1;
 }
-
-.hidden_sign form #passCheck_signIn_label input {
-    border: #FF97C3 1px solid;
-    background-color: #FFDEEC;
-}
-
 
 .hidden_sign button {
     margin: auto;
