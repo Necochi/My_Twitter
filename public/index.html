@@ -225,18 +225,20 @@
   
         <label for="email" id="email_label">
           <input type="email" name="email" id="email_reg" placeholder="Электронная почта">
-          <span class="email_p">Адрес не валиден</span>
+          <span class="email_p hidden">Адрес не валиден</span>
           <span class="emali_plchold_reg hidden">Электронная почта</span>
         </label>
         <label for="password" id="pass_label">
           <input type="password" name="password" id="password" placeholder="Пароль">
           <span class="pass_plchold_reg hidden">Пароль</span>
+          <span class="pass_p_reg hidden">Пароль не верный</span>
         </label>
         <label for="password" id="passCheck_label">
           <input type="password" name="passCheck" id="passCheck" placeholder="Потдверждение пароля">
           <span class="passCheck_plchold hidden">Подтверждение пароля</span>
+          <span class="passCheck_p_reg hidden">Пароль не верный</span>
         </label>
-        <button class="register_button">Зарегестрироваться</button>
+        <button class="register_button" type="button">Зарегестрироваться</button>
       </form>
   </div>
 
@@ -252,14 +254,14 @@
   
       <label for="email" id="emailSign_label">
         <input type="email" name="email" id="email_signIn" placeholder="Электронная почта">
-        <p class="email_plchold_sign hidden">Электронная почта</p>
+        <span class="email_plchold_sign hidden">Электронная почта</span>
       </label>
       <label for="password" id="passCheck_signIn_label">
         <input type="password" name="password" id="passCheck_signIn" placeholder="Пароль">
-        <p class="pass_plchold_sign hidden">Пароль</p>
-        <p class="pass_p_sign">Пароль не верный</p>
+        <span class="pass_plchold_sign hidden">Пароль</span>
+        <span class="pass_p_sign hidden">Пароль не верный</span>
       </label>
-      <button>Войти</button>
+      <button type="button">Войти</button>
     </form>
   </div>
   
