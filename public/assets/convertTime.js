@@ -106,6 +106,7 @@ export default function convertTime(postDate, currentDate) {
       }
     }
   } else if (minutes < 61) {
+    minutes = Math.round(minutes);
     makingVar();
     if (stringTime.length === 1) {
       if (minutes === 1) {
