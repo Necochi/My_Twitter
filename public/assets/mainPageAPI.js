@@ -68,20 +68,20 @@ export default function mainPageAPI() {
       });
     }
     // --------------
-
-    fetch(picturesApi)
+    const picsApiFetch = fetch(picturesApi)
       .then((response) => {
-        let respJSON;
-        if (response.ok) respJSON = response.json();
-        return respJSON;
+        let pics;
+        if (response.ok) pics = response.json();
+        return pics;
       })
       .then((data) => {
         avatarsJS = data.pictures;
+        return avatarsJS;
       });
 
     // ----------------
 
-    fetch(msgsApi)
+    const msgsApiFetch = fetch(msgsApi)
       .then((response) => {
         if (response.ok) preloadDiv.classList.add('hidden');
         return response.json();
@@ -89,15 +89,21 @@ export default function mainPageAPI() {
       .then((data) => {
         msgsJS = data.messages;
         convertDate(msgsJS);
-      })
-      .then(() => {
+        return msgsJS;
+      });
+
+    const allData = Promise.all([picsApiFetch, msgsApiFetch]);
+    allData.then((res) => res)
+      .then((twoArrs) => {
         msgsJS.forEach((val, index) => {
+          const icon = twoArrs[0][index].url;
+          const picMsg = twoArrs[1][index].img_message;
           newTime = whatTime(convertedTime[index]);
-          if (!val.img_message) {
+          if (!picMsg) {
             allMsgs.innerHTML += `
             <div class="msg${index + 1} msg">
               <div class="icon">
-              <img src=${avatarsJS[index].url} alt="icon">
+              <img src=${icon} alt="icon">
             </div>
             <div class="info">
               <div class="name_time">
@@ -135,7 +141,7 @@ export default function mainPageAPI() {
             allMsgs.innerHTML += `
           <div class="msg${index + 1} msg">
             <div class="icon">
-            <img src=${avatarsJS[index].url} alt="icon">
+            <img src=${icon} alt="icon">
             </div>
             <div class="info">
               <div class="name_time">
@@ -149,7 +155,7 @@ export default function mainPageAPI() {
               </div>
               <div class="text">
                 <p>${val.message}</p>
-                <img class="added_img" src=${val.img_message}>
+                <img class="added_img" src=${picMsg}>
               </div>
               <div class="send_like_dwld">
                 <div class="send">
