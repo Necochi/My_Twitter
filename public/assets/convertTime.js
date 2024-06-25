@@ -9,7 +9,7 @@ export default function convertTime(postDate, currentDate) {
 
   function makingVar() {
     stringTime = String(minutes);
-    stringTimeTwoLast = stringTime.slice(stringTime.length - 2, stringTime.length);
+    stringTimeTwoLast = Number(stringTime.slice(stringTime.length - 2, stringTime.length));
     numberSTimeEnd = Number(stringTime[stringTime.length - 1]);
     numberStringTwoLast = Number(stringTimeTwoLast);
   }
@@ -40,7 +40,8 @@ export default function convertTime(postDate, currentDate) {
         } else if (numberSTimeEnd > 1
         && numberSTimeEnd < 5) {
           result = `${minutes} года назад`;
-        } else if (numberSTimeEnd >= 5) {
+        } else if (numberSTimeEnd >= 5
+          || numberSTimeEnd === 0) {
           result = `${minutes} лет назад`;
         }
       }
@@ -71,7 +72,8 @@ export default function convertTime(postDate, currentDate) {
         } else if (numberSTimeEnd > 1
         && numberSTimeEnd < 5) {
           result = `${minutes} дня назад`;
-        } else if (numberSTimeEnd >= 5) {
+        } else if (numberSTimeEnd >= 5
+          || numberSTimeEnd === 0) {
           result = `${minutes} дней назад`;
         }
       }
@@ -93,7 +95,8 @@ export default function convertTime(postDate, currentDate) {
           result = `${minutes} час назад`;
         } else if (minutes >= 2 && minutes < 5) {
           result = `${minutes} часа назад`;
-        } else if (minutes >= 5) {
+        } else if (minutes >= 5
+          || minutes === 0) {
           result = `${minutes} часов назад`;
         }
       } else if (numberStringTwoLast > 20) {
