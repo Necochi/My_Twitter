@@ -81,15 +81,18 @@ button {
 /* ---------------- */
 
 .statistic {
-    height: 457px;
+    height: 550px;
+    padding: 20px;
     display: flex;
     background-color: #0057FF;
 }
 
 .statistic .block {
-    align-self: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
     text-align: center;
-    margin: auto;
+    margin-inline: auto;
     color: #fff;
 }
 
