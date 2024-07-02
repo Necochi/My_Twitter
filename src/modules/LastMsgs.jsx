@@ -22,7 +22,7 @@ const LastMsgs = () => {
         return null;
       });
       setTimes(newTimes);
-    }, 6000);
+    }, 60000);
 
     return () => clearInterval(interval);
   }, [messages.data]);
