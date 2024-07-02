@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import highlightHashtags from '../public/assets/highlightHashtags.js';
+import highlightHashtags from '../src/public/assets/highlightHashtags.js';
 
 describe('Функция подсветки и поиска по хештегу', function () {
   it('Добро пожаловать в #нашСладкийМир', function () {

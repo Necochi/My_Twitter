@@ -1,0 +1,74 @@
+.register_up {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.register_up .img1 {
+  width: 100%;
+}
+
+.register_up .icon {
+  width: 38px;
+  margin: 24px 162px 22px;
+}
+
+.register_up p {
+  margin: 0 16px 0 16px;
+  font-size: 32px;
+  font-weight: 700;
+  width: auto; 
+}
+
+.buttons {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 24px 15px;
+}
+
+.buttons button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  width: 87%;
+  margin: auto;
+  border: 1px solid #0057FF;
+
+}
+
+.buttons .sign_in {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  background-color: #fff;
+  color: #0057FF;
+  box-shadow: none;
+  margin-top: 8px;
+}
+
+.buttons .register {
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+
+button {
+  border-radius: 10px;
+  background-color: #0057FF;
+  height: 52px;
+  font-size: 18px;
+}
+
+.buttons :hover {
+  cursor: pointer;
+}
+
+/* @media screen and (width > 500px) {
+  .buttons {
+    background-color: aqua;
+  }
+} */

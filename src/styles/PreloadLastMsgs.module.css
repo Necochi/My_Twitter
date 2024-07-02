@@ -1,0 +1,78 @@
+.preload_div {
+  width: 100%;
+  height: auto;
+  margin: auto;
+  padding: 20px 0px 10px 30px;
+}
+
+.msgs_div {
+  width: 90%;
+  border: 2px solid #d8d8d8;
+  border-radius: 10px;
+  height: 180px;
+  margin-top: 20px;
+}
+
+.icon_name_pre {
+  display: flex;
+  align-items: center;
+  justify-content: left;
+
+}
+
+.icon_div {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  background-color: #d8d8d8;
+  margin-left: 50px;
+}
+
+.preload_nick_name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 60%;
+  height: 80px;
+  margin-left: 40px;
+}
+
+.pre_name {
+  width: 60%;
+  height: 10px;
+  background-color: #d8d8d8;
+  margin: 10px 0 10px 0;
+  border-radius: 10px;
+}
+
+.pre_nickname {
+  width: 40%;
+  height: 10px;
+  background-color: #d8d8d8;
+  margin: 10px 0 10px 0;
+  border-radius: 10px;
+}
+
+.pre_text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  padding: 10px 10px 10px 50px;
+  width: 100%;
+  height: 80px;
+
+}
+
+.pre1 {
+  width: 95%;
+  height: 15px;
+  background-color: #d8d8d8;
+  border-radius: 100px;
+}
+
+.pre2 {
+  width: 80%;
+  height: 15px;
+  background-color: #d8d8d8;
+  border-radius: 100px
+}

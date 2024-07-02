@@ -1,0 +1,30 @@
+.statistic {
+  height: 550px;
+  padding: 20px;
+  display: flex;
+  background-color: #0057FF;
+}
+
+.statistic .block {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  text-align: center;
+  margin-inline: auto;
+  color: #fff;
+}
+
+.statistic .block p {
+  width: 150px;
+  margin: auto;
+}
+
+.statistic .block .big_p {
+  font-weight: 300;
+  font-size: 48px;
+
+}
+
+.statistic .block .msgs {
+  margin: 32px 0 32px 0;
+}
