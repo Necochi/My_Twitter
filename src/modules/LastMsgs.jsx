@@ -82,16 +82,16 @@ const LastMsgs = () => {
                   </div>
                   <div className={style.send_like_dwld}>
                     <div className={style.send}>
-                      <img src="src/public/assets/imgs/send.svg" alt="send" />
+                      <img src="/assets/imgs/send.svg" alt="send" />
                       <p>{val["quantityReposts"]}</p>
                     </div>
                     <div className={style.like}>
-                      <img src="src/public/assets/imgs/like.svg" alt="like" />
+                      <img src="/assets/imgs//like.svg" alt="like" />
                       <p>{val["quantityLike"]}</p>
                     </div>
                     <div className={style.dwld}>
                       <img
-                        src="src/public/assets/imgs/dwld.svg"
+                        src="/assets/imgs/dwld.svg"
                         alt="download"
                       />
                       <p>{val["quantityShare"]}</p>
