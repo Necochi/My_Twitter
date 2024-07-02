@@ -8,7 +8,7 @@ const RegSignButtonsUp = () => {
     <div className={style.register_up}>
       <img
         className={style.icon}
-        src="src/public/assets/imgs/dulphin.svg"
+        src="/assets/imgs/dulphin.svg"
         alt="Dulphin icon"
       />
       <p>Оставайся на связи с друзьями, даже когда их нет рядом</p>
@@ -30,7 +30,7 @@ const RegSignButtonsUp = () => {
       </div>
       <img
         className={style.img1}
-        src="src/public/assets/imgs/groupOfPeople.jpg"
+        src="/assets/imgs/groupOfPeople.jpg"
         alt="Group of people"
       />
     </div>
