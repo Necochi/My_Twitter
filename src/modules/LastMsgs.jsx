@@ -86,22 +86,11 @@ const LastMsgs = () => {
                       <p>{val["quantityReposts"]}</p>
                     </div>
                     <div className={style.like}>
-<<<<<<< HEAD
-                      <img src="/assets/imgs//like.svg" alt="like" />
-                      <p>{val["quantityLike"]}</p>
-                    </div>
-                    <div className={style.dwld}>
-                      <img
-                        src="/assets/imgs/dwld.svg"
-                        alt="download"
-                      />
-=======
                       <img src="/assets/imgs/like.svg" alt="like" />
                       <p>{val["quantityLike"]}</p>
                     </div>
                     <div className={style.dwld}>
                       <img src="/assets/imgs/dwld.svg" alt="download" />
->>>>>>> appOnReact
                       <p>{val["quantityShare"]}</p>
                     </div>
                   </div>
