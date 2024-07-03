@@ -90,10 +90,7 @@ const LastMsgs = () => {
                       <p>{val["quantityLike"]}</p>
                     </div>
                     <div className={style.dwld}>
-                      <img
-                        src="/assets/imgs/dwld.svg"
-                        alt="download"
-                      />
+                      <img src="/assets/imgs/dwld.svg" alt="download" />
                       <p>{val["quantityShare"]}</p>
                     </div>
                   </div>
