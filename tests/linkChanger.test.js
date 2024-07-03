@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import linkChanger from '../public/assets/linkChanger.js';
+import linkChanger from '../src/public/assets/linkChanger.js';
 
 describe('Функция оборота ссылок в тег <a>', function () {
   it('Одна ссылка', function () {

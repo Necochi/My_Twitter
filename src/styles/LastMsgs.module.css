@@ -1,0 +1,112 @@
+.last_msgs {
+  color: #1D1E22;
+}
+
+.last_msgs .heading {
+  font-weight: 900;
+  font-size: 24px;
+  margin: 40px 0 0 16px;
+  color: #000000;
+}
+
+.added_img {
+  margin-top: 10px;
+  width: 95%;
+}
+
+.msg {
+  display: flex;
+  margin: 24px 16px 0 16px;
+}
+
+.info {
+  width: 100%;
+}
+
+.icon img {
+  border-radius: 50%;
+  margin-right: 16px;
+  width: 52px;
+}
+
+.name_time {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+  font-size: 10px;
+  color: #ABACB1;
+}
+
+.name_div p{
+  color: #ABACB1;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+.name_div .name{
+  color: #1D1E22;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.time p{
+  width: 52px;
+  font-weight: 400;
+  font-size: 10px;
+  text-align: right;
+}
+
+.text p{
+font-size: 16px;
+font-weight: 400;
+margin-right: 16px;
+}
+
+.send_like_dwld {
+  color: #ABACB1;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 15px;
+}
+
+.send {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.send p {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.like {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.like p {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.dwld {
+  margin-right: 71px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.dwld p {
+  margin-left: 10px;
+  font-size: 14px;
+}
+
+.line {
+  background-color: #E9E9E9;
+  height: 1px;
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 10px;
+}

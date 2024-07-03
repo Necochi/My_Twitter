@@ -15,9 +15,7 @@ export default function registration() {
     if (validation) {
       emailWrong.classList.add('hidden');
       userEmail.classList.remove('wrong_border');
-      console.log(userEmail.value);
     } else if (!validation) {
-      console.log('wrong email');
       emailWrong.classList.remove('hidden');
       userEmail.classList.add('wrong_border');
     }
@@ -28,14 +26,11 @@ export default function registration() {
       userPassRegCheck.classList.remove('wrong_border');
       wrongPass.classList.add('hidden');
       wrongPassCheck.classList.add('hidden');
-      console.log(userPassReg.value);
-      console.log(userPassRegCheck.value);
     } else {
       userPassRegCheck.classList.add('wrong_border');
       userPassReg.classList.add('wrong_border');
       wrongPass.classList.remove('hidden');
       wrongPassCheck.classList.remove('hidden');
-      console.log('wrong pass or passCheck');
     }
   });
 }

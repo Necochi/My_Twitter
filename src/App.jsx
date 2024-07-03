@@ -1,25 +1,44 @@
-import { useState } from 'react'
-import './App.css'
+import { useDispatch, useSelector } from "react-redux";
+import RegSignButtonsUp from "./modules/RegSignButtonsUp";
+import LastMsgs from "./modules/LastMsgs";
+import Statistic from "./modules/Statistic";
+import RegSignButtonsDown from "./modules/RegSignButtonsDown";
+import RegistrationForm from "./modules/RegistrationForm";
+import AuthorizationForm from "./modules/AuthorizationForm";
+import "./App.css";
+import { hideRegForm } from "./store/slices/regFormSlice";
+import { hideSignForm } from "./store/slices/signFormSlice";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const dispatch = useDispatch();
+  const regState = useSelector((state) => state.regForm.isHidden);
+  const signState = useSelector((state) => state.signForm.isHidden);
+  let hidden = {};
+  if (!regState || !signState) {
+    document.body.classList.add("stop_scrolling");
+  } else {
+    document.body.classList.remove("stop_scrolling");
+    hidden.display = "none";
+  }
 
   return (
     <>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <div
+        className="black_block"
+        style={hidden}
+        onClick={() => {
+          dispatch(hideRegForm());
+          dispatch(hideSignForm());
+        }}
+      ></div>
+      <RegSignButtonsUp />
+      <Statistic />
+      <LastMsgs />
+      <RegSignButtonsDown />
+      <RegistrationForm />
+      <AuthorizationForm />
     </>
-  )
-}
+  );
+};
 
-export default App
+export default App;

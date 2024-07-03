@@ -1,0 +1,91 @@
+.swipe_line {
+  margin: auto;
+  width: 50px;
+  height: 4px;
+  border-radius: 60px;
+  background-color: #ABACB1;
+}
+
+.swipe_line_sign {
+  padding: 10px;
+}
+
+.hidden_sign {
+  padding: 16px;
+  border-radius: 5% 5% 0 0;
+  position: sticky;
+  bottom: 0px;
+  background-color: #FFFFFF;
+  color: #555555;
+}
+
+.hidden_sign legend {
+  text-align: left;
+  margin: 20px 0 30px 0;
+  margin-left: 5%;
+  font-family: 'Roboto';
+  color: #1D1E22;
+  font-weight: 800;
+  font-size: 24px;
+}
+
+.hidden_sign form {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+.hidden_sign input {
+  width: 90%;
+  height: 52px;
+  border-radius: 10px;
+  padding-left: 16px;
+  margin-bottom: 24px;
+  margin-left: 20px;
+  border: #DFDFDF 1px solid;
+}
+
+.hidden_sign ::placeholder {
+  color: #B1B1B1;
+  font-family: 'Roboto';
+  font-size: 18px;
+  font-weight: 400;
+}
+
+
+.hidden_sign form .pass_p_sign {
+  position: absolute;
+  font-size: 9px;
+  font-family: 'Roboto';
+  font-weight: 400;
+  color: #E40060;
+  top: 252px;
+  left: 7%;
+  margin-left: 20px;
+
+}
+
+.hidden_sign form .email_plchold_sign {
+  position: absolute;
+  top: 128px;
+  left: 7%;
+  margin-left: 20px;
+  font-size: 9px;
+  color: #B1B1B1;
+}
+
+.hidden_sign form .pass_plchold_sign {
+  position: absolute;
+  top: 205px;
+  left: 7%;
+  margin-left: 20px;
+  font-size: 9px;
+  color: #B1B1B1;
+}
+
+.hidden_sign button {
+  margin: auto;
+  width: 90%;
+  border: #0057FF 1px solid;
+  color: #FFFFFF;
+}
