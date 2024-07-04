@@ -89,3 +89,45 @@
   border: #0057FF 1px solid;
   color: #FFFFFF;
 }
+
+.closeBtn {
+  display: none;
+}
+
+@media screen and (width > 1279px) {
+  .swipe_line, .swipe_line_sign {
+    display: none;
+  }
+
+  .close_legend {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    margin-bottom: 10px;
+  }
+
+  .closeBtn {
+    display: block;
+    cursor: pointer;
+    text-align: right;
+    padding-bottom: 10px;
+  }
+
+  .hidden_sign {
+    margin-inline: auto;
+    bottom: 32.5%;
+    height: 300px;
+    width: 400px;
+    border-radius: 15px;
+  }
+
+  .hidden_sign form .email_plchold_sign {
+    top: 82px;
+  }
+
+  .hidden_sign form .pass_plchold_sign {
+    top: 156px;
+  }
+}

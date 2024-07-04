@@ -8,6 +8,8 @@ import AuthorizationForm from "./modules/AuthorizationForm";
 import "./App.css";
 import { hideRegForm } from "./store/slices/regFormSlice";
 import { hideSignForm } from "./store/slices/signFormSlice";
+import ActualThemes from "./modules/ActualThemes";
+import Blogers from "./modules/Blogers";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -33,7 +35,13 @@ const App = () => {
       ></div>
       <RegSignButtonsUp />
       <Statistic />
-      <LastMsgs />
+      <div className="information">
+        <LastMsgs />
+        <div className="themes_blogers">
+        <ActualThemes className="themes_module"/>
+        <Blogers className="blogers_module"/>
+        </div>
+      </div>
       <RegSignButtonsDown />
       <RegistrationForm />
       <AuthorizationForm />
