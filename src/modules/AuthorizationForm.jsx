@@ -47,7 +47,15 @@ const AuthorizationForm = () => {
       </div>
 
       <form action="" id="signIn_form">
-        <legend>Авторизация</legend>
+        <div className={style.close_legend}>
+          <div
+            className={style.closeBtn}
+            onClick={() => dispatch(hideSignForm())}
+          >
+            <img src="src/public/assets/imgs/closeBtn.svg" alt="" />
+          </div>
+          <legend>Авторизация</legend>
+        </div>
 
         <label htmlFor="email" id="emailSign_label"></label>
         <input

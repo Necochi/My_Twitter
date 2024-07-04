@@ -5,6 +5,16 @@
   margin: 0;
   padding: 0;
   line-height: normal;
+  overflow-y: none;
+}
+
+html {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+html::-webkit-scrollbar {
+  display: none;
 }
 
 body {
@@ -12,7 +22,7 @@ body {
   height: auto;
   width: auto;
   margin: auto;
-
+  background-color: #F4F5F6;
 }
 
 .black_block {
@@ -25,4 +35,22 @@ body {
 
 .stop_scrolling {
   overflow-y: hidden;
+}
+
+.information {
+  display: flex;
+  justify-content: space-between;
+}
+
+.themes_blogers {
+  display: none;
+}
+
+@media screen and (width > 1279px) {
+  .themes_blogers {
+    display: flex;
+    flex-direction: column;
+    margin-block: 138px;
+    margin-right: 10%;
+  }
 }

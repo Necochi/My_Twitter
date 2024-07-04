@@ -2,7 +2,7 @@
   height: 550px;
   padding: 20px;
   display: flex;
-  background-color: #0057FF;
+  background-color: #0057ff;
 }
 
 .statistic .block {
@@ -22,9 +22,31 @@
 .statistic .block .big_p {
   font-weight: 300;
   font-size: 48px;
-
 }
 
 .statistic .block .msgs {
   margin: 32px 0 32px 0;
+}
+
+@media screen and (width > 1279px) {
+  .statistic {
+    display: block;
+    width: 80%;
+    margin: auto;
+    height: 280px;
+    align-content: center;
+    border-radius: 0 0 10px 10px;
+  }
+
+  .statistic .block {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-inline: none;
+  }
+
+  .statistic .block .big_p {
+    font-size: 72px;
+    margin-bottom: 18px;
+  }
 }

@@ -22,24 +22,22 @@ const Statistic = () => {
   }
 
   return (
-    <>
-      <div className={style.statistic}>
-        <div className={style.block}>
-          <div className={style.registers}>
-            <p className={style.big_p}>{usersRegistr}</p>
-            <p>Пользователей зарегестрировано</p>
-          </div>
-          <div className={style.msg}>
-            <p className={style.big_p}>{writMessages}</p>
-            <p>Сообщений написано</p>
-          </div>
-          <div className={style.today_msg}>
-            <p className={style.big_p}>{writToday}</p>
-            <p>Написано сегодня</p>
-          </div>
+    <div className={style.statistic}>
+      <div className={style.block}>
+        <div className={style.registers}>
+          <p className={style.big_p}>{usersRegistr}</p>
+          <p>Пользователей зарегестрировано</p>
+        </div>
+        <div className={style.msg}>
+          <p className={style.big_p}>{writMessages}</p>
+          <p>Сообщений написано</p>
+        </div>
+        <div className={style.today_msg}>
+          <p className={style.big_p}>{writToday}</p>
+          <p>Написано сегодня</p>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
