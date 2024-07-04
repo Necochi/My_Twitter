@@ -1,6 +1,8 @@
 .last_msgs {
+  position: relative;
   color: #1d1e22;
   background-color: #ffffff;
+  z-index: -1;
 }
 
 .last_msgs .heading {
@@ -117,10 +119,19 @@
   margin-top: 20px;
 }
 
+.blur_div {
+  display: none;
+  background: linear-gradient(#00000000, #f4f5f6);
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  bottom: 0;
+}
+
 @media screen and (width > 1279px) {
   .last_msgs {
     margin-left: 10%;
-    width: 680px;
+    width: 53%;
     background-color: inherit;
   }
 

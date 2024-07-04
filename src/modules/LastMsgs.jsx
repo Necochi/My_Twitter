@@ -103,6 +103,7 @@ const LastMsgs = () => {
               </React.Fragment>
             );
           })}
+          <div className={style.blur_div}></div>
         </div>
       </div>
     );
