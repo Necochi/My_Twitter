@@ -51,7 +51,7 @@ const AuthorizationForm = () => {
             className={style.closeBtn}
             onClick={() => dispatch(hideSignForm())}
           >
-            <img src={close} alt="close" />
+            <img src="/imgs/close_btn.svg" alt="close" />
           </div>
           <legend>Авторизация</legend>
         </div>
