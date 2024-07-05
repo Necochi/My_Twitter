@@ -1,4 +1,4 @@
-import validateEmail from "../public/assets/validateEmail";
+import close from "../../src/public/assets/imgs/close_btn.png"
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles/AuthorizationForm.module.css";
 import { useEffect, useRef } from "react";
@@ -52,7 +52,7 @@ const AuthorizationForm = () => {
             className={style.closeBtn}
             onClick={() => dispatch(hideSignForm())}
           >
-            <img src="/assets/imgs/close_btn.png" alt="close" />
+            <img src={close} alt="close" />
           </div>
           <legend>Авторизация</legend>
         </div>
