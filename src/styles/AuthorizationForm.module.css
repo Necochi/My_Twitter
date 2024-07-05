@@ -108,6 +108,11 @@
     margin-bottom: 10px;
   }
 
+  .close_legend img {
+    width: 15px;
+    height: 15px;
+  }
+
   .closeBtn {
     display: block;
     cursor: pointer;
