@@ -157,7 +157,7 @@ const RegistrationForm = () => {
             className={style.closeBtn}
             onClick={() => dispatch(hideRegForm())}
           >
-            <img src="../public/assets/imgs/closeBtn.svg" alt="close" />
+            <img src="/assets/imgs/closeBtn.svg" alt="close" />
           </div>
           <legend>Регистрация</legend>
         </div>

@@ -32,7 +32,7 @@ const RegSignButtonsUp = () => {
       </div>
       <img
         className={style.img1}
-        src="https://static.tildacdn.com/tild3837-6466-4162-b232-356330623436/toa-heftiba-x9I-6yoX.jpg"
+        src="/assets/imgs/groupOfPeople.jpg"
         alt="Group of people"
       />
     </div>
