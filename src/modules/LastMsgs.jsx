@@ -1,5 +1,5 @@
-import convertTime from "../public/assets/convertTime.js";
-import convertDate from "../public/assets/convertDate.js";
+import convertTime from "../assets/convertTime.js";
+import convertDate from "../assets/convertDate.js";
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles/LastMsgs.module.css";
 import PreloadLastMsgs from "./PreloadLastMsgs";
@@ -85,15 +85,15 @@ const LastMsgs = () => {
                     </div>
                     <div className={style.send_like_dwld}>
                       <div className={style.send}>
-                        <img src="/assets/imgs/send.svg" alt="send" />
+                        <img src="/imgs/send.svg" alt="send" />
                         <p>{val["quantityReposts"]}</p>
                       </div>
                       <div className={style.like}>
-                        <img src="/assets/imgs/like.svg" alt="like" />
+                        <img src="/imgs/like.svg" alt="like" />
                         <p>{val["quantityLike"]}</p>
                       </div>
                       <div className={style.dwld}>
-                        <img src="/assets/imgs/dwld.svg" alt="download" />
+                        <img src="/imgs/dwld.svg" alt="download" />
                         <p>{val["quantityShare"]}</p>
                       </div>
                     </div>

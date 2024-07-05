@@ -1,7 +1,4 @@
 
-import bloger1 from "../public/assets/imgs/bloger1.png"
-import bloger2 from "../public/assets/imgs/bloger2.png"
-import bloger3 from "../public/assets/imgs/bloger3.png"
 import style from "../styles/Blogers.module.css";
 const Blogers = () => {
   return (
@@ -10,7 +7,7 @@ const Blogers = () => {
       <div className={style.blogers}>
         <div className={style.bloger}>
           <div className={style.name_img}>
-            <img src={bloger1} alt="icon1" />
+            <img src="/imgs/bloger1.png"alt="icon1" />
             <div className={style.name}>
               <p>Хабр Научпоп</p>
               <span>@habr_popsci</span>
@@ -20,7 +17,7 @@ const Blogers = () => {
         </div>
         <div className={style.bloger}>
           <div className={style.name_img}>
-            <img src={bloger2} alt="icon2" />
+            <img src="/imgs/bloger2.png" alt="icon2" />
             <div className={style.name}>
               <p>Матч ТВ</p>
               <span>@MatchTV</span>
@@ -30,7 +27,7 @@ const Blogers = () => {
         </div>
         <div className={style.bloger}>
           <div className={style.name_img}>
-            <img src={bloger3} alt="icon3" />
+            <img src="/imgs/bloger3.png" alt="icon3" />
             <div className={style.name}>
               <p>Популярная меха...</p>
               <span>@PopMechanica</span>

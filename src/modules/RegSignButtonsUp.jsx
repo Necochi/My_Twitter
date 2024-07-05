@@ -9,7 +9,7 @@ const RegSignButtonsUp = () => {
       <div className={style.logo__buttons}>
         <img
           className={style.icon}
-          src="/assets/imgs/dulphin.svg"
+          src="/imgs/dulphin.svg"
           alt="Dulphin icon"
         />
         <p>Оставайся на связи с друзьями, даже когда их нет рядом</p>
