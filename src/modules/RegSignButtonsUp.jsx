@@ -32,7 +32,7 @@ const RegSignButtonsUp = () => {
       </div>
       <img
         className={style.img1}
-        src="/assets/imgs/groupOfPeople.jpg"
+        src="/assets/imgs/groupOfPeople.png"
         alt="Group of people"
       />
     </div>
