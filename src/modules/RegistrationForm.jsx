@@ -1,4 +1,5 @@
 import validateEmail from "../public/assets/validateEmail";
+import close from "../../src/public/assets/imgs/close_btn.svg"
 import { useEffect, useRef, useState } from "react";
 import style from "../styles/RegistrationForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -157,7 +158,7 @@ const RegistrationForm = () => {
             className={style.closeBtn}
             onClick={() => dispatch(hideRegForm())}
           >
-            <img src="\assets\imgs\close_btn.png" alt="close" />
+            <img src={close} alt="close" />
           </div>
           <legend>Регистрация</legend>
         </div>

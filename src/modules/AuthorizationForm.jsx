@@ -1,4 +1,4 @@
-import close from "../../src/public/assets/imgs/close_btn.png"
+import close from "../../src/public/assets/imgs/close_btn.svg"
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles/AuthorizationForm.module.css";
 import { useEffect, useRef } from "react";
