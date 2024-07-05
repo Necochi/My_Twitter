@@ -1,5 +1,5 @@
 import validateEmail from "../public/assets/validateEmail";
-import close from "../../src/public/assets/imgs/close_btn.svg"
+import close from "../../src/public/assets/imgs/close_btn.svg";
 import { useEffect, useRef, useState } from "react";
 import style from "../styles/RegistrationForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
