@@ -1,4 +1,4 @@
-import validateEmail from "../public/assets/validateEmail";
+import validateEmail from "../assets/validateEmail.js";
 import { useEffect, useRef, useState } from "react";
 import style from "../styles/RegistrationForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,9 +9,7 @@ const RegistrationForm = () => {
   const [email, setEmail] = useState("");
   let resultEmal;
   const [pass, setPass] = useState("");
-  let resultPass;
   const [passCheck, setPassCheck] = useState("");
-  let resultPassCheck;
 
   const swipeRef = useRef();
   const emailRef = useRef();
@@ -154,7 +152,15 @@ const RegistrationForm = () => {
         <div className={style.swipe_line} id="swipe_line"></div>
       </div>
       <form action="" id="register_form">
-        <legend>Регистрация</legend>
+        <div className={style.close_legend}>
+          <div
+            className={style.closeBtn}
+            onClick={() => dispatch(hideRegForm())}
+          >
+            <img src="/imgs/close_btn.svg" alt="close" />
+          </div>
+          <legend>Регистрация</legend>
+        </div>
 
         <label htmlFor="email" id="email_label"></label>
         <input

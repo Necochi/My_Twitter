@@ -6,38 +6,37 @@ const RegSignButtonsUp = () => {
   const dispatch = useDispatch();
   return (
     <div className={style.register_up}>
-      <img
-        className={style.icon}
-        src="/assets/imgs/dulphin.svg"
-        alt="Dulphin icon"
-      />
-      <p>Оставайся на связи с друзьями, даже когда их нет рядом</p>
-      <div className={style.buttons}>
-        <button
-          className={style.register}
-          type="button"
-          onClick={() => dispatch(showRegForm())}
-        >
-          Зарегестрироваться
-        </button>
-        <button
-          className={style.sign_in}
-          type="button"
-          onClick={() => dispatch(showSignForm())}
-        >
-          Войти
-        </button>
+      <div className={style.logo__buttons}>
+        <img
+          className={style.icon}
+          src="/imgs/dulphin.svg"
+          alt="Dulphin icon"
+        />
+        <p>Оставайся на связи с друзьями, даже когда их нет рядом</p>
+        <div className={style.buttons}>
+          <button
+            className={style.register}
+            type="button"
+            onClick={() => dispatch(showRegForm())}
+          >
+            Зарегестрироваться
+          </button>
+          <button
+            className={style.sign_in}
+            type="button"
+            onClick={() => dispatch(showSignForm())}
+          >
+            Войти
+          </button>
+        </div>
       </div>
       <img
         className={style.img1}
-        src="/assets/imgs/groupOfPeople.jpg"
+        src="https://static.tildacdn.com/tild3837-6466-4162-b232-356330623436/toa-heftiba-x9I-6yoX.jpg"
         alt="Group of people"
       />
     </div>
   );
 };
-
-// style.reg_up
-// style.sign_up
 
 export default RegSignButtonsUp;

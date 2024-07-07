@@ -1,5 +1,5 @@
 import { assert } from 'chai';
-import convertTime from '../src/public/assets/convertTime.js';
+import convertTime from '../src/assets/convertTime.js';
 
 describe('Функция перевода секунд в минуты, часы, дни, годы', function () {
   it('час', function () {

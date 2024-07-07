@@ -1,22 +1,31 @@
 .last_msgs {
-  color: #1D1E22;
+  position: relative;
+  color: #1d1e22;
+  background-color: #ffffff;
+  z-index: -1;
 }
 
 .last_msgs .heading {
-  font-weight: 900;
-  font-size: 24px;
-  margin: 40px 0 0 16px;
   color: #000000;
+  font-weight: 800;
+  font-size: 24px;
+  padding: 25px 0 25px 16px;
+}
+
+.allMsgs {
+  background-color: #ffffff;
 }
 
 .added_img {
   margin-top: 10px;
   width: 95%;
+  border-radius: 5%;
 }
 
 .msg {
+  padding-top: 20px;
   display: flex;
-  margin: 24px 16px 0 16px;
+  margin: 0 16px 0 16px;
 }
 
 .info {
@@ -34,36 +43,36 @@
   justify-content: space-between;
   margin-bottom: 5px;
   font-size: 10px;
-  color: #ABACB1;
+  color: #abacb1;
 }
 
-.name_div p{
-  color: #ABACB1;
+.name_div p {
+  color: #abacb1;
   font-weight: 400;
   font-size: 14px;
 }
 
-.name_div .name{
-  color: #1D1E22;
+.name_div .name {
+  color: #1d1e22;
   font-weight: 900;
   font-size: 14px;
 }
 
-.time p{
+.time p {
   width: 52px;
   font-weight: 400;
   font-size: 10px;
   text-align: right;
 }
 
-.text p{
-font-size: 16px;
-font-weight: 400;
-margin-right: 16px;
+.text p {
+  font-size: 16px;
+  font-weight: 400;
+  margin-right: 16px;
 }
 
 .send_like_dwld {
-  color: #ABACB1;
+  color: #abacb1;
   display: flex;
   justify-content: space-between;
   margin-top: 15px;
@@ -104,9 +113,73 @@ margin-right: 16px;
 }
 
 .line {
-  background-color: #E9E9E9;
+  color: #e9e9e9;
   height: 1px;
   width: 100%;
   margin-top: 20px;
-  margin-bottom: 10px;
+}
+
+.blur_div {
+  display: none;
+  background: linear-gradient(#00000000, #f4f5f6);
+  width: 100%;
+  height: 300px;
+  position: absolute;
+  bottom: 0;
+}
+
+@media screen and (width > 1279px) {
+  .last_msgs {
+    margin-left: 10%;
+    width: 53%;
+    background-color: inherit;
+  }
+
+  .last_msgs .heading {
+    font-size: 36px;
+    padding-block: 64px 25px;
+  }
+
+  .allMsgs {
+    border-radius: 15px;
+  }
+
+  .line {
+    display: none;
+  }
+
+  .msg {
+    padding-top: 30px;
+  }
+
+  .name_div {
+    display: flex;
+  }
+
+  .name_div p {
+    font-size: 16px;
+  }
+
+  .name_div .name {
+    margin-right: 16px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  .time p {
+    width: 150px;
+    font-size: 14px;
+  }
+
+  .text p {
+    padding-top: 6px;
+  }
+
+  .send_like_dwld {
+    width: 360px;
+  }
+
+  .blur_div {
+    display: block;
+  }
 }

@@ -1,4 +1,3 @@
-import validateEmail from "../public/assets/validateEmail";
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles/AuthorizationForm.module.css";
 import { useEffect, useRef } from "react";
@@ -47,7 +46,15 @@ const AuthorizationForm = () => {
       </div>
 
       <form action="" id="signIn_form">
-        <legend>Авторизация</legend>
+        <div className={style.close_legend}>
+          <div
+            className={style.closeBtn}
+            onClick={() => dispatch(hideSignForm())}
+          >
+            <img src="/imgs/close_btn.svg" alt="close" />
+          </div>
+          <legend>Авторизация</legend>
+        </div>
 
         <label htmlFor="email" id="emailSign_label"></label>
         <input
