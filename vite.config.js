@@ -8,4 +8,9 @@ export default defineConfig({
     emptyOutDir: false,
   },
   plugins: [react()],
+  server: {
+    proxy: {
+      '/date': 'http://localhost:3000',
+    },
+  },
 });
