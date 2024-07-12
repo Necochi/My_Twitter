@@ -11,6 +11,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/date': 'http://localhost:3000',
+      '/posts': 'http://localhost:3000',
     },
   },
 });
