@@ -26,9 +26,6 @@ app.get('/posts', (req, res) => {
     .then((result) => res.json(result.rows))
     .catch((err) => {
       console.log('error', err);
-    })
-    .finally(() => {
-      client.end();
     });
 });
 
