@@ -7,9 +7,12 @@ const RegistrationForm = () => {
   const dispatch = useDispatch();
   const regState = useSelector((state) => state.regForm.isHidden);
   const [email, setEmail] = useState("");
+  const [trueEmail, setTrueEmail] = useState(false);
   let resultEmal;
   const [pass, setPass] = useState("");
+  const [truePass, setTruePass] = useState(false);
   const [passCheck, setPassCheck] = useState("");
+  const [succsessRegistr, setSuccsessRegistr] = useState();
 
   const swipeRef = useRef();
   const emailRef = useRef();
@@ -21,6 +24,10 @@ const RegistrationForm = () => {
   const passCheckRef = useRef();
   const passChecklPlch = useRef();
   const passChecklPlchSpan = useRef();
+  const sendBtn = useRef();
+  const registrTrue = useRef();
+  const registrFalse = useRef();
+
 
   useEffect(() => {
     swipeRef.current.addEventListener("swiped-down", () => {
@@ -94,13 +101,63 @@ const RegistrationForm = () => {
     };
   }, [passChecklPlch]);
 
+  useEffect(() => {
+    sendBtn.current.addEventListener("click", createUser);
+    return () => {
+      sendBtn.current.removeEventListener("click", createUser);
+    };
+  }, [sendBtn, pass, email, trueEmail, truePass, succsessRegistr]);
+
+  useEffect(() => {
+    if (succsessRegistr) {
+      registrTrue.current.style.visibility = 'visible';
+      registrFalse.current.style.visibility = 'hidden';
+    }
+    else if (succsessRegistr === false) {
+      registrFalse.current.style.visibility = 'visible';
+      registrTrue.current.style.visibility = 'hidden';
+    }
+  }, [succsessRegistr])
+
+  const createUser = () => {
+    try {
+      console.log(trueEmail, truePass, email, pass);
+      if (trueEmail && truePass && email !== "" && pass !== "") {
+        console.log("true!");
+        console.log(email, pass);
+
+        fetch("/createUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            mail: email,
+            password: pass,
+          }),
+        })
+        .then((res) => {
+          if (!res.ok) {
+            return res.json().then((error) => {
+              throw new Error(error.error);
+            });
+          }
+          setSuccsessRegistr(true);
+          return res.json();
+        })
+          .catch((error) => {
+            console.log("Error", error);
+            setSuccsessRegistr(false)
+          });
+        }
+    } catch (error) {
+      console.log(error);
+      console.log("something wrong");
+    }
+  };
+
   // --------------------
 
-  const wrongInput = {
-    display: "",
-    border: "#FF97C3 1px solid",
-    backgroundColor: "#FFDEEC",
-  };
   let hidden = {};
   let hiddenWrong = {
     display: "none",
@@ -112,26 +169,28 @@ const RegistrationForm = () => {
       emailRef.current.style.display = "none";
       emailPlch.current.style.backgroundColor = "";
       emailPlch.current.style.border = "";
-      console.log(resultEmal);
+      setTrueEmail(true);
     } else {
-      console.log("else");
+      console.log("wrong Email");
       emailRef.current.style.display = "";
       emailPlch.current.style.backgroundColor = "#FFDEEC";
       emailPlch.current.style.border = "#FF97C3 1px solid";
+      setTrueEmail(false);
+      setSuccsessRegistr(false);
     }
   };
 
   const checkPass = () => {
-    if (pass && passCheck) {
-      if (pass == passCheck) {
-        passRef.current.style.display = "none";
-        passPlch.current.style.backgroundColor = "";
-        passPlch.current.style.border = "";
-        passCheckRef.current.style.display = "none";
-        passChecklPlch.current.style.backgroundColor = "";
-        passChecklPlch.current.style.border = "";
-        console.log("Your password is: " + pass);
-      }
+    console.log(pass, passCheck);
+    if ((pass && passCheck) && (pass === passCheck)) {
+      passRef.current.style.display = "none";
+      passPlch.current.style.backgroundColor = "";
+      passPlch.current.style.border = "";
+      passCheckRef.current.style.display = "none";
+      passChecklPlch.current.style.backgroundColor = "";
+      passChecklPlch.current.style.border = "";
+      console.log("Your password is: " + pass);
+      setTruePass(true);
     } else {
       passRef.current.style.display = "";
       passPlch.current.style.backgroundColor = "#FFDEEC";
@@ -139,6 +198,9 @@ const RegistrationForm = () => {
       passCheckRef.current.style.display = "";
       passChecklPlch.current.style.backgroundColor = "#FFDEEC";
       passChecklPlch.current.style.border = "#FF97C3 1px solid";
+      console.log("wrong Pass");
+      setTruePass(false);
+      setSuccsessRegistr(false);
     }
   };
 
@@ -229,15 +291,27 @@ const RegistrationForm = () => {
         </span>
 
         <button
+          ref={sendBtn}
           className={style.register_button}
           type="button"
           onClick={() => {
-            checkEmail(), checkPass();
+            checkEmail();
+            checkPass();
           }}
         >
           Зарегестрироваться
         </button>
       </form>
+      <div
+      ref={registrTrue}
+      className={style.registrationTrue}>
+        <p>Успешная регистрация!</p>
+      </div>
+      <div
+      ref={registrFalse}
+      className={style.registrationFalse}>
+        <p>Если ошибок нет, то пользователь уже существует</p>
+      </div>
     </div>
   );
 };

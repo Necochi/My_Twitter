@@ -1,8 +1,4 @@
 export default function validateEmail(email) {
-  const domens = [
-    '.ru',
-    '.com',
-  ];
   let count = 0;
   let indexA = 0;
   let firstPart = '';
@@ -16,14 +12,12 @@ export default function validateEmail(email) {
   });
 
   function isEmailBroken(part) {
-    domens.forEach((val, ind) => {
-      if (part.endsWith(val) && part.length > val.length) {
+      if (part.length > 1 && part.includes('.') && part[0] !== '.') {
         result = true;
-      } else if (part.endsWith(val) && ind === domens.length - 1) {
+      } else if (part.length < 2) {
         result = false;
       }
-    });
-  }
+    };
 
   if (email.includes('@')) {
     indexA = email.indexOf('@');

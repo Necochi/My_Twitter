@@ -128,6 +128,37 @@
   color: #FFFFFF;
 }
 
+.registrationTrue {
+  background-color: #05d305;
+  border-radius: 10px;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 255px;
+  left: 41%;
+  width: 270px;
+  height: 40px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
+.registrationFalse {
+  background-color: #d30505;
+  border-radius: 10px;
+  position: fixed;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  top: 220px;
+  left: 41%;
+  width: 270px;
+  height: 80px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
 @media screen and (width > 1279px) {
   .hidden_reg {
     margin-inline: auto;
