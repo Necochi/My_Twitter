@@ -12,12 +12,12 @@ export default function validateEmail(email) {
   });
 
   function isEmailBroken(part) {
-      if (part.length > 1 && part.includes('.') && part[0] !== '.') {
-        result = true;
-      } else if (part.length < 2) {
-        result = false;
-      }
-    };
+    if (part.length > 1 && part.includes('.') && part[0] !== '.') {
+      result = true;
+    } else if (part.length < 2) {
+      result = false;
+    }
+  }
 
   if (email.includes('@')) {
     indexA = email.indexOf('@');

@@ -1,18 +1,18 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
-    outDir: "./public",
+    outDir: './public',
     emptyOutDir: false,
   },
   plugins: [react()],
   server: {
     proxy: {
-      "/date": "http://localhost:3000",
-      "/posts": "http://localhost:3000",
-      "/createUser": "http://localhost:3000",
+      '/date': 'http://localhost:3000',
+      '/posts': 'http://localhost:3000',
+      '/createUser': 'http://localhost:3000',
     },
   },
 });
