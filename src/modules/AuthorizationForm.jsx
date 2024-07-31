@@ -1,10 +1,12 @@
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles/AuthorizationForm.module.css";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { hideSignForm } from "../store/slices/signFormSlice";
 const AuthorizationForm = () => {
   const dispatch = useDispatch();
   const signState = useSelector((state) => state.signForm.isHidden);
+  const [isEmailFocused, setIsEmailFocused] = useState();
+  const [isPassFocused, setIsPassFocused] = useState();
   const swipeRef = useRef();
   const emailPlch = useRef();
   const emailPlchSpan = useRef();
@@ -18,21 +20,8 @@ const AuthorizationForm = () => {
     swipeRef.current.addEventListener("swiped-down", () => {
       dispatch(hideSignForm());
     });
-    emailPlch.current.addEventListener("focus", () => {
-      emailPlch.current.placeholder = "";
-      emailPlchSpan.current.style.display = "";
-    });
-    emailPlch.current.addEventListener("focusout", () => {
-      emailPlch.current.placeholder = "Электронная почта";
-      emailPlchSpan.current.style.display = "none";
-    });
-    passPlch.current.addEventListener("focus", () => {
-      passPlch.current.placeholder = "";
-      passPlchSpan.current.style.display = "";
-    });
-    passPlch.current.addEventListener("focusout", () => {
-      passPlch.current.placeholder = "Пароль";
-      passPlchSpan.current.style.display = "none";
+    return swipeRef.current.removeEventListener("swiped-down", () => {
+      dispatch(hideRegForm());
     });
   }, [dispatch]);
 
@@ -61,13 +50,19 @@ const AuthorizationForm = () => {
           type="email"
           name="email"
           id="email_signIn"
-          placeholder="Электронная почта"
+          placeholder={isEmailFocused ? "" : "Электронная почта"}
+          onFocus={() => setIsEmailFocused(true)}
+          onBlur={() => setIsEmailFocused(false)}
           ref={emailPlch}
         />
         <span
           className={style.email_plchold_sign}
           ref={emailPlchSpan}
-          style={{ display: "none" }}
+          onFocus={() => setIsPassFocused(true)}
+          onBlur={() => setIsPassFocused(false)}
+          style={{
+            display: isEmailFocused ? "" : "none",
+          }}
         >
           Электронная почта
         </span>
@@ -76,13 +71,17 @@ const AuthorizationForm = () => {
           type="password"
           name="password"
           id="passCheck_signIn"
-          placeholder="Пароль"
+          placeholder={isPassFocused ? "" : "Пароль"}
           ref={passPlch}
+          onFocus={() => setIsPassFocused(true)}
+          onBlur={() => setIsPassFocused(false)}
         />
         <span
           className={style.pass_plchold_sign}
           ref={passPlchSpan}
-          style={{ display: "none" }}
+          onFocus={() => setIsPassFocused(true)}
+          onBlur={() => setIsPassFocused(false)}
+          style={{display: isPassFocused ? '' : 'none'}}
         >
           Пароль
         </span>
