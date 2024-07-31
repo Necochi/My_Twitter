@@ -244,7 +244,7 @@ const RegistrationForm = () => {
         className={style.registrationFalse}
         style={{
           visibility:
-            succsessRegistr !== null && !succsessRegistr && !trueEmail
+            succsessRegistr !== null && !succsessRegistr
               ? "visible"
               : "hidden",
         }}
