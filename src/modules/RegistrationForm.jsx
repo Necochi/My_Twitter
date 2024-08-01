@@ -19,6 +19,7 @@ const RegistrationForm = () => {
   const [isRightEmail, setIsRightEmail] = useState(true);
   const [isRightPass, setIsRightPass] = useState(true);
   const [isRightPassCheck, setIsRightPassCheck] = useState(true);
+  const [error, setError] = useState(false);
 
   const swipeRef = useRef();
 
@@ -57,10 +58,12 @@ const RegistrationForm = () => {
               });
             }
             setSuccsessRegistr(true);
+            setError(false);
             return res.json();
           })
           .catch((error) => {
-            console.log("Error", error);
+            console.log("Error ошибка", error);
+            setError(true);
             setSuccsessRegistr(false);
           });
       }
@@ -235,7 +238,9 @@ const RegistrationForm = () => {
         className={style.registrationTrue}
         style={{
           visibility:
-            succsessRegistr !== null && succsessRegistr ? "visible" : "hidden",
+            succsessRegistr !== null && succsessRegistr && !false
+              ? "visible"
+              : "hidden",
         }}
       >
         <p>Успешная регистрация!</p>
@@ -244,12 +249,23 @@ const RegistrationForm = () => {
         className={style.registrationFalse}
         style={{
           visibility:
-            succsessRegistr !== null && !succsessRegistr
+            succsessRegistr !== null && !succsessRegistr && !error
               ? "visible"
               : "hidden",
         }}
       >
-        <p>Если ошибок нет, то пользователь уже существует!</p>
+        <p>Неправильный пароль либо почта!</p>
+      </div>
+      <div
+        className={style.registrationFalseEmail}
+        style={{
+          visibility:
+            succsessRegistr !== null && !succsessRegistr && error
+              ? "visible"
+              : "hidden",
+        }}
+      >
+        <p>Пользователь уже существует!</p>
       </div>
     </div>
   );

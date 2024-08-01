@@ -131,14 +131,14 @@
 .registrationTrue {
   background-color: #05d305;
   border-radius: 10px;
-  position: fixed;
+  position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 255px;
-  left: 41%;
+  top: 0; left: 0; bottom: 400px; right: 0;
+  margin: auto;
   width: 270px;
-  height: 40px;
+  height: 80px;
   color: #FFFFFF;
   visibility: hidden;
 }
@@ -146,13 +146,29 @@
 .registrationFalse {
   background-color: #d30505;
   border-radius: 10px;
-  position: fixed;
+  position: absolute;
   display: flex;
   text-align: center;
   justify-content: center;
   align-items: center;
-  top: 220px;
-  left: 41%;
+  top: 0; left: 0; bottom: 400px; right: 0;
+  margin: auto;
+  width: 270px;
+  height: 80px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
+.registrationFalseEmail {
+  background-color: #d30505;
+  border-radius: 10px;
+  position: absolute;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  top: 0; left: 0; bottom: 400px; right: 0;
+  margin: auto;
   width: 270px;
   height: 80px;
   color: #FFFFFF;
@@ -211,5 +227,17 @@
 
   .hidden_reg form .passCheck_plchold {
     top: 235px;
+  }
+
+  .registrationFalse {
+    top: 0; left: 0; bottom: -500px; right: 0;
+  }
+
+  .registrationFalseEmail {
+    top: 0; left: 0; bottom: -500px; right: 0;
+  }
+
+  .registrationTrue {
+    top: 0; left: 0; bottom: -500px; right: 0;
   }
 }
