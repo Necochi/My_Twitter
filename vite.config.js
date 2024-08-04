@@ -12,6 +12,7 @@ export default defineConfig({
     proxy: {
       '/date': 'http://localhost:3000',
       '/posts': 'http://localhost:3000',
+      '/createUser': 'http://localhost:3000',
     },
   },
 });

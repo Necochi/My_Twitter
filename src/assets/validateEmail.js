@@ -1,8 +1,4 @@
 export default function validateEmail(email) {
-  const domens = [
-    '.ru',
-    '.com',
-  ];
   let count = 0;
   let indexA = 0;
   let firstPart = '';
@@ -16,13 +12,27 @@ export default function validateEmail(email) {
   });
 
   function isEmailBroken(part) {
-    domens.forEach((val, ind) => {
-      if (part.endsWith(val) && part.length > val.length) {
+    let beforeDot = 0;
+    let afterDot = 0;
+    let wasDot = false;
+    if (part.length > 1 && part.includes('.') && part[0] !== '.') {
+      part.split('').forEach((v) => {
+        if (!wasDot && v !== '.') {
+          beforeDot += 1;
+        } else if (v === '.') {
+          wasDot = true;
+        } else if (wasDot && v !== '.') {
+          afterDot += 1;
+        }
+      });
+      if (beforeDot > 1 && wasDot && afterDot > 1) {
         result = true;
-      } else if (part.endsWith(val) && ind === domens.length - 1) {
+      } else {
         result = false;
       }
-    });
+    } else if (part.length < 2) {
+      result = false;
+    }
   }
 
   if (email.includes('@')) {

@@ -1,5 +1,6 @@
 import express from 'express';
 import pg from 'pg';
+import bcrypt from 'bcrypt';
 
 const app = express();
 const port = 3000;
@@ -25,7 +26,6 @@ app.get('/posts', (req, res) => {
   client
     .query(query)
     .then((result) => {
-      console.log(result.rows);
       res.json(result.rows);
     })
     .catch((err) => {
@@ -36,6 +36,8 @@ app.get('/posts', (req, res) => {
 console.log(client.query);
 
 app.get('/date', (req, res) => res.type('json').send({ date: new Date() }));
+
+// -- Posts endpoints ---
 
 app.post('/posts.json', async (req, res) => {
   const {
@@ -101,6 +103,33 @@ app.post('/posts/:id.json', async (req, res) => {
     res.json(result.rows);
   } catch (error) {
     console.log(error);
+  }
+});
+
+// --- Authorization endpoints ---
+
+app.post('/createUser', async (req, res) => {
+  const { mail, password } = req.body;
+  try {
+    const checkingEmail = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
+    const createUserData = `INSERT INTO "userAuthorization" (mail, password)
+    VALUES ($1, $2) RETURNING *`;
+
+    const checkMail = await client.query(checkingEmail, [mail]);
+
+    if (checkMail.rows.length > 0) {
+      return res.status(400).json({ error: 'Email уже существует' });
+    }
+    const createSalt = await bcrypt.genSalt(10);
+    const hashedPass = await bcrypt.hash(password, createSalt);
+
+    const createUser = await client.query(createUserData, [mail, hashedPass]);
+    console.log('Пользователь создан:', createUser.rows);
+
+    return res.json(createUser.rows);
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: 'Произошла ошибка на сервере' });
   }
 });
 

@@ -128,6 +128,53 @@
   color: #FFFFFF;
 }
 
+.registrationTrue {
+  background-color: #05d305;
+  border-radius: 10px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0; left: 0; bottom: 400px; right: 0;
+  margin: auto;
+  width: 270px;
+  height: 80px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
+.registrationFalse {
+  background-color: #d30505;
+  border-radius: 10px;
+  position: absolute;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  top: 0; left: 0; bottom: 400px; right: 0;
+  margin: auto;
+  width: 270px;
+  height: 80px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
+.registrationFalseEmail {
+  background-color: #d30505;
+  border-radius: 10px;
+  position: absolute;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  top: 0; left: 0; bottom: 400px; right: 0;
+  margin: auto;
+  width: 270px;
+  height: 80px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
 @media screen and (width > 1279px) {
   .hidden_reg {
     margin-inline: auto;
@@ -180,5 +227,17 @@
 
   .hidden_reg form .passCheck_plchold {
     top: 235px;
+  }
+
+  .registrationFalse {
+    top: 0; left: 0; bottom: -500px; right: 0;
+  }
+
+  .registrationFalseEmail {
+    top: 0; left: 0; bottom: -500px; right: 0;
+  }
+
+  .registrationTrue {
+    top: 0; left: 0; bottom: -500px; right: 0;
   }
 }

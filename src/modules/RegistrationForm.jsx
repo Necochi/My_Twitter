@@ -7,20 +7,21 @@ const RegistrationForm = () => {
   const dispatch = useDispatch();
   const regState = useSelector((state) => state.regForm.isHidden);
   const [email, setEmail] = useState("");
-  let resultEmal;
+  const [trueEmail, setTrueEmail] = useState(false);
+  let resultEmail;
   const [pass, setPass] = useState("");
+  const [truePass, setTruePass] = useState(false);
   const [passCheck, setPassCheck] = useState("");
+  const [succsessRegistr, setSuccsessRegistr] = useState(null);
+  const [isEmailFocused, setIsEmailFocused] = useState();
+  const [isPassFocused, setIsPassFocused] = useState();
+  const [isPassCheckFocused, setIsPassCheckFocused] = useState();
+  const [isRightEmail, setIsRightEmail] = useState(true);
+  const [isRightPass, setIsRightPass] = useState(true);
+  const [isRightPassCheck, setIsRightPassCheck] = useState(true);
+  const [error, setError] = useState(false);
 
   const swipeRef = useRef();
-  const emailRef = useRef();
-  const emailPlch = useRef();
-  const emailPlchSpan = useRef();
-  const passRef = useRef();
-  const passPlch = useRef();
-  const passlPlchSpan = useRef();
-  const passCheckRef = useRef();
-  const passChecklPlch = useRef();
-  const passChecklPlchSpan = useRef();
 
   useEffect(() => {
     swipeRef.current.addEventListener("swiped-down", () => {
@@ -31,114 +32,77 @@ const RegistrationForm = () => {
     });
   }, [dispatch]);
 
-  useEffect(() => {
-    emailPlch.current.addEventListener("focus", () => {
-      emailPlch.current.placeholder = "";
-      emailPlchSpan.current.style.display = "";
-    });
-    emailPlch.current.addEventListener("focusout", () => {
-      emailPlch.current.placeholder = "Электронная почта";
-      emailPlchSpan.current.style.display = "none";
-    });
-    return () => {
-      emailPlch.current.removeEventListener("focus", () => {
-        emailPlch.current.placeholder = "";
-        emailPlchSpan.current.style.display = "";
-      });
-      emailPlch.current.removeEventListener("focusout", () => {
-        emailPlch.current.placeholder = "Электронная почта";
-        emailPlchSpan.current.style.display = "none";
-      });
-    };
-  }, [emailPlch]);
+  const createUser = () => {
+    checkEmail();
+    checkPass();
+    try {
+      console.log(trueEmail, truePass, email, pass);
+      if (trueEmail && truePass && email !== "" && pass !== "") {
+        console.log("true!");
+        console.log(email, pass);
 
-  useEffect(() => {
-    passPlch.current.addEventListener("focus", () => {
-      passPlch.current.placeholder = "";
-      passlPlchSpan.current.style.display = "";
-    });
-    passPlch.current.addEventListener("focusout", () => {
-      passPlch.current.placeholder = "Пароль";
-      passlPlchSpan.current.style.display = "none";
-    });
-    return () => {
-      passPlch.current.removeEventListener("focus", () => {
-        passPlch.current.placeholder = "";
-        passlPlchSpan.current.style.display = "";
-      });
-      passPlch.current.removeEventListener("focusout", () => {
-        passPlch.current.placeholder = "Пароль";
-        passlPlchSpan.current.style.display = "none";
-      });
-    };
-  }, [passPlch]);
-
-  useEffect(() => {
-    passChecklPlch.current.addEventListener("focus", () => {
-      passChecklPlch.current.placeholder = "";
-      passChecklPlchSpan.current.style.display = "";
-    });
-    passChecklPlch.current.addEventListener("focusout", () => {
-      passChecklPlch.current.placeholder = "Подтверждение пароля";
-      passChecklPlchSpan.current.style.display = "none";
-    });
-    return () => {
-      passChecklPlch.current.removeEventListener("focus", () => {
-        passChecklPlch.current.placeholder = "";
-        passChecklPlchSpan.current.style.display = "";
-      });
-      passChecklPlch.current.removeEventListener("focusout", () => {
-        passChecklPlch.current.placeholder = "Подтверждение пароля";
-        passChecklPlchSpan.current.style.display = "none";
-      });
-    };
-  }, [passChecklPlch]);
+        fetch("/createUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            mail: email,
+            password: pass,
+          }),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              return res.json().then((error) => {
+                throw new Error(error.error);
+              });
+            }
+            setSuccsessRegistr(true);
+            setError(false);
+            return res.json();
+          })
+          .catch((error) => {
+            console.log("Error ошибка", error);
+            setError(true);
+            setSuccsessRegistr(false);
+          });
+      }
+    } catch (error) {
+      console.log(error);
+      console.log("something wrong");
+    }
+  };
 
   // --------------------
 
-  const wrongInput = {
-    display: "",
-    border: "#FF97C3 1px solid",
-    backgroundColor: "#FFDEEC",
-  };
   let hidden = {};
-  let hiddenWrong = {
-    display: "none",
-  };
 
   const checkEmail = () => {
-    resultEmal = validateEmail(email);
-    if (resultEmal) {
-      emailRef.current.style.display = "none";
-      emailPlch.current.style.backgroundColor = "";
-      emailPlch.current.style.border = "";
-      console.log(resultEmal);
+    resultEmail = validateEmail(email);
+    if (resultEmail) {
+      setTrueEmail(true);
+      setIsRightEmail(true);
     } else {
-      console.log("else");
-      emailRef.current.style.display = "";
-      emailPlch.current.style.backgroundColor = "#FFDEEC";
-      emailPlch.current.style.border = "#FF97C3 1px solid";
+      console.log("wrong Email");
+      setTrueEmail(false);
+      setIsRightEmail(false);
+      setSuccsessRegistr(false);
     }
   };
 
   const checkPass = () => {
-    if (pass && passCheck) {
-      if (pass == passCheck) {
-        passRef.current.style.display = "none";
-        passPlch.current.style.backgroundColor = "";
-        passPlch.current.style.border = "";
-        passCheckRef.current.style.display = "none";
-        passChecklPlch.current.style.backgroundColor = "";
-        passChecklPlch.current.style.border = "";
-        console.log("Your password is: " + pass);
-      }
+    console.log(pass, passCheck);
+    if (pass && passCheck && pass === passCheck) {
+      setIsRightPass(true);
+      setIsRightPassCheck(true);
+      console.log("Your password is: " + pass);
+      setTruePass(true);
     } else {
-      passRef.current.style.display = "";
-      passPlch.current.style.backgroundColor = "#FFDEEC";
-      passPlch.current.style.border = "#FF97C3 1px solid";
-      passCheckRef.current.style.display = "";
-      passChecklPlch.current.style.backgroundColor = "#FFDEEC";
-      passChecklPlch.current.style.border = "#FF97C3 1px solid";
+      console.log("wrong Pass");
+      setIsRightPass(false);
+      setIsRightPassCheck(false);
+      setTruePass(false);
+      setSuccsessRegistr(false);
     }
   };
 
@@ -167,20 +131,32 @@ const RegistrationForm = () => {
           type="email"
           name="email"
           id="email_reg"
-          placeholder="Электронная почта"
-          ref={emailPlch}
-          style={hidden}
           value={email}
+          placeholder={isEmailFocused ? "" : "Электронная почта"}
+          onFocus={() => setIsEmailFocused(true)}
+          onBlur={() => setIsEmailFocused(false)}
           onChange={(e) => setEmail(e.target.value)}
+          style={{
+            backgroundColor: isRightEmail ? "" : "#FFDEEC",
+            border: isRightEmail ? "" : "#FF97C3 1px solid",
+          }}
         />
         <span
           className={style.emali_plchold_reg}
-          ref={emailPlchSpan}
-          style={hiddenWrong}
+          onFocus={() => setIsPassFocused(true)}
+          onBlur={() => setIsPassFocused(false)}
+          style={{
+            display: isEmailFocused ? "" : "none",
+          }}
         >
           Электронная почта
         </span>
-        <span className={style.email_p} style={hiddenWrong} ref={emailRef}>
+        <span
+          className={style.email_p}
+          style={{
+            display: isRightEmail ? "none" : "",
+          }}
+        >
           Адрес не валиден
         </span>
         <label htmlFor="password" id="pass_label"></label>
@@ -188,19 +164,32 @@ const RegistrationForm = () => {
           type="password"
           name="password"
           id="password"
-          placeholder="Пароль"
-          ref={passPlch}
           value={pass}
+          placeholder={isPassFocused ? "" : "Пароль"}
+          onFocus={() => setIsPassFocused(true)}
+          onBlur={() => setIsPassFocused(false)}
           onChange={(e) => setPass(e.target.value)}
+          style={{
+            backgroundColor: isRightPass ? "" : "#FFDEEC",
+            border: isRightPass ? "" : "#FF97C3 1px solid",
+          }}
         />
         <span
           className={style.pass_plchold_reg}
-          ref={passlPlchSpan}
-          style={hiddenWrong}
+          onFocus={() => setIsPassFocused(true)}
+          onBlur={() => setIsPassFocused(false)}
+          style={{
+            display: isPassFocused ? "" : "none",
+          }}
         >
           Пароль
         </span>
-        <span className={style.pass_p_reg} style={hiddenWrong} ref={passRef}>
+        <span
+          className={style.pass_p_reg}
+          style={{
+            display: isRightPass ? "none" : "",
+          }}
+        >
           Пароль не верный
         </span>
         <label htmlFor="password" id="passCheck_label"></label>
@@ -208,22 +197,31 @@ const RegistrationForm = () => {
           type="password"
           name="passCheck"
           id="passCheck"
-          placeholder="Потдверждение пароля"
-          ref={passChecklPlch}
           value={passCheck}
+          placeholder={isPassCheckFocused ? "" : "Потдверждение пароля"}
+          onFocus={() => setIsPassCheckFocused(true)}
+          onBlur={() => setIsPassCheckFocused(false)}
           onChange={(e) => setPassCheck(e.target.value)}
+          style={{
+            backgroundColor: isRightPassCheck ? "" : "#FFDEEC",
+            border: isRightPassCheck ? "" : "#FF97C3 1px solid",
+          }}
         />
         <span
           className={style.passCheck_plchold}
-          style={hiddenWrong}
-          ref={passChecklPlchSpan}
+          onFocus={() => setIsPassCheckFocused(true)}
+          onBlur={() => setIsPassCheckFocused(false)}
+          style={{
+            display: isPassCheckFocused ? "" : "none",
+          }}
         >
           Подтверждение пароля
         </span>
         <span
           className={style.passCheck_p_reg}
-          style={hiddenWrong}
-          ref={passCheckRef}
+          style={{
+            display: isRightPassCheck ? "none" : "",
+          }}
         >
           Пароль не верный
         </span>
@@ -231,13 +229,44 @@ const RegistrationForm = () => {
         <button
           className={style.register_button}
           type="button"
-          onClick={() => {
-            checkEmail(), checkPass();
-          }}
+          onClick={createUser}
         >
           Зарегестрироваться
         </button>
       </form>
+      <div
+        className={style.registrationTrue}
+        style={{
+          visibility:
+            succsessRegistr !== null && succsessRegistr && !false
+              ? "visible"
+              : "hidden",
+        }}
+      >
+        <p>Успешная регистрация!</p>
+      </div>
+      <div
+        className={style.registrationFalse}
+        style={{
+          visibility:
+            succsessRegistr !== null && !succsessRegistr && !error
+              ? "visible"
+              : "hidden",
+        }}
+      >
+        <p>Неправильный пароль либо почта!</p>
+      </div>
+      <div
+        className={style.registrationFalseEmail}
+        style={{
+          visibility:
+            succsessRegistr !== null && !succsessRegistr && error
+              ? "visible"
+              : "hidden",
+        }}
+      >
+        <p>Пользователь уже существует!</p>
+      </div>
     </div>
   );
 };
