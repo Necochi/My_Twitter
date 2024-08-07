@@ -133,6 +133,31 @@ app.post('/createUser', async (req, res) => {
   }
 });
 
+app.post('/login', async (req, res) => {
+  const { mail, password } = req.body;
+
+  try {
+    const checkingMail = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
+    let result;
+
+    const checkMail = await client.query(checkingMail, [mail]);
+    if (checkMail.rows.length !== 1) {
+      result = res.status(400).json({ error: 'Неверный логин' });
+    } else {
+      const truePass = await bcrypt.compare(password, checkMail.rows[0].password);
+      if (truePass) {
+        result = res.status(200).json({ text: 'Успешно залогинены!' });
+      } else {
+        result = res.status(400).json({ error: 'Неправильный пароль' });
+      }
+    }
+    return result;
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({ error: 'some server error' });
+  }
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });

@@ -94,6 +94,37 @@
   display: none;
 }
 
+.trueLogin {
+  background-color: #05d305;
+  border-radius: 10px;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  top: 0; left: 0; bottom: 400px; right: 400px;
+  margin: auto;
+  width: 220px;
+  height: 60px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
+.falseLogin {
+  background-color: #d30505;
+  border-radius: 10px;
+  position: absolute;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  top: 0; left: 0; bottom: 400px; right: 400px;
+  margin: auto;
+  width: 220px;
+  height: 80px;
+  color: #FFFFFF;
+  visibility: hidden;
+}
+
 @media screen and (width > 1279px) {
   .swipe_line, .swipe_line_sign {
     display: none;
@@ -129,5 +160,13 @@
 
   .hidden_sign form .pass_plchold_sign {
     top: 156px;
+  }
+
+  .trueLogin {
+    top: 0; left: 0; bottom: -400px; right: 0;
+  }
+
+  .falseLogin {
+    top: 0; left: 0; bottom: -400px; right: 0;
   }
 }

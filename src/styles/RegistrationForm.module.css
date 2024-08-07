@@ -128,14 +128,14 @@
   color: #FFFFFF;
 }
 
-.registrationTrue {
+.trueLogin {
   background-color: #05d305;
   border-radius: 10px;
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0; left: 0; bottom: 400px; right: 0;
+  top: 0; left: 0; bottom: 400px; right: 400px;
   margin: auto;
   width: 270px;
   height: 80px;
@@ -151,7 +151,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  top: 0; left: 0; bottom: 400px; right: 0;
+  top: 0; left: 0; bottom: 400px; right: 400px;
   margin: auto;
   width: 270px;
   height: 80px;
@@ -167,7 +167,7 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  top: 0; left: 0; bottom: 400px; right: 0;
+  top: 0; left: 0; bottom: 400px; right: 400px;
   margin: auto;
   width: 270px;
   height: 80px;

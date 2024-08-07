@@ -1,33 +1,99 @@
-import { useDispatch, useSelector } from "react-redux";
-import style from "../styles/AuthorizationForm.module.css";
-import { useEffect, useRef, useState } from "react";
-import { hideSignForm } from "../store/slices/signFormSlice";
-const AuthorizationForm = () => {
+import { useDispatch, useSelector } from 'react-redux';
+import { useEffect, useRef, useState } from 'react';
+import style from '../styles/AuthorizationForm.module.css';
+import { hideSignForm } from '../store/slices/signFormSlice.js';
+
+function AuthorizationForm() {
   const dispatch = useDispatch();
   const signState = useSelector((state) => state.signForm.isHidden);
   const [isEmailFocused, setIsEmailFocused] = useState();
   const [isPassFocused, setIsPassFocused] = useState();
+  const [email, setEmail] = useState('');
+  const [trueEmail, setTrueEmail] = useState(null);
+  const [pass, setPass] = useState('');
+  const [truePass, setTruePass] = useState(null);
+  const [trueLogin, setTrueLogin] = useState(null);
   const swipeRef = useRef();
   const emailPlch = useRef();
   const emailPlchSpan = useRef();
   const passPlch = useRef();
   const passPlchSpan = useRef();
-  let hidden = {};
-  let hiddenwrong = {
-    display: "none",
+  const hidden = {};
+  const hiddenwrong = {
+    display: 'none',
   };
   useEffect(() => {
-    swipeRef.current.addEventListener("swiped-down", () => {
+    swipeRef.current.addEventListener('swiped-down', () => {
       dispatch(hideSignForm());
     });
-    return swipeRef.current.removeEventListener("swiped-down", () => {
-      dispatch(hideRegForm());
+    return swipeRef.current.removeEventListener('swiped-down', () => {
+      dispatch(hideSignForm());
     });
   }, [dispatch]);
 
+  const wrongEmail = () => {
+    if (email === '') {
+      console.log('wrong email log');
+      setTrueEmail(false);
+    }
+    console.log('correct email!');
+    setTrueEmail(true);
+  };
+
+  const wrongPass = () => {
+    if (pass === '') {
+      console.log('wrong pass log');
+      setTruePass(false);
+    }
+    console.log('correct pass!');
+    setTruePass(true);
+  };
+
+  console.log(trueLogin);
+  
+
+  const loginUser = () => {
+    wrongEmail();
+    wrongPass();
+    try {
+      if (trueEmail && truePass) {
+        console.log('logining...');
+        fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            mail: email,
+            password: pass,
+          }),
+        })
+          .then((res) => {
+            if (!res.ok) {
+              return res.json().then((error) => {
+                setTrueLogin(false);
+                throw new Error(error.error);
+              });
+            }
+            console.log('succsess!');
+            setTrueLogin(true);
+            return res.json();
+          })
+          .catch((error) => {
+            setTrueLogin(false);
+            console.log('ошибка', error);
+          });
+        }
+      } catch (error) {
+      setTrueLogin(false);
+      console.log(error);
+    }
+  };
+
   if (signState) {
-    hidden.display = "none";
+    hidden.display = 'none';
   }
+
   return (
     <div className={style.hidden_sign} style={hidden}>
       <div className={style.swipe_line_sign} ref={swipeRef}>
@@ -50,18 +116,17 @@ const AuthorizationForm = () => {
           type="email"
           name="email"
           id="email_signIn"
-          placeholder={isEmailFocused ? "" : "Электронная почта"}
+          placeholder={isEmailFocused ? '' : 'Электронная почта'}
           onFocus={() => setIsEmailFocused(true)}
           onBlur={() => setIsEmailFocused(false)}
+          onChange={(e) => setEmail(e.target.value)}
           ref={emailPlch}
         />
         <span
           className={style.email_plchold_sign}
           ref={emailPlchSpan}
-          onFocus={() => setIsPassFocused(true)}
-          onBlur={() => setIsPassFocused(false)}
           style={{
-            display: isEmailFocused ? "" : "none",
+            display: isEmailFocused ? '' : 'none',
           }}
         >
           Электронная почта
@@ -71,27 +136,47 @@ const AuthorizationForm = () => {
           type="password"
           name="password"
           id="passCheck_signIn"
-          placeholder={isPassFocused ? "" : "Пароль"}
+          placeholder={isPassFocused ? '' : 'Пароль'}
           ref={passPlch}
           onFocus={() => setIsPassFocused(true)}
           onBlur={() => setIsPassFocused(false)}
+          onChange={(e) => setPass(e.target.value)}
         />
         <span
           className={style.pass_plchold_sign}
           ref={passPlchSpan}
-          onFocus={() => setIsPassFocused(true)}
-          onBlur={() => setIsPassFocused(false)}
-          style={{display: isPassFocused ? '' : 'none'}}
+          style={{ display: isPassFocused ? '' : 'none' }}
         >
           Пароль
         </span>
         <span className={style.pass_p_sign} style={hiddenwrong}>
           Пароль не верный
         </span>
-        <button type="button">Войти</button>
+        <button
+          type="button"
+          onClick={loginUser}
+        >
+          Войти
+        </button>
       </form>
+      <div
+        className={style.trueLogin}
+        style={{
+          visibility: (trueLogin && trueLogin !== null) ? 'visible' : 'hidden',
+        }}
+      >
+        <p>Успешный вход!</p>
+      </div>
+      <div
+        className={style.falseLogin}
+        style={{
+          visibility: (!trueLogin && trueLogin !== null) ? 'visible' : 'hidden',
+        }}
+      >
+        <p>Неправильный логин либо пароль!</p>
+      </div>
     </div>
   );
-};
+}
 
 export default AuthorizationForm;
