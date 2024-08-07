@@ -49,6 +49,9 @@ function AuthorizationForm() {
     setTruePass(true);
   };
 
+  console.log(trueLogin);
+  
+
   const loginUser = () => {
     wrongEmail();
     wrongPass();
@@ -68,6 +71,7 @@ function AuthorizationForm() {
           .then((res) => {
             if (!res.ok) {
               return res.json().then((error) => {
+                setTrueLogin(false);
                 throw new Error(error.error);
               });
             }
@@ -76,13 +80,13 @@ function AuthorizationForm() {
             return res.json();
           })
           .catch((error) => {
-            console.log('ошибка', error);
             setTrueLogin(false);
+            console.log('ошибка', error);
           });
-      }
-    } catch (error) {
-      console.log(error);
+        }
+      } catch (error) {
       setTrueLogin(false);
+      console.log(error);
     }
   };
 
@@ -166,7 +170,7 @@ function AuthorizationForm() {
       <div
         className={style.falseLogin}
         style={{
-          visibility: (trueLogin && trueLogin !== null) ? 'hidden' : 'visible',
+          visibility: (!trueLogin && trueLogin !== null) ? 'visible' : 'hidden',
         }}
       >
         <p>Неправильный логин либо пароль!</p>
