@@ -158,7 +158,7 @@ function AuthorizationForm() {
       <div
         className={style.trueLogin}
         style={{
-          visibility: trueLogin ? 'visible' : 'hidden',
+          visibility: (trueLogin && trueLogin !== null) ? 'visible' : 'hidden',
         }}
       >
         <p>Успешный вход!</p>
@@ -166,7 +166,7 @@ function AuthorizationForm() {
       <div
         className={style.falseLogin}
         style={{
-          visibility: trueLogin ? 'hidden' : 'visible',
+          visibility: (trueLogin && trueLogin !== null) ? 'hidden' : 'visible',
         }}
       >
         <p>Неправильный логин либо пароль!</p>
