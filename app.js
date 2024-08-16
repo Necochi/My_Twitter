@@ -3,23 +3,16 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
-import crypto from 'crypto';
-import cookieParser from 'cookie-parser';
 
 const app = express();
 const port = 3000;
 const { Client } = pg;
 const token = crypto.randomUUID();
-const token = crypto.randomUUID();
 const client = new Client({
   user: 'database2_pz1p_user',
   password: '3GRkghqQYJB64aPbwpLp02vpeJfLSrTO',
   host: 'dpg-cqt1bbdsvqrc73foglfg-a.oregon-postgres.render.com',
-  user: 'database2_pz1p_user',
-  password: '3GRkghqQYJB64aPbwpLp02vpeJfLSrTO',
-  host: 'dpg-cqt1bbdsvqrc73foglfg-a.oregon-postgres.render.com',
   port: 5432,
-  database: 'database2_pz1p',
   database: 'database2_pz1p',
   ssl: true,
 });
@@ -28,12 +21,11 @@ await client.connect();
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
-app.use(cookieParser());
 
 app.get('/posts', (req, res) => {
   const query = `
-  SELECT * FROM posts;
-  `;
+SELECT * FROM posts;
+`;
 
   client
     .query(query)
@@ -58,8 +50,8 @@ app.post('/posts.json', async (req, res) => {
   try {
     const currentDate = new Date();
     const query = `INSERT INTO posts (userId, name, mail, message, "quantityReposts", "quantityLike", "quantityShare", "imgMessage", date)
-    VALUES ($1, $2, $3, $4, 0, 0, 0, $5, $6)
-    RETURNING *`;
+VALUES ($1, $2, $3, $4, 0, 0, 0, $5, $6)
+RETURNING *`;
 
     const result = await client.query(query, [
       userId,
@@ -102,8 +94,8 @@ app.post('/posts/:id.json', async (req, res) => {
     const recentPostBody = recentPostGet.rows[0];
 
     const query = `UPDATE posts
-    SET message = $1, "imgMessage" = $2, "quantityReposts" = $3, "quantityLike" = $4, "quantityShare" = $5
-    WHERE id = $6 RETURNING *`;
+SET message = $1, "imgMessage" = $2, "quantityReposts" = $3, "quantityLike" = $4, "quantityShare" = $5
+WHERE id = $6 RETURNING *`;
     const result = await client.query(query, [
       message || recentPostBody.message,
       imgMessage || recentPostBody.imgMessage,
@@ -123,11 +115,10 @@ app.post('/posts/:id.json', async (req, res) => {
 app.post('/createUser', async (req, res) => {
   const { mail, password } = req.body;
   let userToken = token;
-  let userToken = token;
   try {
     const checkingEmail = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
     const createUserData = `INSERT INTO "userAuthorization" (mail, password)
-    VALUES ($1, $2) RETURNING *`;
+VALUES ($1, $2) RETURNING *`;
 
     const checkMail = await client.query(checkingEmail, [mail]);
 
@@ -143,51 +134,7 @@ app.post('/createUser', async (req, res) => {
     try {
       const currentDate = new Date();
       const postToken = `INSERT INTO sessions ("userId", token, "createdAt")
-      VALUES ($1, $2, $3) RETURNING *`;
-      const checkUserId = await client.query(checkingEmail, [mail]);
-      const userId = checkUserId.rows[0].id;
-      const getToken = 'SELECT * from sessions WHERE "userId" = $1';
-      const session = await client.query(getToken, [userId]);
-      const existToken = session.rows[0].token;
-
-      if (session.rowCount === 0) {
-        const result = await client.query(postToken, [
-          userId,
-          userToken,
-          currentDate,
-        ]);
-        console.log(result.rows);
-
-        const userData = {
-          userToken,
-          mail,
-        };
-
-        res.cookie('token', userData, {
-          maxAge: 604800000,
-          httpOnly: true,
-        });
-      } else {
-        userToken = existToken;
-        const userData = {
-          userToken,
-          mail,
-        };
-
-        res.cookie('token', userData, {
-          maxAge: 604800000,
-          httpOnly: true,
-        });
-        console.log('cookie already exist');
-      }
-    } catch (error) {
-      console.log(error);
-    }
-
-    try {
-      const currentDate = new Date();
-      const postToken = `INSERT INTO sessions ("userId", token, "createdAt")
-      VALUES ($1, $2, $3) RETURNING *`;
+VALUES ($1, $2, $3) RETURNING *`;
       const checkUserId = await client.query(checkingEmail, [mail]);
       const userId = checkUserId.rows[0].id;
       const getToken = 'SELECT * from sessions WHERE "userId" = $1';
@@ -238,16 +185,11 @@ app.post('/createUser', async (req, res) => {
 app.post('/login', async (req, res) => {
   const { mail, password } = req.body;
   let userToken = token;
-  let userToken = token;
 
   try {
     const checkingMail = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
     let result;
     const checkMail = await client.query(checkingMail, [mail]);
-    const userId = checkMail.rows[0].id;
-    const getToken = 'SELECT * from sessions WHERE "userId" = $1';
-    const session = await client.query(getToken, [userId]);
-    const existToken = session.rows[0].token;
     const userId = checkMail.rows[0].id;
     const getToken = 'SELECT * from sessions WHERE "userId" = $1';
     const session = await client.query(getToken, [userId]);
@@ -259,16 +201,12 @@ app.post('/login', async (req, res) => {
         password,
         checkMail.rows[0].password,
       );
-      const truePass = await bcrypt.compare(
-        password,
-        checkMail.rows[0].password,
-      );
       if (truePass) {
         if (session.rowCount === 0) {
           try {
             const currentDate = new Date();
             const postToken = `INSERT INTO sessions ("userId", token, "createdAt")
-            VALUES ($1, $2, $3) RETURNING *`;
+VALUES ($1, $2, $3) RETURNING *`;
             const sendToken = await client.query(postToken, [
               userId,
               userToken,
