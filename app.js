@@ -24,8 +24,8 @@ app.use(cookieParser());
 
 app.get('/posts', (req, res) => {
   const query = `
-  SELECT * FROM posts;
-  `;
+SELECT * FROM posts;
+`;
 
   client
     .query(query)
@@ -41,7 +41,7 @@ console.log(client.query);
 
 app.get('/date', (req, res) => res.type('json').send({ date: new Date() }));
 
-// -- Posts endpoints ---
+// — Posts endpoints —-
 
 app.post('/posts.json', async (req, res) => {
   const {
@@ -50,8 +50,8 @@ app.post('/posts.json', async (req, res) => {
   try {
     const currentDate = new Date();
     const query = `INSERT INTO posts (userId, name, mail, message, "quantityReposts", "quantityLike", "quantityShare", "imgMessage", date)
-    VALUES ($1, $2, $3, $4, 0, 0, 0, $5, $6)
-    RETURNING *`;
+VALUES ($1, $2, $3, $4, 0, 0, 0, $5, $6)
+RETURNING *`;
 
     const result = await client.query(query, [
       userId,
@@ -94,8 +94,8 @@ app.post('/posts/:id.json', async (req, res) => {
     const recentPostBody = recentPostGet.rows[0];
 
     const query = `UPDATE posts
-    SET message = $1, "imgMessage" = $2, "quantityReposts" = $3, "quantityLike" = $4, "quantityShare" = $5
-    WHERE id = $6 RETURNING *`;
+SET message = $1, "imgMessage" = $2, "quantityReposts" = $3, "quantityLike" = $4, "quantityShare" = $5
+WHERE id = $6 RETURNING *`;
     const result = await client.query(query, [
       message || recentPostBody.message,
       imgMessage || recentPostBody.imgMessage,
@@ -110,7 +110,7 @@ app.post('/posts/:id.json', async (req, res) => {
   }
 });
 
-// --- Authorization endpoints ---
+// —- Authorization endpoints —-
 
 app.post('/createUser', async (req, res) => {
   const { mail, password } = req.body;
@@ -118,7 +118,7 @@ app.post('/createUser', async (req, res) => {
   try {
     const checkingEmail = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
     const createUserData = `INSERT INTO "userAuthorization" (mail, password)
-    VALUES ($1, $2) RETURNING *`;
+VALUES ($1, $2) RETURNING *`;
 
     const checkMail = await client.query(checkingEmail, [mail]);
 
@@ -134,7 +134,7 @@ app.post('/createUser', async (req, res) => {
     try {
       const currentDate = new Date();
       const postToken = `INSERT INTO sessions ("userId", token, "createdAt")
-      VALUES ($1, $2, $3) RETURNING *`;
+VALUES ($1, $2, $3) RETURNING *`;
       const checkUserId = await client.query(checkingEmail, [mail]);
       const userId = checkUserId.rows[0].id;
       const getToken = 'SELECT * from sessions WHERE "userId" = $1';
@@ -206,7 +206,7 @@ app.post('/login', async (req, res) => {
           try {
             const currentDate = new Date();
             const postToken = `INSERT INTO sessions ("userId", token, "createdAt")
-          VALUES ($1, $2, $3) RETURNING *`;
+VALUES ($1, $2, $3) RETURNING *`;
             const sendToken = await client.query(postToken, [
               userId,
               userToken,
@@ -281,7 +281,9 @@ app.get('/checking-token', async (req, res) => {
     return res.status(401).send('Токен просрочен, авторизуйтесь заново!');
   }
 
-  return res.status(200).send('Всё прошло успешно, токен и почта дейтсвительны!');
+  return res
+    .status(200)
+    .send('Всё прошло успешно, токен и почта дейтсвительны!');
 });
 
 app.listen(port, () => {
