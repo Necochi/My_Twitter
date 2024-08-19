@@ -7,14 +7,12 @@ import cookieParser from 'cookie-parser';
 const app = express();
 const port = 3000;
 const { Client } = pg;
-const token = crypto.randomUUID();
 const client = new Client({
-  user: 'database2_pz1p_user',
-  password: '3GRkghqQYJB64aPbwpLp02vpeJfLSrTO',
-  host: 'dpg-cqt1bbdsvqrc73foglfg-a.oregon-postgres.render.com',
-  port: 5432,
-  database: 'database2_pz1p',
-  ssl: true,
+  user: 'postgres.rauzumdprohaiyubtqsk',
+  password: 'OwRzQjFsox7rvdSB',
+  host: 'aws-0-us-west-1.pooler.supabase.com',
+  port: 6543,
+  database: 'postgres',
 });
 await client.connect();
 
@@ -113,8 +111,9 @@ WHERE id = $6 RETURNING *`;
 // —- Authorization endpoints —-
 
 app.post('/createUser', async (req, res) => {
+  const token = crypto.randomUUID();
   const { mail, password } = req.body;
-  let userToken = token;
+  const userToken = token;
   try {
     const checkingEmail = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
     const createUserData = `INSERT INTO "userAuthorization" (mail, password)
@@ -139,7 +138,6 @@ VALUES ($1, $2, $3) RETURNING *`;
       const userId = checkUserId.rows[0].id;
       const getToken = 'SELECT * from sessions WHERE "userId" = $1';
       const session = await client.query(getToken, [userId]);
-      const existToken = session.rows[0].token;
 
       if (session.rowCount === 0) {
         const result = await client.query(postToken, [
@@ -149,26 +147,15 @@ VALUES ($1, $2, $3) RETURNING *`;
         ]);
         console.log(result.rows);
 
-        const userData = {
-          userToken,
-          mail,
-        };
-
-        res.cookie('token', userData, {
+        res.cookie('userToken', userToken, {
+          maxAge: 604800000,
+          httpOnly: true,
+        });
+        res.cookie('mail', mail, {
           maxAge: 604800000,
           httpOnly: true,
         });
       } else {
-        userToken = existToken;
-        const userData = {
-          userToken,
-          mail,
-        };
-
-        res.cookie('token', userData, {
-          maxAge: 604800000,
-          httpOnly: true,
-        });
         console.log('cookie already exist');
       }
     } catch (error) {
@@ -183,17 +170,15 @@ VALUES ($1, $2, $3) RETURNING *`;
 });
 
 app.post('/login', async (req, res) => {
+  const token = crypto.randomUUID();
   const { mail, password } = req.body;
-  let userToken = token;
+  const userToken = token;
 
   try {
     const checkingMail = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
     let result;
     const checkMail = await client.query(checkingMail, [mail]);
     const userId = checkMail.rows[0].id;
-    const getToken = 'SELECT * from sessions WHERE "userId" = $1';
-    const session = await client.query(getToken, [userId]);
-    const existToken = session.rows[0].token;
     if (checkMail.rows.length !== 1) {
       result = res.status(400).json({ error: 'Неверный логин' });
     } else {
@@ -202,44 +187,29 @@ app.post('/login', async (req, res) => {
         checkMail.rows[0].password,
       );
       if (truePass) {
-        if (session.rowCount === 0) {
-          try {
-            const currentDate = new Date();
-            const postToken = `INSERT INTO sessions ("userId", token, "createdAt")
+        try {
+          const currentDate = new Date();
+          const postToken = `INSERT INTO sessions ("userId", token, "createdAt")
 VALUES ($1, $2, $3) RETURNING *`;
-            const sendToken = await client.query(postToken, [
-              userId,
-              userToken,
-              currentDate,
-            ]);
-            console.log(sendToken.rows);
-
-            const userData = {
-              userToken,
-              mail,
-            };
-
-            res.cookie('token', userData, {
-              maxAge: 604800000,
-              httpOnly: true,
-            });
-
-            console.log(req.cookies.token);
-          } catch (error) {
-            console.log(error);
-          }
-        } else {
-          userToken = existToken;
-          const userData = {
+          const sendToken = await client.query(postToken, [
+            userId,
             userToken,
-            mail,
-          };
+            currentDate,
+          ]);
+          console.log(sendToken.rows);
 
-          res.cookie('token', userData, {
+          res.cookie('userToken', userToken, {
             maxAge: 604800000,
             httpOnly: true,
           });
-          console.log('cookie already exist');
+          res.cookie('mail', mail, {
+            maxAge: 604800000,
+            httpOnly: true,
+          });
+
+          console.log(req.cookies.token);
+        } catch (error) {
+          console.log(error);
         }
         result = res.status(200).json({ text: 'Успешно залогинены!' });
       } else {
@@ -253,9 +223,9 @@ VALUES ($1, $2, $3) RETURNING *`;
   }
 });
 
-app.get('/checking-token', async (req, res) => {
-  const { userToken } = req.cookies.token;
-  const { mail } = req.cookies.token;
+app.get('/protected-route', async (req, res) => {
+  const { userToken } = req.cookies;
+  const { mail } = req.cookies;
 
   console.log(userToken, mail);
 

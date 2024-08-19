@@ -14,7 +14,7 @@ export default defineConfig({
       '/posts': 'http://localhost:3000',
       '/createUser': 'http://localhost:3000',
       '/login': 'http://localhost:3000',
-      '/checking-token': 'http://localhost:3000',
+      '/protected-route': 'http://localhost:3000',
     },
   },
 });
