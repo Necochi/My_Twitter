@@ -59,6 +59,7 @@ const RegistrationForm = () => {
             }
             setSuccsessRegistr(true);
             setError(false);
+            window.location.href = "/feed";
             return res.json();
           })
           .catch((error) => {

@@ -77,6 +77,7 @@ function AuthorizationForm() {
             }
             console.log('succsess!');
             setTrueLogin(true);
+            window.location.href = '/feed';
             return res.json();
           })
           .catch((error) => {
