@@ -10,6 +10,7 @@ import { hideRegForm } from "./store/slices/regFormSlice";
 import { hideSignForm } from "./store/slices/signFormSlice";
 import ActualThemes from "./modules/ActualThemes";
 import Blogers from "./modules/Blogers";
+import Cookies from "js-cookie";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -22,6 +23,12 @@ const App = () => {
     document.body.classList.remove("stop_scrolling");
     hidden.display = "none";
   }
+
+    console.log("Cookies:", Cookies.get("userToken"));
+    const token = Cookies.get("userToken");
+    if (token) {
+      window.location.href = "/feed";
+    }
 
   return (
     <>
@@ -38,8 +45,8 @@ const App = () => {
       <div className="information">
         <LastMsgs />
         <div className="themes_blogers">
-        <ActualThemes className="themes_module"/>
-        <Blogers className="blogers_module"/>
+          <ActualThemes className="themes_module" />
+          <Blogers className="blogers_module" />
         </div>
       </div>
       <RegSignButtonsDown />

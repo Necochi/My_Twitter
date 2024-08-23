@@ -196,7 +196,7 @@ VALUES ($1, $2, $3) RETURNING *`;
             userToken,
             currentDate,
           ]);
-          console.log(sendToken.rows);
+          console.log('sendToken', sendToken.rows);
 
           res.cookie('userToken', userToken, {
             maxAge: 604800000,
@@ -206,8 +206,6 @@ VALUES ($1, $2, $3) RETURNING *`;
             maxAge: 604800000,
             httpOnly: true,
           });
-
-          console.log(req.cookies.token);
         } catch (error) {
           console.log(error);
         }
@@ -245,7 +243,7 @@ app.get('/protected-route', async (req, res) => {
     return res.status(401).send('Такого токена нет!');
   }
 
-  console.log(session.rows[0].createdAt);
+  console.log('session', session.rows[0].createdAt);
 
   if (session.rows[0].createdAt >= maxDate) {
     return res.status(401).send('Токен просрочен, авторизуйтесь заново!');
@@ -254,6 +252,26 @@ app.get('/protected-route', async (req, res) => {
   return res
     .status(200)
     .send('Всё прошло успешно, токен и почта дейтсвительны!');
+});
+
+async function isValidToken(token) {
+  const getToken = 'SELECT * FROM sessions WHERE token = $1';
+  const isTokenExist = await client.query(getToken, [token]);
+  console.log('is token exist', isTokenExist.rows);
+
+  if (isTokenExist.rowCount === 1 && isTokenExist.rows[0].token === token) {
+    return true;
+  }
+  return false;
+}
+
+app.get('/feed', (req, res) => {
+  const { userToken } = req.cookies;
+  if (!userToken || !isValidToken(userToken)) {
+    res.status(401).send('Пользователь не авторизован');
+  } else {
+    res.send('Страница feed');
+  }
 });
 
 app.listen(port, () => {
