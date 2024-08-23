@@ -273,7 +273,7 @@ app.get('/feed', (req, res) => {
   if (!userToken || !isValidToken(userToken)) {
     res.status(401).send('Пользователь не авторизован');
   } else {
-    res.send('Страница feed');
+    res.redirect('/feed');
   }
 });
 
