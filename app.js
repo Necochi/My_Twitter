@@ -257,25 +257,25 @@ app.get('/protected-route', async (req, res) => {
     .send('Всё прошло успешно, токен и почта дейтсвительны!');
 });
 
-async function isValidToken(token) {
-  const getToken = 'SELECT * FROM sessions WHERE token = $1';
-  const isTokenExist = await client.query(getToken, [token]);
-  console.log('is token exist', isTokenExist.rows);
+// async function isValidToken(token) {
+//   const getToken = 'SELECT * FROM sessions WHERE token = $1';
+//   const isTokenExist = await client.query(getToken, [token]);
+//   console.log('is token exist', isTokenExist.rows);
 
-  if (isTokenExist.rowCount === 1 && isTokenExist.rows[0].token === token) {
-    return true;
-  }
-  return false;
-}
+//   if (isTokenExist.rowCount === 1 && isTokenExist.rows[0].token === token) {
+//     return true;
+//   }
+//   return false;
+// }
 
-app.get('/feed', (req, res) => {
-  const { userToken } = req.cookies;
-  if (!userToken || !isValidToken(userToken)) {
-    res.status(401).send('Пользователь не авторизован');
-  } else {
-    res.redirect('/feed');
-  }
-});
+// app.get('/feed', (req, res) => {
+//   const { userToken } = req.cookies;
+//   if (!userToken || !isValidToken(userToken)) {
+//     res.status(401).send('Пользователь не авторизован');
+//   } else {
+//     res.status(200).send('rgrh')
+//   }
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
