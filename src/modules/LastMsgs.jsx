@@ -8,8 +8,6 @@ import { getMessages } from "../store/slices/messagesSlice";
 import { getIcons } from "../store/slices/iconsSlice";
 const LastMsgs = () => {
   const dispatch = useDispatch();
-  const regState = useSelector((state) => state.regForm.isHidden);
-  const signState = useSelector((state) => state.signForm.isHidden);
   const messages = useSelector((state) => state.messages);
   const icons = useSelector((state) => state.icons);
   const iconsArr = [];
