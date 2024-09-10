@@ -9,6 +9,7 @@ import { getIcons } from "../store/slices/iconsSlice.js";
 import thisStyle from "../styles/FeedPage.module.css";
 import ActualThemes from "../modules/ActualThemes.jsx";
 import Blogers from "../modules/Blogers.jsx";
+import postSize from "../assets/post_size.js";
 
 const FeedPage = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,17 @@ const FeedPage = () => {
   const iconsArr = [];
   const [times, setTimes] = useState([]);
   const [hidden, setHidden] = useState(true);
+  const [post, setPost] = useState("");
+  const [postSizeNumber, setPostSizeNumber] = useState(0);
+
+  const circumference = 2 * 3.14 * 70;
+  const procent = (postSizeNumber / 300) * 100;
+
+  const offset = circumference * ((100 - procent) / 100);
+
+  useEffect(() => {
+    setPostSizeNumber(postSize(post));
+  }, [post]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -40,14 +52,6 @@ const FeedPage = () => {
   const newTimeFunc = (date, newDate) => {
     return convertTime(convertDate(date), newDate);
   };
-
-  useEffect(() => {
-    if (window.innerWidth > 1279) {
-      setHidden(false);
-    } else {
-      setHidden(true);
-    }
-  }, [window.innerWidthth]);
 
   if (!hidden && window.innerWidth < 1279) {
     document.body.classList.add("stop_scrolling");
@@ -106,11 +110,11 @@ const FeedPage = () => {
               </button>
             </div>
           </div>
-          {/* <div className={thisStyle.add_post}>
+          <div className={thisStyle.add_post}>
             <button>
               <img src="/imgs/addPost.svg" alt="Написать пост" />
             </button>
-          </div> */}
+          </div>
           <div className={thisStyle.feed_logo}>
             <img src="/imgs/whiteDulphin.svg" alt="logo" />
             <img src="/imgs/dulphin.svg" alt="logo" />
@@ -120,8 +124,8 @@ const FeedPage = () => {
           </div>
         </div>
 
-        <div className={thisStyle.greets}>
-          <p>Что нового, Александр?</p>
+        <div className={thisStyle.greets} onClick={() => setHidden(false)}>
+          <button>Что нового, Александр?</button>
         </div>
 
         <div
@@ -134,7 +138,31 @@ const FeedPage = () => {
             <div className={thisStyle.swipe_line}></div>
           </div>
           <div className={thisStyle.post_texstarea}>
-            <textarea name="post" id="post" cols="50" rows="3"></textarea>
+            <textarea
+              onChange={(e) => setPost(e.target.value)}
+              maxLength={300}
+              name="post"
+              id="post"
+              cols="50"
+              rows="3"
+              style={{
+
+                resize: 'none',
+        
+                overflowY: 'hidden',
+        
+                height: 'auto',
+        
+              }}
+        
+              onInput={(e) => {
+        
+                e.target.style.height = 'auto';
+        
+                e.target.style.height = e.target.scrollHeight + 'px';
+        
+              }}
+            ></textarea>
           </div>
           <div className={thisStyle.post_info}>
             <div className={thisStyle.add_picture}>
@@ -164,12 +192,15 @@ const FeedPage = () => {
                     stroke="#0057FF"
                     strokeLinecap="round"
                     strokeWidth="10px"
-                    strokeDasharray="439.6px"
-                    strokeDashoffset="109.9px"
+                    strokeDasharray={circumference}
+                    strokeDashoffset={offset}
                   ></circle>
                 </svg>
 
-                <p>123</p>
+                <p
+                style={{
+                  marginLeft: postSizeNumber > 99 ? '0' : postSizeNumber > 9 ? '6px' : '13px',
+                }}>{postSizeNumber}</p>
               </div>
               <div className={thisStyle.circle}>
                 <button>
@@ -245,7 +276,9 @@ const FeedPage = () => {
             </div>
           </div>
 
-          <div className={thisStyle.recommend}>
+          <div
+            className={thisStyle.recommend}
+          >
             <div className={thisStyle.my_info}>
               <div className={thisStyle.icon_name}>
                 <img src="imgs/myIcon.svg" alt="Фото" />
