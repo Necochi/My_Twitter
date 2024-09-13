@@ -49,7 +49,7 @@
 
 .post_block {
   width: 100%;
-  background-color: #FFF;
+  background-color: #fff;
   z-index: 3;
   border-radius: 10px 10px 0 0;
 }
@@ -65,7 +65,7 @@
 
 .post_block textarea:focus {
   outline: none;
-  box-shadow: none
+  box-shadow: none;
 }
 
 .post_block .swipe_line_div {
@@ -88,12 +88,18 @@
   width: 80px;
 }
 
+.post_symbols_send > p {
+  text-align: center;
+
+  margin: 0 auto;
+}
+
 .post_symbols_send .send button {
   width: 200px;
 }
 
 .post_block .swipe_line_div > .swipe_line {
-  background-color: #ABACB1;
+  background-color: #abacb1;
   width: 20%;
   height: 5px;
   margin: auto;
@@ -122,7 +128,7 @@
 }
 
 .post_symbols_send .send button {
-  background-color: #0057FF;
+  background-color: #0057ff;
   color: #fff;
   border: none;
 }
@@ -289,11 +295,17 @@
     border-radius: 10px;
     margin-block: 30px;
     width: 53%;
+    cursor: pointer;
   }
 
-  .greets p {
+  .greets button {
+    background-color: initial;
+    border: none;
+    margin: 0;
+    height: auto;
     font-weight: 900;
-    color: #ABACB1;
+    color: #abacb1;
+    cursor: pointer;
   }
 
   .post_block {
@@ -302,7 +314,7 @@
     width: 53%;
     border-radius: 10px;
     margin-bottom: 20px;
-    border: 3px solid #0057FF;
+    border: 3px solid #0057ff;
   }
 
   .post_block textarea {
@@ -329,9 +341,11 @@
   }
 
   .recommend {
+    position: fixed;
     display: block;
-    margin-top: -300px;
+    top: 100px;
     margin-left: 2%;
+    right: 10%;
   }
 
   .flex_msgs_recommend {
@@ -360,13 +374,13 @@
   .recommend .my_info .icon_name .name_userName p {
     font-size: 18px;
     font-weight: 900;
-    color: #1D1E22;
+    color: #1d1e22;
   }
 
   .recommend .my_info .icon_name .name_userName span {
     font-size: 12px;
     font-weight: 400;
-    color: #ABACB1;
+    color: #abacb1;
   }
 
   .recommend .my_info .more_info {
@@ -380,7 +394,7 @@
   .recommend .my_info .more_info .subs p {
     font-weight: 600;
     font-size: 22px;
-    color: #1D1E22;
+    color: #1d1e22;
   }
 
   .recommend .my_info .more_info .msgs span,
@@ -388,6 +402,6 @@
   .recommend .my_info .more_info .subs span {
     font-weight: 400;
     font-size: 12px;
-    color: #ABACB1;
+    color: #abacb1;
   }
 }
