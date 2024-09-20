@@ -230,6 +230,28 @@
   cursor: pointer;
 }
 
+.msgSend {
+  position: absolute;
+  top: 300px; bottom: 270px; left: 35%; right: 27%;
+  z-index: 15;
+  background-color: rgb(0, 190, 0);
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 18px;
+}
+
+.msgNotSend {
+  position: absolute;
+  top: 300px; bottom: 250px; left: 35%; right: 27%;
+  z-index: 15;
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 18px;
+}
+
 @media screen and (width > 1279px) {
   .footer_feed,
   .add_post {

@@ -20,10 +20,11 @@ const FeedPage = () => {
   const [hidden, setHidden] = useState(true);
   const [post, setPost] = useState("");
   const [postSizeNumber, setPostSizeNumber] = useState(0);
+  const [error, setError] = useState(null);
+  let image;
 
   const circumference = 2 * 3.14 * 70;
   const procent = (postSizeNumber / 300) * 100;
-
   const offset = circumference * ((100 - procent) / 100);
 
   useEffect(() => {
@@ -48,6 +49,40 @@ const FeedPage = () => {
     dispatch(getMessages());
     dispatch(getIcons());
   }, [dispatch]);
+
+  const handleSavePost = () => {
+    if (postSizeNumber > 1) {
+      try {
+        fetch("/posts.json", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            name: "name",
+            message: post,
+            imgMessage: image,
+          }),
+        }).then((res) => {
+          if (!res.ok) {
+            return res.json().then((error) => {
+              setError(true);
+              throw new Error(error.error);
+            });
+          } else {
+            setError(false);
+            console.log(res.json);
+            return res.json();
+          }
+        });
+      } catch (error) {
+        setError(true);
+        console.log(error);
+      }
+    } else {
+      setError(true);
+    }
+  };
 
   const newTimeFunc = (date, newDate) => {
     return convertTime(convertDate(date), newDate);
@@ -79,11 +114,31 @@ const FeedPage = () => {
     return (
       <>
         <div
+          className={thisStyle.msgSend}
+          style={{
+            display: !error && error !== null ? "block" : "none",
+          }}
+        >
+          Пост создан!
+        </div>
+        <div
+          className={thisStyle.msgNotSend}
+          style={{
+            display: error && error !== null ? "block" : "none",
+          }}
+        >
+          Ошибка создания!
+        </div>
+        <div
           className={thisStyle.black_div}
           style={{
-            display: !hidden && window.innerWidth < 1279 ? "block" : "none",
+            display:
+              (!hidden && window.innerWidth < 1279) || error ? "block" : "none",
           }}
-          onClick={() => setHidden(true)}
+          onClick={() => {
+            setHidden(true);
+            setError(null);
+          }}
         ></div>
         <div className={thisStyle.main_logo}>
           <div className={thisStyle.feed_pages}>
@@ -146,21 +201,13 @@ const FeedPage = () => {
               cols="50"
               rows="3"
               style={{
-
-                resize: 'none',
-        
-                overflowY: 'hidden',
-        
-                height: 'auto',
-        
+                resize: "none",
+                overflowY: "hidden",
+                height: "auto",
               }}
-        
               onInput={(e) => {
-        
-                e.target.style.height = 'auto';
-        
-                e.target.style.height = e.target.scrollHeight + 'px';
-        
+                e.target.style.height = "auto";
+                e.target.style.height = e.target.scrollHeight + "px";
               }}
             ></textarea>
           </div>
@@ -198,9 +245,17 @@ const FeedPage = () => {
                 </svg>
 
                 <p
-                style={{
-                  marginLeft: postSizeNumber > 99 ? '0' : postSizeNumber > 9 ? '6px' : '13px',
-                }}>{postSizeNumber}</p>
+                  style={{
+                    marginLeft:
+                      postSizeNumber > 99
+                        ? "0"
+                        : postSizeNumber > 9
+                        ? "6px"
+                        : "13px",
+                  }}
+                >
+                  {postSizeNumber}
+                </p>
               </div>
               <div className={thisStyle.circle}>
                 <button>
@@ -208,7 +263,7 @@ const FeedPage = () => {
                 </button>
               </div>
               <div className={thisStyle.send}>
-                <button>Отправить</button>
+                <button onClick={handleSavePost}>Отправить</button>
               </div>
             </div>
           </div>
@@ -276,9 +331,7 @@ const FeedPage = () => {
             </div>
           </div>
 
-          <div
-            className={thisStyle.recommend}
-          >
+          <div className={thisStyle.recommend}>
             <div className={thisStyle.my_info}>
               <div className={thisStyle.icon_name}>
                 <img src="imgs/myIcon.svg" alt="Фото" />
