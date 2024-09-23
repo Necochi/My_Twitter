@@ -25,7 +25,6 @@ client.keepAliveTimeout = 120000;
 client.headersTimeout = 120000;
 
 app.get('/posts', async (req, res) => {
-
   try {
     const result = await client.query('SELECT * FROM posts');
     const data = result.rows;
