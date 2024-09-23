@@ -108,7 +108,7 @@ export default function convertTime(postDate, currentDate) {
         }
       }
     }
-  } else if (minutes < 61) {
+  } else if (minutes < 61 && minutes >= 1) {
     minutes = Math.round(minutes);
     makingVar();
     if (stringTime.length === 1) {
@@ -140,6 +140,8 @@ export default function convertTime(postDate, currentDate) {
         }
       }
     }
+  } else {
+    result = 'только что';
   }
 
   return result;

@@ -24,19 +24,14 @@ app.use(cookieParser());
 client.keepAliveTimeout = 120000;
 client.headersTimeout = 120000;
 
-app.get('/posts', (req, res) => {
-  const query = `
-SELECT * FROM posts;
-`;
-
-  client
-    .query(query)
-    .then((result) => {
-      res.json(result.rows);
-    })
-    .catch((err) => {
-      console.log('error', err);
-    });
+app.get('/posts', async (req, res) => {
+  try {
+    const result = await client.query('SELECT * FROM posts');
+    const data = result.rows;
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 console.log(client.query);
@@ -280,7 +275,7 @@ app.get('/feed', (req, res) => {
   if (!userToken || !isValidToken(userToken)) {
     res.status(401).send('Пользователь не авторизован');
   } else {
-    res.sendFile(path.join(__dirname, '/index.html'));
+    res.sendFile(path.join('./', '/index.html'));
   }
 });
 

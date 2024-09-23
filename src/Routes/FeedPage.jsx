@@ -19,9 +19,11 @@ const FeedPage = () => {
   const [times, setTimes] = useState([]);
   const [hidden, setHidden] = useState(true);
   const [post, setPost] = useState("");
+  const [dbPosts, setDbPosts] = useState(null);
   const [postSizeNumber, setPostSizeNumber] = useState(0);
   const [error, setError] = useState(null);
   let image;
+  let posts;
 
   const circumference = 2 * 3.14 * 70;
   const procent = (postSizeNumber / 300) * 100;
@@ -33,9 +35,9 @@ const FeedPage = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const newTimes = messages.data.map((message) => {
+      const newTimes = dbPosts.map((message) => {
         if (message) {
-          return newTimeFunc(message.date, new Date());
+          return convertTime(new Date(message.date), new Date());
         }
         return null;
       });
@@ -43,12 +45,25 @@ const FeedPage = () => {
     }, 60000);
 
     return () => clearInterval(interval);
-  }, [messages.data]);
+  }, [dbPosts]);
 
   useEffect(() => {
     dispatch(getMessages());
     dispatch(getIcons());
   }, [dispatch]);
+
+  useEffect(() => {
+    async function getPosts() {
+      try {
+        const response = await fetch("/posts");
+        const data = await response.json();
+        setDbPosts(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getPosts();
+  }, []);
 
   const handleSavePost = () => {
     if (postSizeNumber > 1) {
@@ -71,7 +86,6 @@ const FeedPage = () => {
             });
           } else {
             setError(false);
-            console.log(res.json);
             return res.json();
           }
         });
@@ -82,10 +96,6 @@ const FeedPage = () => {
     } else {
       setError(true);
     }
-  };
-
-  const newTimeFunc = (date, newDate) => {
-    return convertTime(convertDate(date), newDate);
   };
 
   if (!hidden && window.innerWidth < 1279) {
@@ -104,7 +114,7 @@ const FeedPage = () => {
         <PreloadLastMsgs />
       </div>
     );
-  } else if (!messages.isLoading && !icons.isLoading) {
+  } else if (dbPosts !== null && !icons.isLoading) {
     icons.data.map((v) => {
       if (v) {
         iconsArr.push(v["url"]);
@@ -282,9 +292,9 @@ const FeedPage = () => {
                 paddingBottom: "30px",
               }}
             >
-              {messages.data.map((val, ind) => {
+              {dbPosts.map((val, ind) => {
                 return (
-                  <React.Fragment key={val["user_id"]}>
+                  <React.Fragment key={val["userId"]}>
                     <div className={style.msg}>
                       <div className={style.icon}>
                         <img alt="icon" src={iconsArr[ind]} />
@@ -297,7 +307,8 @@ const FeedPage = () => {
                           </div>
                           <div className={style.time}>
                             <p>
-                              {times[ind] || newTimeFunc(val.date, new Date())}
+                              {times[ind] ||
+                                convertTime(new Date(val.date), new Date())}
                             </p>
                           </div>
                         </div>
