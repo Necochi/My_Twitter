@@ -47,18 +47,24 @@ app.get('/date', (req, res) => res.type('json').send({ date: new Date() }));
 
 app.post('/posts.json', async (req, res) => {
   const {
-    userId, name, mail, message, imgMessage,
+    name, message, imgMessage,
   } = req.body;
+  console.log(req.body);
   try {
+    console.log(req.cookies.mail);
+    const email = req.cookies.mail;
+    const getUserId = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
+    const readyUserId = await client.query(getUserId, [email]);
+    console.log(readyUserId.rows[0].id);
     const currentDate = new Date();
-    const query = `INSERT INTO posts (userId, name, mail, message, "quantityReposts", "quantityLike", "quantityShare", "imgMessage", date)
+    const query = `INSERT INTO posts ("userId", name, mail, message, "quantityReposts", "quantityLike", "quantityShare", "imgMessage", date)
 VALUES ($1, $2, $3, $4, 0, 0, 0, $5, $6)
 RETURNING *`;
 
     const result = await client.query(query, [
-      userId,
+      readyUserId.rows[0].id,
       name,
-      mail,
+      email,
       message,
       imgMessage || '',
       currentDate,
