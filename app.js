@@ -24,19 +24,15 @@ app.use(cookieParser());
 client.keepAliveTimeout = 120000;
 client.headersTimeout = 120000;
 
-app.get('/posts', (req, res) => {
-  const query = `
-SELECT * FROM posts;
-`;
+app.get('/posts', async (req, res) => {
 
-  client
-    .query(query)
-    .then((result) => {
-      res.json(result.rows);
-    })
-    .catch((err) => {
-      console.log('error', err);
-    });
+  try {
+    const result = await client.query('SELECT * FROM posts');
+    const data = result.rows;
+    res.json(data);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 console.log(client.query);
