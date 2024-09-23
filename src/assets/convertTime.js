@@ -6,7 +6,7 @@ export default function convertTime(postDate, currentDate) {
   let stringTimeTwoLast;
   let numberSTimeEnd;
   let numberStringTwoLast;
-
+  
   function makingVar() {
     stringTime = String(minutes);
     stringTimeTwoLast = Number(stringTime.slice(stringTime.length - 2, stringTime.length));
@@ -108,7 +108,7 @@ export default function convertTime(postDate, currentDate) {
         }
       }
     }
-  } else if (minutes < 61) {
+  } else if (minutes < 61 && minutes >= 1) {
     minutes = Math.round(minutes);
     makingVar();
     if (stringTime.length === 1) {
@@ -139,7 +139,9 @@ export default function convertTime(postDate, currentDate) {
           result = `${minutes} минут назад`;
         }
       }
-    }
+    } 
+  } else {
+    result = 'только что';
   }
 
   return result;
