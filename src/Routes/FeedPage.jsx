@@ -1,5 +1,4 @@
 import convertTime from "../assets/convertTime.js";
-import convertDate from "../assets/convertDate.js";
 import { useDispatch, useSelector } from "react-redux";
 import style from "../styles/LastMsgs.module.css";
 import PreloadLastMsgs from "../modules/PreloadLastMsgs.jsx";
@@ -10,6 +9,8 @@ import thisStyle from "../styles/FeedPage.module.css";
 import ActualThemes from "../modules/ActualThemes.jsx";
 import Blogers from "../modules/Blogers.jsx";
 import postSize from "../assets/post_size.js";
+import { Widget } from "@uploadcare/react-widget";
+
 
 const FeedPage = () => {
   const dispatch = useDispatch();
@@ -22,12 +23,15 @@ const FeedPage = () => {
   const [dbPosts, setDbPosts] = useState(null);
   const [postSizeNumber, setPostSizeNumber] = useState(0);
   const [error, setError] = useState(null);
-  let image;
+  const [imgUrl, setImgUrl] = useState('');
   let posts;
 
   const circumference = 2 * 3.14 * 70;
   const procent = (postSizeNumber / 300) * 100;
   const offset = circumference * ((100 - procent) / 100);
+  const handleFileUpload = (fileInfo) => {
+    setImgUrl(fileInfo.cdnUrl);
+  };
 
   useEffect(() => {
     setPostSizeNumber(postSize(post));
@@ -76,7 +80,7 @@ const FeedPage = () => {
           body: JSON.stringify({
             name: "name",
             message: post,
-            imgMessage: image,
+            imgMessage: imgUrl,
           }),
         }).then((res) => {
           if (!res.ok) {
@@ -268,9 +272,14 @@ const FeedPage = () => {
                 </p>
               </div>
               <div className={thisStyle.circle}>
-                <button>
-                  <img src="/imgs/addPhoto.svg" alt="Добавить фото" />
-                </button>
+                {/* <img src="/imgs/addPhoto.svg" alt="Добавить фото" /> */}
+                <Widget
+                style={{
+                  width: '40px'
+                }}
+                  publicKey="8712be514bdf73095914"
+                  onChange={(fileInfo) => handleFileUpload(fileInfo)}
+                />
               </div>
               <div className={thisStyle.send}>
                 <button onClick={handleSavePost}>Отправить</button>
@@ -316,7 +325,7 @@ const FeedPage = () => {
                           <p>{val["message"]}</p>
                           <img
                             className={style.added_img}
-                            src={val["img_message"]}
+                            src={val["imgMessage"]}
                           ></img>
                         </div>
                         <div className={style.send_like_dwld}>

@@ -41,9 +41,7 @@ app.get('/date', (req, res) => res.type('json').send({ date: new Date() }));
 // — Posts endpoints —-
 
 app.post('/posts.json', async (req, res) => {
-  const {
-    name, message, imgMessage,
-  } = req.body;
+  const { name, message, imgMessage } = req.body;
   console.log(req.body);
   try {
     console.log(req.cookies.mail);
