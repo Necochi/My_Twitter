@@ -24,11 +24,11 @@ const App = () => {
     hidden.display = "none";
   }
 
-    console.log("Cookies:", Cookies.get("userToken"));
-    const token = Cookies.get("userToken");
-    if (token) {
-      window.location.href = "/feed";
-    }
+  console.log("Cookies:", Cookies.get("userToken"));
+  const token = Cookies.get("userToken");
+  if (token) {
+    window.location.href = "/feed";
+  }
 
   return (
     <>
