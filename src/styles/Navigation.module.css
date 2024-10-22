@@ -1,0 +1,92 @@
+.main_logo {
+  width: 100%;
+  height: 70px;
+  background-color: #0057ff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.black_div {
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  background-color: #000000;
+  z-index: 2;
+  opacity: 50%;
+}
+
+.main_logo .feed_logo img {
+  width: 30px;
+  margin: auto;
+}
+
+.main_logo .feed_logo img:last-child {
+  display: none;
+}
+
+.main_logo .feed_logo img:first-child {
+  display: block;
+}
+
+.main_logo .feed_pages {
+  display: none;
+}
+
+.main_logo .feed_my_profile img {
+  width: 60px;
+  border-radius: 50%;
+  display: none;
+}
+
+@media screen and (width > 1279px) {
+  .add_post {
+    display: none;
+  }
+
+  .main_logo {
+    background-color: #ffffff;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: #c7c7c7 1px 1px 6px;
+  }
+
+  .main_logo .feed_logo img:last-child {
+    margin-right: 300px;
+    display: block;
+  }
+
+  .main_logo .feed_logo img:first-child {
+    display: none;
+  }
+
+  .main_logo .feed_my_profile img {
+    display: block;
+    margin-right: 20px;
+  }
+
+  .main_logo .feed_pages {
+    display: flex;
+  }
+
+  .feed_pages button {
+    background-color: initial;
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0%;
+    width: max-content;
+    height: 70px;
+    padding-inline: 25px;
+    cursor: pointer;
+  }
+
+  .feed_pages button img {
+    width: 25px;
+  }
+
+  .feed_pages button p {
+    margin-inline: 10px;
+  }
+}

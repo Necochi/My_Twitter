@@ -5,17 +5,19 @@ import PreloadLastMsgs from "../modules/PreloadLastMsgs.jsx";
 import React, { useEffect, useState } from "react";
 import { getMessages } from "../store/slices/messagesSlice.js";
 import { getIcons } from "../store/slices/iconsSlice.js";
+import { getPosts, addNewPost } from "../store/slices/postSlice.js";
 import thisStyle from "../styles/FeedPage.module.css";
 import ActualThemes from "../modules/ActualThemes.jsx";
 import Blogers from "../modules/Blogers.jsx";
 import postSize from "../assets/post_size.js";
 import { Widget } from "@uploadcare/react-widget";
-
+import Navigation from "../modules/Navigation.jsx";
+import FeedNavigation from "../modules/FeedNavigation.jsx";
 
 const FeedPage = () => {
   const dispatch = useDispatch();
-  const messages = useSelector((state) => state.messages);
   const icons = useSelector((state) => state.icons);
+  const posts = useSelector((state) => state.posts);
   const iconsArr = [];
   const [times, setTimes] = useState([]);
   const [hidden, setHidden] = useState(true);
@@ -23,8 +25,7 @@ const FeedPage = () => {
   const [dbPosts, setDbPosts] = useState(null);
   const [postSizeNumber, setPostSizeNumber] = useState(0);
   const [error, setError] = useState(null);
-  const [imgUrl, setImgUrl] = useState('');
-  let posts;
+  const [imgUrl, setImgUrl] = useState("");
 
   const circumference = 2 * 3.14 * 70;
   const procent = (postSizeNumber / 300) * 100;
@@ -39,7 +40,7 @@ const FeedPage = () => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      const newTimes = dbPosts.map((message) => {
+      const newTimes = posts.data.map((message) => {
         if (message) {
           return convertTime(new Date(message.date), new Date());
         }
@@ -54,49 +55,20 @@ const FeedPage = () => {
   useEffect(() => {
     dispatch(getMessages());
     dispatch(getIcons());
+    dispatch(getPosts());
   }, [dispatch]);
 
-  useEffect(() => {
-    async function getPosts() {
-      try {
-        const response = await fetch("/posts");
-        const data = await response.json();
-        setDbPosts(data);
-      } catch (error) {
-        console.log(error);
-      }
-    }
-    getPosts();
-  }, []);
-
-  const handleSavePost = () => {
+  const handleSavePost = (e) => {
     if (postSizeNumber > 1) {
-      try {
-        fetch("/posts.json", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            name: "name",
-            message: post,
-            imgMessage: imgUrl,
-          }),
-        }).then((res) => {
-          if (!res.ok) {
-            return res.json().then((error) => {
-              setError(true);
-              throw new Error(error.error);
-            });
-          } else {
-            setError(false);
-            return res.json();
-          }
-        });
-      } catch (error) {
-        setError(true);
-        console.log(error);
-      }
+      e.preventDefault();
+      const postData = {
+        name: "name",
+        message: post,
+        imgMessage: imgUrl,
+      };
+
+      dispatch(addNewPost(postData));
+      setError(true);
     } else {
       setError(true);
     }
@@ -108,17 +80,19 @@ const FeedPage = () => {
     document.body.classList.remove("stop_scrolling");
   }
 
-  if (messages.isLoading && icons.isLoading) {
+  if (posts.isLoading) {
     return (
-      <div className={style.last_msgs}>
-        <p className={style.heading}>Последние сообщения</p>
-        <PreloadLastMsgs />
-        <PreloadLastMsgs />
-        <PreloadLastMsgs />
-        <PreloadLastMsgs />
-      </div>
+      <>
+        <Navigation />
+        <div className={style.last_msgs}>
+          <PreloadLastMsgs />
+          <PreloadLastMsgs />
+          <PreloadLastMsgs />
+          <PreloadLastMsgs />
+        </div>
+      </>
     );
-  } else if (dbPosts !== null && !icons.isLoading) {
+  } else if (!icons.isLoading) {
     icons.data.map((v) => {
       if (v) {
         iconsArr.push(v["url"]);
@@ -154,46 +128,26 @@ const FeedPage = () => {
             setError(null);
           }}
         ></div>
-        <div className={thisStyle.main_logo}>
-          <div className={thisStyle.feed_pages}>
-            <div className={thisStyle.header_main_div}>
-              <button
-                style={{
-                  borderBottom: "5px solid #0057FF",
-                }}
-              >
-                <img src="/imgs/home.svg" alt="Домой" />
-                <p>Лента</p>
-              </button>
-            </div>
-            <div className={thisStyle.header_profile_div}>
-              <button>
-                <img src="/imgs/user.svg" alt="Пользователь" />
-                <p>Профиль</p>
-              </button>
-            </div>
-            <div className={thisStyle.header_settings_div}>
-              <button>
-                <img src="/imgs/settings.svg" alt="Настройки" />
-                <p>Настройки</p>
-              </button>
-            </div>
-          </div>
-          <div className={thisStyle.add_post}>
-            <button>
-              <img src="/imgs/addPost.svg" alt="Написать пост" />
-            </button>
-          </div>
-          <div className={thisStyle.feed_logo}>
-            <img src="/imgs/whiteDulphin.svg" alt="logo" />
-            <img src="/imgs/dulphin.svg" alt="logo" />
-          </div>
-          <div className={thisStyle.feed_my_profile}>
-            <img src="/imgs/myIcon.svg" alt="" />
-          </div>
-        </div>
+        <div
+          className={thisStyle.invisible_div}
+          style={{
+            display: !hidden && window.innerWidth > 1278 ? "block" : "none",
+          }}
+          onClick={() => {
+            setHidden(true);
+            setError(null);
+          }}
+        ></div>
 
-        <div className={thisStyle.greets} onClick={() => setHidden(false)}>
+        <Navigation />
+
+        <div
+          className={thisStyle.greets}
+          onClick={() => setHidden(false)}
+          style={{
+            display: hidden && window.innerWidth > 1278 ? "block" : "none",
+          }}
+        >
           <button>Что нового, Александр?</button>
         </div>
 
@@ -274,9 +228,9 @@ const FeedPage = () => {
               <div className={thisStyle.circle}>
                 {/* <img src="/imgs/addPhoto.svg" alt="Добавить фото" /> */}
                 <Widget
-                style={{
-                  width: '40px'
-                }}
+                  style={{
+                    width: "40px",
+                  }}
                   publicKey="8712be514bdf73095914"
                   onChange={(fileInfo) => handleFileUpload(fileInfo)}
                 />
@@ -301,7 +255,7 @@ const FeedPage = () => {
                 paddingBottom: "30px",
               }}
             >
-              {dbPosts.map((val, ind) => {
+              {posts.data.map((val, ind) => {
                 return (
                   <React.Fragment key={val["userId"]}>
                     <div className={style.msg}>
@@ -380,33 +334,12 @@ const FeedPage = () => {
           </div>
         </div>
 
-        <div className={thisStyle.footer_feed}>
-          <div
-            className={thisStyle.footer_main_div}
-            style={{
-              borderBottom: "5px solid blue",
-            }}
-          >
-            <button>
-              <img src="/imgs/home.svg" alt="Домой" />
-            </button>
-          </div>
-          <div className={thisStyle.footer_profile_div}>
-            <button>
-              <img src="/imgs/user.svg" alt="Пользователь" />
-            </button>
-          </div>
-          <div className={thisStyle.footer_settings_div}>
-            <button>
-              <img src="/imgs/settings.svg" alt="Настройки" />
-            </button>
-          </div>
-          <div className={thisStyle.footer_myself_div}>
-            <button>
-              <img src="/imgs/myIcon.svg" alt="Пользователь" />
-            </button>
-          </div>
-        </div>
+        <FeedNavigation
+          style={{
+            display: window.innerWidth < 1279 ? "block" : "none",
+          }}
+        />
+
         <div className={thisStyle.add_post}>
           <button onClick={() => setHidden(false)}>
             <img src="/imgs/addPost.svg" alt="Написать пост" />
