@@ -7,6 +7,8 @@ const FeedNavigation = () => {
   const settings = location.pathname === "/settings/profile";
   const feed = location.pathname === "/feed";
   const profile = location.pathname === "/profile";
+  const pass = location.pathname === "/settings/password";
+  const mail = location.pathname === "/settings/email";
   const navigate = useNavigate();
   return (
     <div className={feedStyle.footer_feed}>
@@ -33,7 +35,7 @@ const FeedNavigation = () => {
       <div className={feedStyle.footer_settings_div}>
         <button
           style={{
-            borderBottom: settings ? "solid 4px blue" : "solid 4px #ffffff",
+            borderBottom: (settings || pass || mail) ? "solid 4px blue" : "solid 4px #ffffff",
           }}
           onClick={() => navigate("/settings/profile", { replace: false })}
         >

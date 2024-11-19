@@ -43,7 +43,11 @@ const App = () => {
       <RegSignButtonsUp />
       <Statistic />
       <div className="information">
-        <LastMsgs />
+        <div className="msgs_heading">
+          <p className="header">Последние сообщения</p>
+          <LastMsgs />
+          <div className="blur_div"></div>
+        </div>
         <div className="themes_blogers">
           <ActualThemes className="themes_module" />
           <Blogers className="blogers_module" />

@@ -3,7 +3,6 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
-import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -152,11 +151,11 @@ VALUES ($1, $2, $3) RETURNING *`;
 
         res.cookie('userToken', userToken, {
           maxAge: 604800000,
-          httpOnly: true,
+          httpOnly: false,
         });
         res.cookie('mail', mail, {
           maxAge: 604800000,
-          httpOnly: true,
+          httpOnly: false,
         });
       } else {
         console.log('cookie already exist');
@@ -203,11 +202,11 @@ VALUES ($1, $2, $3) RETURNING *`;
 
           res.cookie('userToken', userToken, {
             maxAge: 604800000,
-            httpOnly: true,
+            httpOnly: false,
           });
           res.cookie('mail', mail, {
             maxAge: 604800000,
-            httpOnly: true,
+            httpOnly: false,
           });
         } catch (error) {
           console.log(error);
@@ -272,9 +271,83 @@ app.get('/feed', (req, res) => {
   const { userToken } = req.cookies;
   if (!userToken || !isValidToken(userToken)) {
     res.status(401).send('Пользователь не авторизован');
-  } else {
-    res.sendFile(path.join('./', '/index.html'));
   }
+});
+
+app.post('/updateUserInfo', async (req, res) => {
+  const {
+    avatar,
+    name,
+    nickname,
+    about,
+    location,
+    website,
+    birthday,
+    whoSeeBirthday,
+  } = req.body;
+  const { mail } = req.cookies;
+  let nicknameUsed;
+  try {
+    const nicknameUsingQuery = `SELECT * FROM "userAuthorization"
+  WHERE nickname = $1`;
+    const nicknameUsing = await client.query(nicknameUsingQuery, [nickname]);
+    const prevUserInfo = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
+    const getPrevUserInfo = await client.query(prevUserInfo, [mail]);
+
+    if (nicknameUsing.rowCount > 0 && nicknameUsing.rows[0].mail !== mail) {
+      nicknameUsed = true; // Nickname is taken
+      console.log('Не удалось изменить никнейм');
+    } else {
+      const changeNickname = 'UPDATE "userAuthorization" SET nickname = $1 WHERE mail = $2';
+      await client.query(changeNickname, [nickname, mail]);
+      console.log('Никнейм изменён!');
+    }
+    const changeInfo = `UPDATE "userAuthorization"
+    SET name = $1, about = $2, location = $3, website = $4, birthday = $5, "whoSeeBirthday" = $6, avatar = $7
+    WHERE mail = $8`;
+    await client.query(changeInfo, [
+      name || getPrevUserInfo.rows[0].name,
+      about || getPrevUserInfo.rows[0].about,
+      location || getPrevUserInfo.rows[0].location,
+      website || getPrevUserInfo.rows[0].website,
+      birthday || getPrevUserInfo.rows[0].birthday,
+      whoSeeBirthday,
+      avatar || getPrevUserInfo.rows[0].avatar,
+      mail,
+    ]);
+    return res.status(200).json({ nicknameUsed });
+  } catch (error) {
+    return res.status(500);
+  }
+});
+
+app.get('/getUserInfo', async (req, res) => {
+  const { mail } = req.cookies;
+  const getUserInfoSQL = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
+  let result;
+  try {
+    const getUserInfo = await client.query(getUserInfoSQL, [mail]);
+
+    if (getUserInfo.rowCount === 1) {
+      result = res.status(200).json({
+        user: getUserInfo.rows[0],
+      });
+    } else {
+      result = res
+        .status(401)
+        .json({ text: 'Данные о пользователе не получены' });
+    }
+  } catch (error) {
+    console.log(error);
+    result = res.status(500).json({ text: 'Ошибка сервера' });
+  }
+  return result;
+});
+
+app.get('/getAllUsers', async (req, res) => {
+  const getAllUsersSQL = 'SELECT * FROM "userAuthorization"';
+  const query = await client.query(getAllUsersSQL);
+  return res.status(200).json(query.rows);
 });
 
 app.listen(port, () => {

@@ -58,7 +58,6 @@ const postsSlice = createSlice({
         const newState = state;
         newState.isLoading = false;
         newState.data = action.payload;
-        console.log(newState.data);
       })
       .addCase(getPosts.rejected, (state, error) => {
         const newState = state;
@@ -72,10 +71,10 @@ const postsSlice = createSlice({
       })
       .addCase(addNewPost.fulfilled, (state, action) => {
         const newState = state;
-        newState.isLoading = false;
-        newState.data = state.data
-          ? [...state.data, action.payload]
-          : [action.payload];
+        const newPost = Array.isArray(action.payload)
+          ? action.payload[0]
+          : action.payload;
+        newState.data = state.data ? [...state.data, newPost] : [newPost];
         newState.isError = false;
       })
       .addCase(addNewPost.rejected, (state, action) => {

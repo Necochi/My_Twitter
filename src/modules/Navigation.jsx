@@ -7,6 +7,8 @@ const Navigation = () => {
   const settings = location.pathname === "/settings/profile";
   const feed = location.pathname === "/feed";
   const profile = location.pathname === "/profile";
+  const pass = location.pathname === "/settings/password";
+  const mail = location.pathname === "/settings/email";
   const navigate = useNavigate();
 
   return (
@@ -51,7 +53,7 @@ const Navigation = () => {
         <div
           className={styleNav.header_settings_div}
           style={{
-            borderBottom: settings ? "5px solid #0057FF" : "none",
+            borderBottom: (settings || pass || mail) ? "5px solid #0057FF" : "none",
           }}
         >
           <button
@@ -60,8 +62,8 @@ const Navigation = () => {
             <img src="/imgs/settings.svg" alt="Настройки" />
             <p
               style={{
-                color: settings ? "blue" : "black",
-                fontWeight: settings ? "600" : "400",
+                color: (settings || pass || mail) ? "blue" : "black",
+                fontWeight: (settings || pass || mail) ? "600" : "400",
               }}
             >
               Настройки

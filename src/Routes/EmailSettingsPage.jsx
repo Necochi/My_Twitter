@@ -4,6 +4,7 @@ import Navigation from "../modules/Navigation.jsx";
 import FeedNavigation from "../modules/FeedNavigation.jsx";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const EmailSettingsPage = () => {
   const location = useLocation();
@@ -13,6 +14,17 @@ const EmailSettingsPage = () => {
   const navigate = useNavigate();
   const [newEmail, setNewEmail] = useState("");
   const [password, setPassword] = useState("");
+  const token = Cookies.get("userToken");
+
+  if (!token) {
+    return (
+      <>
+        <Navigation />
+          <h1>Пользователь не авторизован</h1>
+        <FeedNavigation/>
+      </>
+    )
+  }
 
   return (
     <>
