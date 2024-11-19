@@ -8,6 +8,7 @@
   background-color: #FFFFFF;
   color: #555555;
   transition: 3s ease;
+  z-index: 2;
 }
 
 .swipe_line_reg {

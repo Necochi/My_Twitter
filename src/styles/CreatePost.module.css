@@ -1,0 +1,260 @@
+.msgSend {
+  position: absolute;
+  top: 300px;
+  bottom: 270px;
+  left: 35%;
+  right: 27%;
+  z-index: 15;
+  background-color: rgb(0, 190, 0);
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 18px;
+  width: 300px;
+  height: 70px;
+}
+
+.msgNotSend {
+  position: absolute;
+  top: 300px;
+  bottom: 250px;
+  left: 35%;
+  right: 27%;
+  z-index: 15;
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 18px;
+  width: 300px;
+  height: 70px;
+}
+
+.greets {
+  display: none;
+}
+
+.post_block {
+  width: 100%;
+  background-color: #fff;
+  z-index: 3;
+  border-radius: 10px 10px 0 0;
+}
+
+.post_block textarea {
+  width: 95%;
+  height: 200px;
+  margin-left: 2.5%;
+  border: none;
+  resize: none;
+  font-size: 24px;
+}
+
+.post_block textarea:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.post_block .swipe_line_div {
+  width: 100%;
+  height: 50px;
+  padding-top: 20px;
+  margin-bottom: 10px;
+}
+
+.post_symbols_send {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding-block: 20px;
+}
+
+/* .post_symbols_send .circle {
+  background-color: initial;
+  border: 1px solid #0057ff;
+  width: 40px;
+} */
+
+.post_symbols_send > p {
+  text-align: center;
+  margin: 0 auto;
+}
+
+.post_symbols_send .send button {
+  width: 200px;
+}
+
+.post_block .swipe_line_div > .swipe_line {
+  background-color: #abacb1;
+  width: 20%;
+  height: 5px;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.post_block {
+  position: fixed;
+  bottom: 0;
+}
+
+.post_block .post_symbols_send {
+  display: flex;
+}
+
+.post_symbols_send .symbols svg {
+  position: absolute;
+  bottom: 15px;
+}
+
+.post_symbols_send .symbols p {
+  position: relative;
+  left: 13px;
+  color: #0057ff;
+  font-weight: 900;
+}
+
+.post_symbols_send .send button {
+  background-color: #0057ff;
+  color: #fff;
+  border: none;
+}
+
+.add_post {
+  position: fixed;
+  background-color: #0057ff;
+  box-shadow: 0px 10px 10px 0px #0000001a;
+  width: 70px;
+  height: 70px;
+  bottom: 50px;
+  right: 30px;
+  border-radius: 50%;
+}
+
+.add_post button {
+  width: 100%;
+  height: 100%;
+  border: none;
+  background-color: initial;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.msgSend {
+  position: absolute;
+  top: 300px;
+  bottom: 270px;
+  left: 35%;
+  right: 27%;
+  z-index: 15;
+  background-color: rgb(0, 190, 0);
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 18px;
+  width: 300px;
+  height: 70px;
+}
+
+.msgNotSend {
+  position: absolute;
+  top: 300px;
+  bottom: 250px;
+  left: 35%;
+  right: 27%;
+  z-index: 15;
+  background-color: rgb(255, 0, 0);
+  color: #fff;
+  text-align: center;
+  font-size: 24px;
+  padding-top: 18px;
+  width: 300px;
+  height: 70px;
+}
+
+.invisible_div {
+  position: fixed; /* Измените на fixed */
+  top: 10; /* Задайте верхнюю границу */
+  left: 0; /* Задайте левую границу */
+  width: 100vw; /* Ширина 100% от ширины окна */
+  height: 100vh; /* Высота 100% от высоты окна */
+  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+  z-index: 2;
+  opacity: 0; /* Начальная непрозрачность */
+  transition: opacity 0.5s ease; /* Плавный переход для изменения непрозрачности */
+}
+
+.black_div {
+  position: absolute;
+  width: 100%;
+  height: 200%;
+  background-color: #000000;
+  z-index: 2;
+  opacity: 50%;
+}
+
+@media screen and (width > 1279px) {
+  .greets {
+    display: block;
+    background-color: #fff;
+    height: 64px;
+    padding-top: 20px;
+    padding-left: 30px;
+    border-radius: 10px;
+    margin-block: 40px 30px;
+    width: 750px;
+    cursor: pointer;
+  }
+
+  .greets button {
+    background-color: initial;
+    border: none;
+    margin: 0;
+    height: auto;
+    font-weight: 900;
+    color: #abacb1;
+    cursor: pointer;
+  }
+
+  .post_block {
+    position: relative;
+    width: 750px;
+    border-radius: 10px;
+    margin-block: 30px 20px;
+    border: 3px solid #0057ff;
+  }
+
+  .post_block textarea {
+    padding-top: 20px;
+    height: 100px;
+  }
+
+  .post_symbols_send {
+    justify-content: space-between;
+    margin-inline: 20px;
+  }
+
+  .post_symbols_send .symbols {
+    order: 2;
+    padding-right: 90px;
+  }
+
+  .post_symbols_send .send {
+    order: 3;
+    margin-left: -40%;
+  }
+
+  .swipe_line_div {
+    display: none;
+  }
+
+  .black_div {
+    display: none;
+  }
+
+  .footer_feed,
+  .add_post {
+    display: none;
+  }
+}

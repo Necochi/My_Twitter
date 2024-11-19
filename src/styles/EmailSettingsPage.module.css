@@ -31,6 +31,11 @@
   justify-content: center;
 }
 
+.settings_mail .mail_inputs input:focus {
+  border-color: #0057FF !important;
+  outline: none;
+}
+
 .settings_mail span {
   position: absolute;
   color: #b1b1b1;

@@ -1,18 +1,7 @@
-.last_msgs {
+.allMsgs {
   position: relative;
   color: #1d1e22;
-  background-color: #ffffff;
   z-index: -1;
-}
-
-.last_msgs .heading {
-  color: #000000;
-  font-weight: 800;
-  font-size: 24px;
-  padding: 25px 0 25px 16px;
-}
-
-.allMsgs {
   background-color: #ffffff;
 }
 

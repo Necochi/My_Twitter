@@ -4,6 +4,7 @@ import Navigation from "../modules/Navigation.jsx";
 import FeedNavigation from "../modules/FeedNavigation.jsx";
 import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 const PasswordSettingsPage = () => {
   const location = useLocation();
@@ -14,6 +15,17 @@ const PasswordSettingsPage = () => {
   const [oldPass, setOldPass] = useState("");
   const [newPass, setNewPass] = useState("");
   const [repeatNewPass, setRepeatNewPass] = useState("");
+  const token = Cookies.get("userToken");
+
+  if (!token) {
+    return (
+      <>
+        <Navigation />
+          <h1>Пользователь не авторизован</h1>
+        <FeedNavigation/>
+      </>
+    )
+  }
 
   return (
     <>
