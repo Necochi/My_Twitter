@@ -295,7 +295,7 @@ app.post('/updateUserInfo', async (req, res) => {
     const getPrevUserInfo = await client.query(prevUserInfo, [mail]);
 
     if (nicknameUsing.rowCount > 0 && nicknameUsing.rows[0].mail !== mail) {
-      nicknameUsed = true; // Nickname is taken
+      nicknameUsed = true;
       console.log('Не удалось изменить никнейм');
     } else {
       const changeNickname = 'UPDATE "userAuthorization" SET nickname = $1 WHERE mail = $2';
@@ -348,6 +348,105 @@ app.get('/getAllUsers', async (req, res) => {
   const getAllUsersSQL = 'SELECT * FROM "userAuthorization"';
   const query = await client.query(getAllUsersSQL);
   return res.status(200).json(query.rows);
+});
+
+app.post('/changePass', async (req, res) => {
+  const { oldPass, newPass } = req.body;
+  const { mail, userToken } = req.cookies;
+  const qGetUser = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
+  const qtrueToken = 'SELECT * FROM sessions WHERE "userId" = $1 AND token = $2';
+  const qUpdatePass = 'UPDATE "userAuthorization" SET password = $1, "lastUpdatePass" = $2 WHERE mail = $3';
+
+  const getUser = await client.query(qGetUser, [mail]);
+  const userId = getUser.rows[0].id;
+  const trueToken = await client.query(qtrueToken, [userId, userToken]);
+
+  if (trueToken.rowCount === 1) {
+    const thisDate = trueToken.rows[0].createdAt;
+    const maxDate = new Date();
+    maxDate.setDate(thisDate.getDate() + 7);
+    if (thisDate >= maxDate) {
+      return res.status(400).json('Старый токен!');
+    }
+  } else {
+    return res.status(401).json('Неправильный токен!');
+  }
+
+  const checkOldPass = await bcrypt.compare(oldPass, getUser.rows[0].password);
+  const checkNewPass = await bcrypt.compare(newPass, getUser.rows[0].password);
+  let { lastUpdatePass } = getUser.rows[0];
+
+  if (lastUpdatePass === null) {
+    lastUpdatePass = new Date();
+  }
+  const lastUpdatePassMax = new Date();
+  lastUpdatePassMax.setDate(lastUpdatePass.getDate() + 1);
+
+  if (checkNewPass) {
+    return res.status(400).json('Новый пароль должен отличаться от старого!');
+  }
+
+  if (!checkOldPass) {
+    return res.status(400).json('Неправильный старый пароль!');
+  }
+
+  if (lastUpdatePass <= lastUpdatePassMax) {
+    return res.status(400).json('Пароль можно менять лишь раз в день!');
+  }
+
+  if (!checkNewPass && checkOldPass) {
+    const createSalt = await bcrypt.genSalt(10);
+    const hashedPass = await bcrypt.hash(newPass, createSalt);
+    await client.query(qUpdatePass, [hashedPass, new Date(), mail]);
+    return res.status(200).json('Пароль успешно изменён!');
+  }
+  return res.status(400).json('Произошла какая-то ошибка');
+});
+
+app.post('/changeMail', async (req, res) => {
+  const { newEmail, password } = req.body;
+  const { mail, userToken } = req.cookies;
+  const qGetUser = 'SELECT * FROM "userAuthorization" WHERE mail = $1';
+  const qtrueToken = 'SELECT * FROM sessions WHERE "userId" = $1 AND token = $2';
+  const qUpdateMail = 'UPDATE "userAuthorization" SET mail = $1 WHERE mail = $2';
+
+  const getUser = await client.query(qGetUser, [mail]);
+  const mailExist = await client.query(qGetUser, [newEmail]);
+  let trueToken;
+
+  if (getUser.rowCount === 1) {
+    const userId = getUser.rows[0].id;
+    if (userId !== null) {
+      trueToken = await client.query(qtrueToken, [userId, userToken]);
+      if (trueToken.rowCount === 1) {
+        const thisDate = trueToken.rows[0].createdAt;
+        const maxDate = new Date();
+        maxDate.setDate(thisDate.getDate() + 7);
+        if (thisDate >= maxDate) {
+          return res.status(400).json('Старый токен!');
+        }
+      } else {
+        return res.status(401).json('Неправильный токен!');
+      }
+    }
+  }
+
+  if (mailExist !== null && mailExist.rowCount !== 0) {
+    return res.status(400).json('Почта уже занята!');
+  }
+
+  if (newEmail === mail) {
+    return res.status(400).json('Новый адрес должен отличаться от старого!');
+  }
+
+  const passRight = await bcrypt.compare(password, getUser.rows[0].password);
+
+  if (newEmail !== mail && passRight) {
+    await client.query(qUpdateMail, [newEmail, mail]);
+    res.cookie('mail', newEmail);
+    return res.status(200).json('Почта успешно изменена!');
+  }
+  return res.status(400).json('Произошла какая-то ошибка');
 });
 
 app.listen(port, () => {
