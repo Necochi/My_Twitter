@@ -19,6 +19,8 @@ export default defineConfig({
       '/updateUserInfo': 'http://localhost:3000',
       '/getUserInfo': 'http://localhost:3000',
       '/getAllUsers': 'http://localhost:3000',
+      '/changePass': 'http://localhost:3000',
+      '/changeMail': 'http://localhost:3000',
     },
   },
 });

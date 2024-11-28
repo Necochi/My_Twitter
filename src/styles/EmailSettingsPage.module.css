@@ -49,13 +49,17 @@
   left: 10%;
 }
 
-.settings_mail .wrong_new_mail,
-.settings_mail .wrong_password {
-  display: none;
+.settings_mail .wrong_mail {
   position: absolute;
-  margin-top: -30px;
-  left: 10%;
-  color: #e40060;
+  width: auto;
+  height: auto;
+  background-color: #d30505;
+  color: #ffffff;
+  font-size: 20px;
+  padding: 20px;
+  top: 50%; left: 30%; right: 30%;
+  justify-content: center;
+  text-align: center;
 }
 
 .settings_mail .button_submit {
@@ -127,5 +131,9 @@
   .settings_mail .wrong_new_mail,
   .settings_mail .wrong_password {
     margin-left: 18%;
+  }
+
+  .settings_pass .wrong_mail {
+    left: 10%; right: 50%;
   }
 }

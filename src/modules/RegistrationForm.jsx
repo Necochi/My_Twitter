@@ -59,7 +59,7 @@ const RegistrationForm = () => {
             }
             setSuccsessRegistr(true);
             setError(false);
-            window.location.href = "/feed";
+            window.location.href = "/settings/profile";
             return res.json();
           })
           .catch((error) => {
@@ -93,7 +93,9 @@ const RegistrationForm = () => {
 
   const checkPass = () => {
     console.log(pass, passCheck);
-    if (pass && passCheck && pass === passCheck) {
+    if (pass && passCheck
+      && pass === passCheck
+      && (pass.length >= 6 && passCheck.length >= 6)) {
       setIsRightPass(true);
       setIsRightPassCheck(true);
       console.log("Your password is: " + pass);

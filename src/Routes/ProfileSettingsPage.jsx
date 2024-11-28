@@ -47,7 +47,6 @@ function ProfileSettingsPage() {
         })
         .then((data) => {
           setUserData(data);
-          // Здесь обновляем состояния на основе полученных данных
           if (data.user) {
             setNickname(data.user.nickname);
             setAvatar(data.user.avatar);
