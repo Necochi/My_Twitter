@@ -26,12 +26,9 @@ const App = () => {
 
   console.log("Cookies:", Cookies.get("userToken"));
   const token = Cookies.get("userToken");
-  
-  useEffect(() => {
-    if (token) {
-      navigate("/feed");
-    }
-  }, [token, navigate]);
+  if (token) {
+    window.location.href = "/feed";
+  }
 
   return (
     <>
