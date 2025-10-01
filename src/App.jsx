@@ -11,9 +11,11 @@ import { hideSignForm } from "./store/slices/signFormSlice";
 import ActualThemes from "./modules/ActualThemes";
 import Blogers from "./modules/Blogers";
 import Cookies from "js-cookie";
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const regState = useSelector((state) => state.regForm.isHidden);
   const signState = useSelector((state) => state.signForm.isHidden);
   let hidden = {};
@@ -26,9 +28,11 @@ const App = () => {
 
   console.log("Cookies:", Cookies.get("userToken"));
   const token = Cookies.get("userToken");
-  if (token) {
-    window.location.href = "/feed";
-  }
+  useEffect(() => {
+    if (token) {
+      navigate("/feed");
+    }
+  }, [token, navigate]);
 
   return (
     <>
