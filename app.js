@@ -450,6 +450,15 @@ app.post('/changeMail', async (req, res) => {
   return res.status(400).json('Произошла какая-то ошибка');
 });
 
+const path = require('path');
+
+// Если сервер не нашёл маршрут (например /feed),
+// то пусть отдаёт React-приложение:
+app.use(express.static(path.join(__dirname, 'client/build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
