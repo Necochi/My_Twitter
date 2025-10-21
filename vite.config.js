@@ -15,7 +15,7 @@ export default defineConfig({
       '/createUser': 'http://localhost:3000',
       '/login': 'http://localhost:3000',
       '/protected-route': 'http://localhost:3000',
-      '/feed': 'http://localhost:3000',
+      '/api/feed': 'http://localhost:3000',
       '/updateUserInfo': 'http://localhost:3000',
       '/getUserInfo': 'http://localhost:3000',
       '/getAllUsers': 'http://localhost:3000',

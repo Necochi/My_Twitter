@@ -267,11 +267,12 @@ async function isValidToken(token) {
   return false;
 }
 
-app.get('/feed', (req, res) => {
+app.get('/api/feed', (req, res) => {
   const { userToken } = req.cookies;
   if (!userToken || !isValidToken(userToken)) {
-    res.status(401).send('Пользователь не авторизован');
+    return res.status(401).send({ text: 'Пользователь не авторизован' });
   }
+  return res.status(200).send({ text: 'Всё ок' });
 });
 
 app.post('/updateUserInfo', async (req, res) => {

@@ -11,11 +11,13 @@ import { hideSignForm } from "./store/slices/signFormSlice";
 import ActualThemes from "./modules/ActualThemes";
 import Blogers from "./modules/Blogers";
 import Cookies from "js-cookie";
+import { useEffect, useState } from 'react';
 
 const App = () => {
   const dispatch = useDispatch();
   const regState = useSelector((state) => state.regForm.isHidden);
   const signState = useSelector((state) => state.signForm.isHidden);
+  const [valid, setValid] = useState();
   let hidden = {};
   if (!regState || !signState) {
     document.body.classList.add("stop_scrolling");
@@ -24,14 +26,45 @@ const App = () => {
     hidden.display = "none";
   }
 
-  console.log("Cookies:", Cookies.get("userToken"));
-  const token = Cookies.get("userToken");
-  
+  // console.log("Cookies:", Cookies.get("userToken"));
+  // const token = Cookies.get("userToken");
+  // if (token) {
+      const ValidToken = () => {
+        try {
+          fetch('/api/feed/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+          })
+          .then((res) => {
+            if (!res.ok) {
+              console.log('Токен неверный');
+              setValid(false);
+              return res.json().then((error) => {
+                throw new Error(error.error);
+              });
+            }
+            console.log('Токен верный');
+            setValid(true);
+            
+          })
+        } catch (error) {
+          console.log(error);
+        }
+      // }
+    // window.location.href = "/feed";
+  }
+
   useEffect(() => {
-    if (token) {
-      navigate("/feed");
-    }
-  }, [token, navigate]);
+    ValidToken();
+  }, [])
+
+  if (valid) {
+    window.location.href = "/feed";
+  }
+
 
   return (
     <>
