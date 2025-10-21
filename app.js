@@ -4,7 +4,7 @@ import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
 import path from 'path';
-
+import { fileURLToPath } from 'url';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -456,10 +456,14 @@ app.post('/changeMail', async (req, res) => {
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Обработка /feed
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// Если зашли на /feed — отдаём index.html
 app.get('/feed', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
+
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
