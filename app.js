@@ -3,6 +3,8 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
+import path from 'path';
+
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -450,15 +452,14 @@ app.post('/changeMail', async (req, res) => {
   return res.status(400).json('Произошла какая-то ошибка');
 });
 
-const path = require('path');
 
-// Если сервер не нашёл маршрут (например /feed),
-// то пусть отдаёт React-приложение:
-app.use(express.static(path.join(__dirname, 'client/build')));
-app.get('*', (req, res) => {
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Обработка /feed
+app.get('/feed', (req, res) => {
   res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
-
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
