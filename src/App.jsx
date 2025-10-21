@@ -12,12 +12,14 @@ import ActualThemes from "./modules/ActualThemes";
 import Blogers from "./modules/Blogers";
 import Cookies from "js-cookie";
 import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const App = () => {
   const dispatch = useDispatch();
   const regState = useSelector((state) => state.regForm.isHidden);
   const signState = useSelector((state) => state.signForm.isHidden);
   const [valid, setValid] = useState();
+  const navigate = useNavigate();
   let hidden = {};
   if (!regState || !signState) {
     document.body.classList.add("stop_scrolling");
@@ -62,7 +64,7 @@ const App = () => {
   }, [])
 
   if (valid) {
-    window.location.href = "/feed";
+   navigate("/feed");
   }
 
 
