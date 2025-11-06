@@ -1,3 +1,5 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import pg from 'pg';
 import bcrypt from 'bcrypt';
@@ -450,6 +452,18 @@ app.post('/changeMail', async (req, res) => {
   return res.status(400).json('Произошла какая-то ошибка');
 });
 
+<<<<<<< HEAD
+=======
+const currentFile = fileURLToPath(import.meta.url);
+const currentDir = path.dirname(currentFile);
+
+app.use(express.static(path.join(currentDir, 'public')));
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(currentDir, 'public/index.html'));
+});
+
+>>>>>>> main
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
