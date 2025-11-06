@@ -453,16 +453,14 @@ app.post('/changeMail', async (req, res) => {
 });
 
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
+const currentFile = fileURLToPath(import.meta.url);
+const currentDir = path.dirname(currentFile);
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(currentDir, 'public')));
 
-// Если зашли на /feed — отдаём index.html
-app.get('/feed', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(currentDir, 'public/index.html'));
 });
-
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
