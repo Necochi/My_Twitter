@@ -1,10 +1,10 @@
+import path from 'path';
+import { fileURLToPath } from 'url';
 import express from 'express';
 import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
-import path from 'path';
-import { fileURLToPath } from 'url';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -451,7 +451,6 @@ app.post('/changeMail', async (req, res) => {
   }
   return res.status(400).json('Произошла какая-то ошибка');
 });
-
 
 const currentFile = fileURLToPath(import.meta.url);
 const currentDir = path.dirname(currentFile);
