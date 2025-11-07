@@ -1,5 +1,3 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import express from 'express';
 import pg from 'pg';
 import bcrypt from 'bcrypt';
