@@ -452,8 +452,6 @@ app.post('/changeMail', async (req, res) => {
   return res.status(400).json('Произошла какая-то ошибка');
 });
 
-<<<<<<< HEAD
-=======
 const currentFile = fileURLToPath(import.meta.url);
 const currentDir = path.dirname(currentFile);
 
@@ -468,7 +466,6 @@ app.get('*', (req, res) => {
   res.sendFile(path.join(currentDir, 'public', 'index.html'));
 });
 
->>>>>>> main
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
