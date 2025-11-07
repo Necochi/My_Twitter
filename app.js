@@ -457,10 +457,15 @@ app.post('/changeMail', async (req, res) => {
 const currentFile = fileURLToPath(import.meta.url);
 const currentDir = path.dirname(currentFile);
 
+app.use((req, res, next) => {
+  console.log('➡️  Запрос:', req.method, req.path);
+  next();
+});
+
 app.use(express.static(path.join(currentDir, 'public')));
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(currentDir, 'public/index.html'));
+  res.sendFile(path.join(currentDir, 'public', 'index.html'));
 });
 
 >>>>>>> main
