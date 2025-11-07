@@ -3,6 +3,7 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -448,6 +449,15 @@ app.post('/changeMail', async (req, res) => {
     return res.status(200).json('Почта успешно изменена!');
   }
   return res.status(400).json('Произошла какая-то ошибка');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html'), (err) => {
+    if (err) {
+      console.error('Error sending index.html:', err);
+      res.status(500).send('Could not load application');
+    }
+  });
 });
 
 app.listen(port, () => {
