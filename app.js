@@ -1,5 +1,3 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
 import express from 'express';
 import pg from 'pg';
 import bcrypt from 'bcrypt';
@@ -450,15 +448,6 @@ app.post('/changeMail', async (req, res) => {
     return res.status(200).json('Почта успешно изменена!');
   }
   return res.status(400).json('Произошла какая-то ошибка');
-});
-
-const currentFile = fileURLToPath(import.meta.url);
-const currentDir = path.dirname(currentFile);
-
-app.use(express.static(path.join(currentDir, 'public')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(currentDir, 'public/index.html'));
 });
 
 app.listen(port, () => {
