@@ -18,14 +18,9 @@ const client = new Client({
 });
 await client.connect();
 
-// app.use(express.static('public'));
+app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
-
-const currentFile = fileURLToPath(import.meta.url);
-const currentDir = path.dirname(currentFile);
-
-app.use(express.static(path.join(currentDir, 'public')));
 
 client.keepAliveTimeout = 120000;
 client.headersTimeout = 120000;
@@ -455,15 +450,6 @@ app.post('/changeMail', async (req, res) => {
     return res.status(200).json('Почта успешно изменена!');
   }
   return res.status(400).json('Произошла какая-то ошибка');
-});
-
-app.use((req, res, next) => {
-  console.log('➡️  Запрос:', req.method, req.path);
-  next();
-});
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(currentDir, 'public', 'index.html'));
 });
 
 app.listen(port, () => {
