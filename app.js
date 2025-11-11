@@ -452,7 +452,7 @@ app.post('/changeMail', async (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'public', 'index.html'), (err) => {
+  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'), (err) => {
     if (err) {
       console.error('Error sending index.html:', err);
       res.status(500).send('Could not load application');
