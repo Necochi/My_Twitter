@@ -458,18 +458,18 @@ app.post('/changeMail', async (req, res) => {
 });
 
 // После всех API-маршрутов
-app.get('*', (req, res) => {
-  // Не перехватывать API
-  if (req.path.startsWith('/api/') || req.path.startsWith('/posts') || req.path.startsWith('/date') || req.path.startsWith('/createUser') || req.path.startsWith('/login') || req.path.startsWith('/protected-route') || req.path.startsWith('/updateUserInfo') || req.path.startsWith('/getUserInfo') || req.path.startsWith('/getAllUsers') || req.path.startsWith('/changePass') || req.path.startsWith('/changeMail')) {
-    return res.status(404).json({ error: 'API not found' });
-  }
-  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'), (err) => {
-    if (err) {
-      console.error('Error sending index.html:', err);
-      res.status(500).send('Could not load application');
-    }
-  });
-});
+// app.get('*', (req, res) => {
+//   // Не перехватывать API
+//   if (req.path.startsWith('/api/') || req.path.startsWith('/posts') || req.path.startsWith('/date') || req.path.startsWith('/createUser') || req.path.startsWith('/login') || req.path.startsWith('/protected-route') || req.path.startsWith('/updateUserInfo') || req.path.startsWith('/getUserInfo') || req.path.startsWith('/getAllUsers') || req.path.startsWith('/changePass') || req.path.startsWith('/changeMail')) {
+//     return res.status(404).json({ error: 'API not found' });
+//   }
+//   res.sendFile(path.join(process.cwd(), 'dist', 'index.html'), (err) => {
+//     if (err) {
+//       console.error('Error sending index.html:', err);
+//       res.status(500).send('Could not load application');
+//     }
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
