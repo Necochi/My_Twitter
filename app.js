@@ -3,7 +3,7 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
-import path from 'path';
+// import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -37,30 +37,6 @@ app.get('/posts', async (req, res) => {
 console.log(client.query);
 
 app.get('/date', (req, res) => res.type('json').send({ date: new Date() }));
-
-// ДОБАВЬ ПЕРВЫМИ СТРОЧКАМИ - логирование всех запросов
-app.use((req, res, next) => {
-  console.log('=== INCOMING REQUEST ===');
-  console.log('Method:', req.method);
-  console.log('Path:', req.path);
-  console.log('URL:', req.url);
-  console.log('Headers:', req.headers);
-  console.log('=======================');
-  next();
-});
-
-// ПРОСТЕЙШИЙ ТЕСТОВЫЙ РОУТ В САМОЕ НАЧАЛО
-app.get('/health', (req, res) => {
-  console.log('✅ Health check called');
-  res.json({ status: 'OK', server: 'working', time: new Date() });
-});
-
-app.get('/test-posts', (req, res) => {
-  console.log('✅ Test posts called');
-  res.json([{ id: 1, message: 'Test post from server' }]);
-});
-
-// — Posts endpoints —-
 
 app.post('/posts.json', async (req, res) => {
   const { name, message, imgMessage } = req.body;
