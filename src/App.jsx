@@ -33,7 +33,7 @@ const App = () => {
   // if (token) {
       const ValidToken = () => {
         try {
-          fetch('/api/feed/', {
+          fetch('/api/feed', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
