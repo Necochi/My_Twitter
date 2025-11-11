@@ -18,17 +18,25 @@ const client = new Client({
 await client.connect();
 
 app.use((req, res, next) => {
+  // Удаляем все CSP headers
+  res.removeHeader('Content-Security-Policy');
+  res.removeHeader('content-security-policy');
+  
+  // Ставим разрешающую политику
   res.setHeader(
     'Content-Security-Policy',
-    "default-src 'self'; " +
-    "img-src 'self' data: blob: https:; " +
-    "script-src 'self' 'unsafe-inline'; " +
-    "style-src 'self' 'unsafe-inline'; " +
-    "connect-src 'self';"
+    "default-src 'self'; "
+    + "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://burtovoy.github.io; "
+    + "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; "
+    + "font-src 'self' https://fonts.gstatic.com; "
+    + "img-src 'self' data: blob: https:; "
+    + "connect-src 'self' https://burtovoy.github.io https://my-twitter-express-react-redux.onrender.com; "
+    + "frame-src 'self';"
   );
   next();
 });
 
+// Статические файлы
 app.use(express.static('public'));
 app.use('/imgs', express.static('public/imgs'));
 app.use(express.json());
