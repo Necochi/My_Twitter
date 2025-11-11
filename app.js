@@ -268,12 +268,18 @@ async function isValidToken(token) {
   return false;
 }
 
-app.get('/api/feed', (req, res) => {
+app.get('/api/feed', async (req, res) => {
   const { userToken } = req.cookies;
-  if (!userToken || !isValidToken(userToken)) {
-    return res.status(401).send({ text: 'Пользователь не авторизован' });
+  console.log('userToken в /api/feed:', userToken);
+  if (!userToken) {
+    return res.status(401).json({ text: 'Пользователь не авторизован' });
   }
-  return res.status(200).send({ text: 'Всё ок' });
+  const isValid = await isValidToken(userToken);
+  console.log('isValid:', isValid);
+  if (!isValid) {
+    return res.status(401).json({ text: 'Токен недействителен' });
+  }
+  return res.status(200).json({ message: 'Токен валиден' });
 });
 
 app.post('/updateUserInfo', async (req, res) => {
@@ -451,14 +457,19 @@ app.post('/changeMail', async (req, res) => {
   return res.status(400).json('Произошла какая-то ошибка');
 });
 
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(process.cwd(), 'dist', 'index.html'), (err) => {
-//     if (err) {
-//       console.error('Error sending index.html:', err);
-//       res.status(500).send('Could not load application');
-//     }
-//   });
-// });
+// После всех API-маршрутов
+app.get('*', (req, res) => {
+  // Не перехватывать API
+  if (req.path.startsWith('/api/') || req.path.startsWith('/posts') || req.path.startsWith('/date') || req.path.startsWith('/createUser') || req.path.startsWith('/login') || req.path.startsWith('/protected-route') || req.path.startsWith('/updateUserInfo') || req.path.startsWith('/getUserInfo') || req.path.startsWith('/getAllUsers') || req.path.startsWith('/changePass') || req.path.startsWith('/changeMail')) {
+    return res.status(404).json({ error: 'API not found' });
+  }
+  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'), (err) => {
+    if (err) {
+      console.error('Error sending index.html:', err);
+      res.status(500).send('Could not load application');
+    }
+  });
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
