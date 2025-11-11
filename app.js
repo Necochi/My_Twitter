@@ -17,7 +17,20 @@ const client = new Client({
 });
 await client.connect();
 
+app.use((req, res, next) => {
+  res.setHeader(
+    'Content-Security-Policy',
+    "default-src 'self'; " +
+    "img-src 'self' data: blob: https:; " +
+    "script-src 'self' 'unsafe-inline'; " +
+    "style-src 'self' 'unsafe-inline'; " +
+    "connect-src 'self';"
+  );
+  next();
+});
+
 app.use(express.static('public'));
+app.use('/imgs', express.static('public/imgs'));
 app.use(express.json());
 app.use(cookieParser());
 
