@@ -10,6 +10,8 @@ export default defineConfig({
   plugins: [react()],
   server: {
     proxy: {
+      '/health': 'http://localhost:3000',
+      '/test-posts': 'http://localhost:3000',
       '/date': 'http://localhost:3000',
       '/posts': 'http://localhost:3000',
       '/createUser': 'http://localhost:3000',
