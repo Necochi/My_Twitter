@@ -28,45 +28,43 @@ const App = () => {
     hidden.display = 'none';
   }
 
-  // console.log("Cookies:", Cookies.get("userToken"));
+// console.log("Cookies:", Cookies.get("userToken"));
   // const token = Cookies.get("userToken");
   // if (token) {
-    const ValidToken = () => {
-      fetch('/api/feed', {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        credentials: 'include'
-      })
-      .then((res) => {
-        if (!res.ok) {
-          console.log('Токен неверный');
-          setValid(false);
-          return res.text().then((text) => {
-            console.log('Ответ сервера:', text);
-            throw new Error('Unauthorized');
-          });
+      const ValidToken = () => {
+        try {
+          fetch('/api/feed/', {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Accept': 'application/json'
+            },
+          })
+          .then((res) => {
+            if (!res.ok) {
+              console.log('Токен неверный');
+              setValid(false);
+              return res.json().then((error) => {
+                throw new Error(error.error);
+              });
+            }
+            console.log('Токен верный');
+            setValid(true);
+            
+          })
+        } catch (error) {
+          console.log(error);
         }
-        return res.json();
-      })
-      .then((data) => {
-        console.log('Токен верный:', data);
-        setValid(true);
-      })
-      .catch((error) => {
-        console.log('Ошибка ValidToken:', error);
-        setValid(false);
-      });
-    };
+      // }
+    // window.location.href = "/feed";
+  }
 
   useEffect(() => {
     ValidToken();
   }, [])
 
   if (valid) {
-   navigate('/feed');
+   navigate("/feed");
   }
 
 
