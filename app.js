@@ -451,14 +451,14 @@ app.post('/changeMail', async (req, res) => {
   return res.status(400).json('Произошла какая-то ошибка');
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(process.cwd(), 'dist', 'index.html'), (err) => {
-    if (err) {
-      console.error('Error sending index.html:', err);
-      res.status(500).send('Could not load application');
-    }
-  });
-});
+// app.get('*', (req, res) => {
+//   res.sendFile(path.join(process.cwd(), 'dist', 'index.html'), (err) => {
+//     if (err) {
+//       console.error('Error sending index.html:', err);
+//       res.status(500).send('Could not load application');
+//     }
+//   });
+// });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
