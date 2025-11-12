@@ -3,8 +3,7 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
-
-const path = require('path');
+import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 3000;
