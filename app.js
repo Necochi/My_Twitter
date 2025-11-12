@@ -3,6 +3,7 @@ import pg from 'pg';
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import cookieParser from 'cookie-parser';
+import path from 'path';
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -16,6 +17,7 @@ const client = new Client({
 });
 await client.connect();
 
+// Статические файлы
 app.use(express.static('public'));
 app.use(express.json());
 app.use(cookieParser());
@@ -36,8 +38,6 @@ app.get('/posts', async (req, res) => {
 console.log(client.query);
 
 app.get('/date', (req, res) => res.type('json').send({ date: new Date() }));
-
-// — Posts endpoints —-
 
 app.post('/posts.json', async (req, res) => {
   const { name, message, imgMessage } = req.body;
@@ -267,12 +267,18 @@ async function isValidToken(token) {
   return false;
 }
 
-app.get('/api/feed', (req, res) => {
+app.get('/api/feed', async (req, res) => {
   const { userToken } = req.cookies;
-  if (!userToken || !isValidToken(userToken)) {
-    return res.status(401).send({ text: 'Пользователь не авторизован' });
+  console.log('userToken в /api/feed:', userToken);
+  if (!userToken) {
+    return res.status(401).json({ text: 'Пользователь не авторизован' });
   }
-  return res.status(200).send({ text: 'Всё ок' });
+  const isValid = await isValidToken(userToken);
+  console.log('isValid:', isValid);
+  if (!isValid) {
+    return res.status(401).json({ text: 'Токен недействителен' });
+  }
+  return res.status(200).json({ message: 'Токен валиден' });
 });
 
 app.post('/updateUserInfo', async (req, res) => {
@@ -448,6 +454,10 @@ app.post('/changeMail', async (req, res) => {
     return res.status(200).json('Почта успешно изменена!');
   }
   return res.status(400).json('Произошла какая-то ошибка');
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(process.cwd(), 'public', 'index.html'));
 });
 
 app.listen(port, () => {

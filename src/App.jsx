@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
-import RegSignButtonsUp from "./modules/RegSignButtonsUp";
-import LastMsgs from "./modules/LastMsgs";
-import Statistic from "./modules/Statistic";
-import RegSignButtonsDown from "./modules/RegSignButtonsDown";
-import RegistrationForm from "./modules/RegistrationForm";
-import AuthorizationForm from "./modules/AuthorizationForm";
-import "./App.css";
-import { hideRegForm } from "./store/slices/regFormSlice";
-import { hideSignForm } from "./store/slices/signFormSlice";
-import ActualThemes from "./modules/ActualThemes";
-import Blogers from "./modules/Blogers";
-import Cookies from "js-cookie";
+import { useDispatch, useSelector } from 'react-redux';
+import RegSignButtonsUp from './modules/RegSignButtonsUp';
+import LastMsgs from './modules/LastMsgs';
+import Statistic from './modules/Statistic';
+import RegSignButtonsDown from './modules/RegSignButtonsDown';
+import RegistrationForm from './modules/RegistrationForm';
+import AuthorizationForm from './modules/AuthorizationForm';
+import './App.css';
+import { hideRegForm } from './store/slices/regFormSlice';
+import { hideSignForm } from './store/slices/signFormSlice';
+import ActualThemes from './modules/ActualThemes';
+import Blogers from './modules/Blogers';
+import Cookies from 'js-cookie';
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,18 +22,18 @@ const App = () => {
   const navigate = useNavigate();
   let hidden = {};
   if (!regState || !signState) {
-    document.body.classList.add("stop_scrolling");
+    document.body.classList.add('stop_scrolling');
   } else {
-    document.body.classList.remove("stop_scrolling");
-    hidden.display = "none";
+    document.body.classList.remove('stop_scrolling');
+    hidden.display = 'none';
   }
 
-  // console.log("Cookies:", Cookies.get("userToken"));
+// console.log("Cookies:", Cookies.get("userToken"));
   // const token = Cookies.get("userToken");
   // if (token) {
       const ValidToken = () => {
         try {
-          fetch('/api/feed/', {
+          fetch('/api/feed', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

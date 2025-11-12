@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import style from '../styles/AuthorizationForm.module.css';
 import { hideSignForm } from '../store/slices/signFormSlice.js';
 
@@ -18,6 +19,7 @@ function AuthorizationForm() {
   const emailPlchSpan = useRef();
   const passPlch = useRef();
   const passPlchSpan = useRef();
+  const navigate = useNavigate();
   const hidden = {};
   const hiddenwrong = {
     display: 'none',
@@ -77,7 +79,7 @@ function AuthorizationForm() {
             }
             console.log('succsess!');
             setTrueLogin(true);
-            window.location.href = '/feed';
+            navigate('/feed');
             return res.json();
           })
           .catch((error) => {

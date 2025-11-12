@@ -1,5 +1,6 @@
 import validateEmail from "../assets/validateEmail.js";
 import { useEffect, useRef, useState } from "react";
+import { useNavigate } from 'react-router-dom';
 import style from "../styles/RegistrationForm.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { hideRegForm } from "../store/slices/regFormSlice";
@@ -22,6 +23,7 @@ const RegistrationForm = () => {
   const [error, setError] = useState(false);
 
   const swipeRef = useRef();
+  const navigate = useNavigate();
 
   useEffect(() => {
     swipeRef.current.addEventListener("swiped-down", () => {
@@ -59,7 +61,7 @@ const RegistrationForm = () => {
             }
             setSuccsessRegistr(true);
             setError(false);
-            window.location.href = "/settings/profile";
+            navigate("/settings/profile");
             return res.json();
           })
           .catch((error) => {
