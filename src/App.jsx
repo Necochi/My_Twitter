@@ -29,34 +29,32 @@ const App = () => {
   }
 
 // console.log("Cookies:", Cookies.get("userToken"));
-  // const token = Cookies.get("userToken");
-  // if (token) {
-      const ValidToken = () => {
-        try {
-          fetch('/api/feed', {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-          })
-          .then((res) => {
-            if (!res.ok) {
-              console.log('Токен неверный');
-              setValid(false);
-              return res.json().then((error) => {
-                throw new Error(error.error);
-              });
-            }
-            console.log('Токен верный');
-            setValid(true);
-            
-          })
-        } catch (error) {
-          console.log(error);
+  const token = Cookies.get("userToken");
+  const ValidToken = () => {
+    if (token) {
+      fetch('/api/feed', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+      })
+      .then((res) => {
+        if (!res.ok) {
+          console.log('Токен неверный');
+          setValid(false);
+          return res.json().then((error) => {
+            throw new Error(error.error);
+          });
         }
-      // }
-    // window.location.href = "/feed";
+        console.log('Токен верный');
+        setValid(true);
+        
+      })
+      .catch((error) => {
+        console.log(error);
+      })
+    }
   }
 
   useEffect(() => {
