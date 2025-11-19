@@ -34,12 +34,9 @@ function LastMsgs() {
               throw new Error(error.error);
             });
           }
-          console.log('succsess getting user info');
           return res.json();
         })
         .then((data) => {
-          console.log(data);
-
           setUserData(data);
         })
         .catch((error) => {
@@ -95,7 +92,7 @@ function LastMsgs() {
         }}
       >
         {completeUserInfo.map((val, ind) => (
-          <React.Fragment key={val.userId}>
+          <React.Fragment key={val.id}>
             <div className={style.msg}>
               <div className={style.icon}>
                 <img alt="icon" src={val.avatar} />

@@ -36,29 +36,23 @@ function AuthorizationForm() {
   const wrongEmail = () => {
     if (email === '') {
       console.log('wrong email log');
-      setTrueEmail(false);
+      return false;
     }
     console.log('correct email!');
-    setTrueEmail(true);
+    return true;
   };
 
   const wrongPass = () => {
     if (pass === '') {
       console.log('wrong pass log');
-      setTruePass(false);
+      return false;
     }
     console.log('correct pass!');
-    setTruePass(true);
+    return true;
   };
 
-  console.log(trueLogin);
-  
-
   const loginUser = () => {
-    wrongEmail();
-    wrongPass();
-    try {
-      if (trueEmail && truePass) {
+      if (wrongEmail() && wrongPass()) {
         console.log('logining...');
         fetch('/login', {
           method: 'POST',
@@ -87,10 +81,7 @@ function AuthorizationForm() {
             console.log('ошибка', error);
           });
         }
-      } catch (error) {
       setTrueLogin(false);
-      console.log(error);
-    }
   };
 
   if (signState) {
