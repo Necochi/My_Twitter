@@ -57,13 +57,13 @@ function LastMsgs() {
         if (message) {
           return convertTime(new Date(message.date), new Date());
         }
-        return null;
+        return '';
       });
       setTimes(newTimes);
     }, 60000);
 
     return () => clearInterval(interval);
-  }, [dbPosts]);
+  }, [posts.data]);
 
   const reversedPosts = Array.isArray(posts.data) ? [...posts.data].reverse() : [];
 
