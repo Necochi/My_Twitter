@@ -12,6 +12,7 @@ const RegistrationForm = () => {
   let resultEmail;
   const [pass, setPass] = useState("");
   const [truePass, setTruePass] = useState(false);
+  const [lengthPass, setLengthPass] = useState(false);
   const [passCheck, setPassCheck] = useState("");
   const [succsessRegistr, setSuccsessRegistr] = useState(null);
   const [isEmailFocused, setIsEmailFocused] = useState();
@@ -35,11 +36,7 @@ const RegistrationForm = () => {
   }, [dispatch]);
 
   const createUser = () => {
-    checkEmail();
-    checkPass();
-    try {
-      console.log(trueEmail, truePass, email, pass);
-      if (trueEmail && truePass && email !== "" && pass !== "") {
+      if (checkEmail() && checkPass() && email !== "" && pass !== "") {
         console.log("true!");
         console.log(email, pass);
 
@@ -70,10 +67,6 @@ const RegistrationForm = () => {
             setSuccsessRegistr(false);
           });
       }
-    } catch (error) {
-      console.log(error);
-      console.log("something wrong");
-    }
   };
 
   // --------------------
@@ -85,29 +78,44 @@ const RegistrationForm = () => {
     if (resultEmail) {
       setTrueEmail(true);
       setIsRightEmail(true);
+      return true;
     } else {
       console.log("wrong Email");
       setTrueEmail(false);
       setIsRightEmail(false);
       setSuccsessRegistr(false);
+      return false;
     }
   };
 
   const checkPass = () => {
     console.log(pass, passCheck);
-    if (pass && passCheck
-      && pass === passCheck
-      && (pass.length >= 6 && passCheck.length >= 6)) {
-      setIsRightPass(true);
-      setIsRightPassCheck(true);
-      console.log("Your password is: " + pass);
-      setTruePass(true);
+    if (pass.length >= 6 && passCheck.length >= 6) {
+      if (pass && passCheck
+        && pass === passCheck) {
+        setIsRightPass(true);
+        setIsRightPassCheck(true);
+        setTruePass(true);
+        setLengthPass(true)
+        return true;
+      } else {
+        console.log("wrong Pass");
+        setLengthPass(true)
+        setIsRightPass(false);
+        setIsRightPassCheck(false);
+        setTruePass(false);
+        setSuccsessRegistr(false);
+        return false;
+      }
     } else {
-      console.log("wrong Pass");
+      setLengthPass(false);
       setIsRightPass(false);
       setIsRightPassCheck(false);
-      setTruePass(false);
-      setSuccsessRegistr(false);
+      console.log(lengthPass);
+      console.log(isRightPassCheck);
+      return false;
+      
+      
     }
   };
 
@@ -195,7 +203,7 @@ const RegistrationForm = () => {
             display: isRightPass ? "none" : "",
           }}
         >
-          Пароль не верный
+          {lengthPass ? `Пароль не верный` : "Пароль слишком короткий"}
         </span>
         <label htmlFor="password" id="passCheck_label"></label>
         <input
@@ -228,7 +236,7 @@ const RegistrationForm = () => {
             display: isRightPassCheck ? "none" : "",
           }}
         >
-          Пароль не верный
+          {lengthPass ? `Пароль не верный` : "Пароль слишком короткий"}
         </span>
 
         <button

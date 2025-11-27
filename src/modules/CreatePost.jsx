@@ -155,9 +155,9 @@ function CreatePost() {
           />
         </div>
         <div className={style.post_info}>
-          <div className={style.add_picture}>
+          {/* <div className={style.add_picture}>
             <div className={style.photo} />
-          </div>
+          </div> */}
           <div className={style.post_symbols_send}>
             <div className={style.symbols}>
               <svg
@@ -200,14 +200,12 @@ function CreatePost() {
                 {postSizeNumber}
               </p>
             </div>
-            <div className={style.circle}>
-              {/* <img src="/imgs/addPhoto.svg" alt="Добавить фото" /> */}
+            <div className={style.add_image}>
               <Widget
-                style={{
-                  width: '40px',
-                }}
                 publicKey="8712be514bdf73095914"
                 onChange={(fileInfo) => handleFileUpload(fileInfo)}
+                imagesOnly
+                systemDialog
               />
             </div>
             <div className={style.send}>
