@@ -39,11 +39,12 @@
   background-color: #fff;
   z-index: 3;
   border-radius: 10px 10px 0 0;
+  height: 350px;
 }
 
 .post_block textarea {
   width: 95%;
-  height: 200px;
+  height: auto;
   margin-left: 2.5%;
   border: none;
   resize: none;
@@ -62,6 +63,19 @@
   margin-bottom: 10px;
 }
 
+.post_block .swipe_line_div > .swipe_line {
+  background-color: #abacb1;
+  width: 30%;
+  height: 5px;
+  margin: auto;
+  border-radius: 10px;
+}
+
+.post_block .post_info {
+  position: absolute;
+  bottom: 10px;
+}
+
 .post_symbols_send {
   display: flex;
   justify-content: space-around;
@@ -69,27 +83,26 @@
   padding-block: 20px;
 }
 
-/* .post_symbols_send .circle {
-  background-color: initial;
-  border: 1px solid #0057ff;
-  width: 40px;
-} */
-
 .post_symbols_send > p {
   text-align: center;
   margin: 0 auto;
 }
 
-.post_symbols_send .send button {
-  width: 200px;
+.post_symbols_send :global(.uploadcare--widget__button_type_open) {
+  width: 40px !important;
 }
 
-.post_block .swipe_line_div > .swipe_line {
-  background-color: #abacb1;
-  width: 20%;
-  height: 5px;
-  margin: auto;
-  border-radius: 10px;
+.post_symbols_send :global(.uploadcare--widget__button_type_open)::before {
+  content: "📷";
+  font-size: 20px;
+}
+
+.post_symbols_send .send button {
+  width: 200px;
+  font-weight: 500;
+  color: #fff;
+  border: none;
+  background-color: #0057ff;
 }
 
 .post_block {
@@ -97,36 +110,32 @@
   bottom: 0;
 }
 
-.post_block .post_symbols_send {
-  display: flex;
-}
-
 .post_symbols_send .symbols svg {
   position: absolute;
-  bottom: 15px;
+  top: 6px;
+  left: 20px;
+  width: 50px;
 }
 
 .post_symbols_send .symbols p {
-  position: relative;
-  left: 13px;
-  color: #0057ff;
-  font-weight: 900;
+  position: absolute;
+  top: 26px;
+  left: 30px;
 }
 
-.post_symbols_send .send button {
-  background-color: #0057ff;
-  color: #fff;
-  border: none;
+.post_symbols_send .symbols .add_photo {
+  position: absolute;
+  top: 10px;
 }
 
 .add_post {
   position: fixed;
   background-color: #0057ff;
   box-shadow: 0px 10px 10px 0px #0000001a;
-  width: 70px;
-  height: 70px;
-  bottom: 50px;
-  right: 30px;
+  width: 64px;
+  height: 64px;
+  bottom: 65px;
+  right: 15px;
   border-radius: 50%;
 }
 
@@ -139,6 +148,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
+}
+
+.add_post button img {
+  position: fixed;
+  width: 36px;
+  height: 36px;
 }
 
 .msgSend {
@@ -174,15 +189,14 @@
 }
 
 .invisible_div {
-  position: fixed; /* Измените на fixed */
-  top: 10; /* Задайте верхнюю границу */
-  left: 0; /* Задайте левую границу */
-  width: 100vw; /* Ширина 100% от ширины окна */
-  height: 100vh; /* Высота 100% от высоты окна */
-  background-color: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный фон */
+  position: fixed;
+  top: 10;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  opacity: 0; /* Начальная непрозрачность */
-  transition: opacity 0.5s ease; /* Плавный переход для изменения непрозрачности */
+  opacity: 0;
 }
 
 .black_div {

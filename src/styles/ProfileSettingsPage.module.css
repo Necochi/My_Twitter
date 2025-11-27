@@ -8,16 +8,23 @@
   display: flex;
   justify-content: space-around;
   background-color: #ffffff;
-  height: 50px;
+  height: 66px;
 }
 
 .select_setting .main_setting,
 .select_setting .pass_setting,
 .select_setting .mail_setting {
   margin-top: 12px;
-  height: 40px;
+  height: 55px;
   border-bottom: 3px solid initial;
   cursor: pointer;
+}
+
+.select_setting .main_setting p,
+.select_setting .pass_setting p,
+.select_setting .mail_setting p {
+  font-size: 18px;
+  text-align: center;
 }
 
 .main_settings .settings_form {
@@ -30,16 +37,17 @@
 
 .main_settings h1 {
   font-weight: 600;
-  font-size: 30px;
+  font-size: 28px;
   margin-inline: auto;
   margin-block: 20px 20px;
 }
 
 .main_settings input {
-  width: 90%;
-  height: 52px;
+  width: 88%;
+  height: 54px;
   border-radius: 10px;
   padding-left: 16px;
+  padding-top: 4px;
   margin-bottom: 34px;
   border: #dfdfdf 1px solid;
   margin-inline: auto;
@@ -78,39 +86,39 @@
 .main_settings .spanWeb {
   position: absolute;
   margin-top: 6px;
-  left: 10%;
-}
-
-
-
-.main_settings .spanBirth {
-  position: inherit;
-  margin-left: 25%;
-}
-
-.main_settings .spanBirthSee {
-  position: inherit;
-  margin-left: 32%;
+  left: 13%;
 }
 
 .main_settings .birthday {
   display: flex;
   justify-content: space-between;
-  margin-right: 8%;
 }
 
 .main_settings .birthday input {
-  margin-left: 25%;
-  width: 105%;
+  margin-left: 12%;
+  width: 70%;
+  padding-left: 55px;
+  margin-right: -20px;
+  padding-top: 0;
 }
 
 .main_settings .birthday select {
-  padding-left: 30px;
+  padding-left: 10px;
+  margin-left: 8%;
   width: 80%;
   height: 50px;
   border-radius: 10px;
   border: #dfdfdf 1px solid;
-  margin-left: 30%;
+}
+
+.main_settings .spanBirth {
+  position: inherit;
+  margin-left: 16%;
+}
+
+.main_settings .spanBirthSee {
+  position: inherit;
+  margin-left: 11%;
 }
 
 .main_settings .button_submit {
@@ -134,11 +142,149 @@
   background-color: #8BB3FF;
 }
 
+@media screen and (width > 399px) {
+  .select_setting {
+    height: 70px;
+  }
+
+  .select_setting .main_setting,
+  .select_setting .pass_setting,
+  .select_setting .mail_setting {
+    height: 58px;
+}
+
+  .select_setting .main_setting p,
+  .select_setting .pass_setting p,
+  .select_setting .mail_setting p {
+    font-size: 20px;
+  }
+}
+
+@media screen and (width > 444px) {
+  .select_setting {
+    height: 46px;
+  }
+
+  .select_setting .main_setting,
+  .select_setting .pass_setting,
+  .select_setting .mail_setting {
+    height: 34px;
+}
+
+  .select_setting .main_setting p,
+  .select_setting .pass_setting p,
+  .select_setting .mail_setting p {
+    font-size: 18px;
+  }
+
+  .main_settings .birthday input {
+    padding-right: 40px;
+    width: 80%;
+  }
+
+  .main_settings .spanBirth {
+    margin-left: 18%;
+  }
+}
+
+@media screen and (width > 599px) {
+  .select_setting {
+    height: 54px;
+  }
+
+  .select_setting .main_setting,
+  .select_setting .pass_setting,
+  .select_setting .mail_setting {
+    height: 43px;
+  }
+
+  .select_setting .main_setting p,
+  .select_setting .pass_setting p,
+  .select_setting .mail_setting p {
+    font-size: 20px;
+  }
+
+  .main_settings .spanName,
+  .main_settings .spanNickname,
+  .main_settings .spanAbout,
+  .main_settings .spanLocation,
+  .main_settings .spanWeb {
+    left: 10%;
+  }
+
+  .main_settings .birthday input {
+    margin-left: 20%;
+    width: 80%;
+    padding-left: 46px;
+  }
+
+  .main_settings .birthday select {
+    margin-left: 2%;
+  }
+
+  .main_settings .spanBirth {
+    margin-left: 24%;
+  }
+
+  .main_settings .spanBirthSee {
+    margin-left: 5%;
+  }
+}
+
+@media screen and (width > 859px) {
+  .main_settings .birthday input {
+    margin-left: 26%;
+  }
+
+  .main_settings .birthday select {
+    margin-left: -2%;
+  }
+
+  .main_settings .spanBirth {
+    margin-left: 30%;
+  }
+
+  .main_settings .spanBirthSee {
+    margin-left: 0%;
+  }
+}
+
+@media screen and (width > 1059px) {
+  .main_settings .spanName,
+  .main_settings .spanNickname,
+  .main_settings .spanAbout,
+  .main_settings .spanLocation,
+  .main_settings .spanWeb {
+    left: 9.5%;
+  }
+
+  .main_settings .birthday input {
+    margin-left: 32%;
+  }
+
+  .main_settings .birthday select {
+    margin-left: -8%;
+  }
+
+  .main_settings .spanBirth {
+    margin-left: 36%;
+  }
+
+  .main_settings .spanBirthSee {
+    margin-left: -5%;
+  }
+}
+
 @media screen and (width > 1279px) {
   .main_settings {
     justify-content: center;
     flex-direction: row;
     margin-top: 100px;
+  }
+
+  .main_settings input {
+    height: 50px;
+    padding-top: 0;
   }
 
   .select_setting {
@@ -151,6 +297,12 @@
     border-radius: 10px;
   }
 
+  .select_setting .main_setting p,
+  .select_setting .pass_setting p,
+  .select_setting .mail_setting p {
+    text-align: left;
+  }
+
   .select_setting p {
     margin-top: 8px;
     margin-left: 15px;
@@ -159,8 +311,8 @@
   .main_settings h1 {
     position: absolute;
     top: 100px;
-    left: 100px;
-    margin-left: 300px;
+    fill-rule: auto;
+    margin-right: 300px;
   }
 
   .main_settings .settings_form {
@@ -198,6 +350,22 @@
   .names input {
     width: 400px;
     margin-inline: 30px 60px;
+  }
+
+    .main_settings .birthday input {
+    margin-left: 15%;
+  }
+
+  .main_settings .birthday select {
+    margin-left: 6%;
+  }
+
+  .main_settings .spanBirth {
+    margin-left: 22%;
+  }
+
+  .main_settings .spanBirthSee {
+    margin-left: 12%;
   }
 
   .main_settings .spanName,
