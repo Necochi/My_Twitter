@@ -145,7 +145,7 @@ function CreatePost() {
             rows="3"
             style={{
               resize: 'none',
-              overflowY: 'hidden',
+              overflowY: 'scroll',
               height: 'auto',
             }}
             onInput={(e) => {
@@ -187,16 +187,7 @@ function CreatePost() {
                 />
               </svg>
 
-              <p
-                style={{
-                  marginLeft:
-                    postSizeNumber > 99
-                      ? '0'
-                      : postSizeNumber > 9
-                      ? '6px'
-                      : '13px',
-                }}
-              >
+              <p>
                 {postSizeNumber}
               </p>
             </div>

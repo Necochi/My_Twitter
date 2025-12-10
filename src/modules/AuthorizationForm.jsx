@@ -73,7 +73,7 @@ function AuthorizationForm() {
             }
             console.log('succsess!');
             setTrueLogin(true);
-            navigate('/feed');
+            setTimeout(() => navigate('/feed'), 1500);
             return res.json();
           })
           .catch((error) => {
@@ -81,7 +81,6 @@ function AuthorizationForm() {
             console.log('ошибка', error);
           });
         }
-      setTrueLogin(false);
   };
 
   if (signState) {

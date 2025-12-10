@@ -36,11 +36,9 @@ const RegistrationForm = () => {
   }, [dispatch]);
 
   const createUser = () => {
-      if (checkEmail() && checkPass() && email !== "" && pass !== "") {
-        console.log("true!");
-        console.log(email, pass);
-
-        fetch("/createUser", {
+      if (checkMailPass() && email !== "" && pass !== "") {
+        setSuccsessRegistr(true);
+        fetch("/createUser1", {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
@@ -58,7 +56,7 @@ const RegistrationForm = () => {
             }
             setSuccsessRegistr(true);
             setError(false);
-            navigate("/settings/profile");
+            setTimeout(() => navigate('/settings/profile'), 1500);
             return res.json();
           })
           .catch((error) => {
@@ -80,7 +78,6 @@ const RegistrationForm = () => {
       setIsRightEmail(true);
       return true;
     } else {
-      console.log("wrong Email");
       setTrueEmail(false);
       setIsRightEmail(false);
       setSuccsessRegistr(false);
@@ -89,7 +86,6 @@ const RegistrationForm = () => {
   };
 
   const checkPass = () => {
-    console.log(pass, passCheck);
     if (pass.length >= 6 && passCheck.length >= 6) {
       if (pass && passCheck
         && pass === passCheck) {
@@ -99,7 +95,6 @@ const RegistrationForm = () => {
         setLengthPass(true)
         return true;
       } else {
-        console.log("wrong Pass");
         setLengthPass(true)
         setIsRightPass(false);
         setIsRightPassCheck(false);
@@ -111,13 +106,19 @@ const RegistrationForm = () => {
       setLengthPass(false);
       setIsRightPass(false);
       setIsRightPassCheck(false);
-      console.log(lengthPass);
-      console.log(isRightPassCheck);
       return false;
-      
-      
     }
   };
+
+  const checkMailPass = () => {
+    if (checkEmail() && checkPass()) {
+      return true;
+    }
+    return false;
+  }
+
+  console.log(succsessRegistr);
+  
 
   if (regState) {
     hidden.display = "none";
@@ -251,7 +252,7 @@ const RegistrationForm = () => {
         className={style.registrationTrue}
         style={{
           visibility:
-            succsessRegistr !== null && succsessRegistr && !false
+            succsessRegistr !== null && succsessRegistr
               ? "visible"
               : "hidden",
         }}

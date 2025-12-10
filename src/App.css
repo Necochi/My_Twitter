@@ -39,7 +39,7 @@ body {
 }
 
 .information {
-  height: 1200px;
+  max-height: 1200px;
   overflow: hidden;
 }
 
