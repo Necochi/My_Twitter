@@ -17,7 +17,7 @@
 
 .swipe_line {
   margin: auto;
-  width: 50px;
+  width: 100px;
   height: 4px;
   border-radius: 60px;
   background-color: #ABACB1;
@@ -136,8 +136,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  top: 0; left: 0; bottom: 400px; right: 400px;
-  margin: auto;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 270px;
   height: 80px;
   color: #FFFFFF;
@@ -152,8 +153,9 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  top: 0; left: 0; bottom: 400px; right: 400px;
-  margin: auto;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   width: 270px;
   height: 80px;
   color: #FFFFFF;
@@ -168,10 +170,11 @@
   text-align: center;
   justify-content: center;
   align-items: center;
-  top: 0; left: 0; bottom: 400px; right: 400px;
-  margin: auto;
-  width: 270px;
-  height: 80px;
+  bottom: 100%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 290px;
+  height: 60px;
   color: #FFFFFF;
   visibility: hidden;
 }

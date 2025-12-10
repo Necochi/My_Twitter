@@ -49,6 +49,9 @@
   border: none;
   resize: none;
   font-size: 24px;
+  max-height: 200px;
+  overflow-y: auto;
+  padding-bottom: 80px;
 }
 
 .post_block textarea:focus {
@@ -72,15 +75,17 @@
 }
 
 .post_block .post_info {
+  width: 100%;
   position: absolute;
-  bottom: 10px;
+  bottom: 0px;
 }
 
 .post_symbols_send {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
-  padding-block: 20px;
+  padding-block: 10px;
+  gap: 20px;
 }
 
 .post_symbols_send > p {
@@ -89,12 +94,37 @@
 }
 
 .post_symbols_send :global(.uploadcare--widget__button_type_open) {
-  width: 40px !important;
+  width: 60px !important;
+  height: 50px !important;
+  background-color: white;
+  background-image: url('/imgs/addPhoto.svg');
+  background-size: 24px 24px;
+  background-repeat: no-repeat;
+  background-position: center;
+  border: 2px solid #0057FF;
+  border-radius: 8px;
+  color: transparent;
+  cursor: pointer;
 }
 
-.post_symbols_send :global(.uploadcare--widget__button_type_open)::before {
-  content: "📷";
-  font-size: 20px;
+.post_symbols_send :global(.uploadcare--widget_status_loaded) {
+  width: 60px !important;
+  height: 50px !important;
+  position: relative;
+}
+
+.post_symbols_send :global(.uploadcare--widget__file-name) {
+  display: block;
+  width: 60px !important;
+  height: 50px !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-top: 13px;
+}
+
+.post_symbols_send :global(.uploadcare--widget__file-size) {
+  display: none;
 }
 
 .post_symbols_send .send button {
@@ -110,17 +140,25 @@
   bottom: 0;
 }
 
+.post_symbols_send .symbols {
+  position: relative;
+  width: 60px;
+  height: 50px;
+}
+
 .post_symbols_send .symbols svg {
   position: absolute;
-  top: 6px;
-  left: 20px;
+  top: 0px;
+  left: 5px;
   width: 50px;
+  height: 50px;
 }
 
 .post_symbols_send .symbols p {
   position: absolute;
-  top: 26px;
+  top: 25px;
   left: 30px;
+  transform: translate(-50%, -50%);
 }
 
 .post_symbols_send .symbols .add_photo {
@@ -241,7 +279,9 @@
 
   .post_block textarea {
     padding-top: 20px;
-    height: 100px;
+    max-height: 200px;
+    overflow-y: hidden !important;
+    padding-bottom: 80px;
   }
 
   .post_symbols_send {
@@ -256,7 +296,7 @@
 
   .post_symbols_send .send {
     order: 3;
-    margin-left: -40%;
+    margin-left: -55%;
   }
 
   .swipe_line_div {
